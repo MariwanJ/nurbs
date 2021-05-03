@@ -149,7 +149,7 @@ Gui.addCommand("Nurbs_ControlPanelAdd", Nurbs_ControlPanelAdd())
 
 
 def clear(window):
-    ''' delete the window widget '''
+    '''delete the window widget '''
     # window.deleteLater()
     # App.ActiveDocument.Spreadsheet.ViewObject.update()
     App.ActiveDocument.recompute()
@@ -282,7 +282,7 @@ def createPropWidget(obj, propname):
 
 
 def dialogV(obj):
-    '''erzeugen dialog vLayout'''
+    '''create dialog vLayout'''
 
     w = QtGui.QWidget()
     box = QtGui.QVBoxLayout()
@@ -304,7 +304,7 @@ def dialogV(obj):
 # create controller main dialog
 
 def dialog(obj):
-    '''erzeuge dialog grid'''
+    '''create dialog grid'''
 
     grid = QtGui.QGridLayout()
     grid.setSpacing(10)
@@ -449,7 +449,7 @@ class ControlPanel(PartFeature):
 
     # read the propertyx values from the source objects into the local property holder
     def refresh(proxy):
-        print("aktualisiere attribute")
+        print("update attributes")
         obj = proxy.Object
         for propname in obj.props:
             print(obj)

@@ -953,7 +953,7 @@ class Nurbs_AnalyseTest4:
         App.ActiveDocument.ActiveObject.Label = "Eindeutige Punkte"
 
         print
-        print("nicht zuordenbar ...")
+        print("not assignable ...")
         noups = []
         for n in g.nodes():
             if n not in uniqs:
@@ -969,7 +969,7 @@ class Nurbs_AnalyseTest4:
             random.random(), random.random(), random.random())
         App.ActiveDocument.ActiveObject.ViewObject.PointSize = 10
 
-        App.ActiveDocument.ActiveObject.Label = "Nich eindeutige Punkte"
+        App.ActiveDocument.ActiveObject.Label = "No clear points"
 
     def GetResources(self):
         

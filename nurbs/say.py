@@ -138,7 +138,7 @@ def sayexc(mess=''):
         print(inspect.stack()[3][3])
 
 
-def showdialog(title="Fehler",
+def showdialog(title="Error",
                text="Schau in den ReportView fuer mehr Details", detail=None):
     '''display a window with: title,text and detail'''
 
@@ -151,7 +151,7 @@ def showdialog(title="Fehler",
     msg.exec_()
 
 
-def sayexc2(title='Fehler', mess=''):
+def sayexc2(title='Error', mess=''):
     '''display exception trace in Console
     and pop up a window with title, message'''
 

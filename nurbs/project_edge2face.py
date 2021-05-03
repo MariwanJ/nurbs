@@ -107,7 +107,7 @@ def OLDrunAll():
             wsort += [w]
 
         else:
-            print("Fehler")
+            print("Error")
             raise Exception("Gehrte")
 
     w = Part.Wire(wsort)
@@ -185,7 +185,7 @@ def runAll():
             wsort += [w]
 
         else:
-            print("Fehler")
+            print("Error")
             raise Exception("Gehrte")
 
         w = Part.Wire(wsort)

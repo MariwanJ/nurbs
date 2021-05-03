@@ -38,7 +38,7 @@ from pivy import coin
 
 
 class gridNode(coin.SoSeparator):
-    ''' coin Node fuer das grid'''
+    '''coin node for the grid'''
 
     def __init__(self):
         super(gridNode, self).__init__()
@@ -319,7 +319,7 @@ class gridNode(coin.SoSeparator):
 
 
 class gridObject:
-    '''  parametrisches Grid'''
+    '''parametric Grid'''
 
     def __init__(self, obj):
         obj.Proxy = self
@@ -341,7 +341,7 @@ class gridObject:
 
 
 class gridVP:
-    ''' View Provider fuer das Grid '''
+    '''View Provider for the Grid'''
 
     def __init__(self, obj):
         obj.addProperty("App::PropertyDistance",  "Total",
@@ -517,7 +517,7 @@ class gridVP:
 
 class Nurbs_ParametricGridModifiable:
     def Activated(self):
-        '''creates a parametric grid object that can be configured later '''
+        '''creates a parametric grid object that can be configured later'''
         obj = App.ActiveDocument.addObject("App::FeaturePython", "Grid")
         gridObject(obj)
         gridVP(obj.ViewObject)

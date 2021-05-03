@@ -55,7 +55,7 @@ from PySide import QtGui
 import sys,traceback,random
 
 
-def showdialog(title="Fehler",text="Schau in den ReportView fuer mehr Details",detail=None):
+def showdialog(title="Error",text="Schau in den ReportView fuer mehr Details",detail=None):
     msg = QtGui.QMessageBox()
     msg.setIcon(QtGui.QMessageBox.Warning)
     msg.setText(text)
@@ -64,7 +64,7 @@ def showdialog(title="Fehler",text="Schau in den ReportView fuer mehr Details",d
     msg.exec_()
 
 
-def sayexc(title='Fehler',mess=''):
+def sayexc(title='Error',mess=''):
     exc_type, exc_value, exc_traceback = sys.exc_info()
     ttt=repr(traceback.format_exception(exc_type, exc_value,exc_traceback))
     lls=eval(ttt)

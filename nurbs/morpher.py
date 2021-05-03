@@ -108,7 +108,7 @@ class Morpher(FeaturePython):
             pb=pb[::-1] 
             print (pa.shape)
             print (pb.shape)
-            print ("Ecken 0 0")
+            print ("corners 0 0")
             print (pa[0,0])
             print (pb[0,0])
             print ("Eckebn -1 -1 ")

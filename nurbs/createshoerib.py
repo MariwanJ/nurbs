@@ -43,7 +43,7 @@ import os, sys
 import NURBSinit
 
 '''
-multiplizitaet erhoehen
+increase multiplicity
 App.ActiveDocument.Sketch.modifyBSplineKnotMultiplicity(7,3,1) 
 App.ActiveDocument.Sketch.exposeInternalGeometry(6)
 App.ActiveDocument.Sketch.modifyBSplineKnotMultiplicity(6,3,-1) 
@@ -134,7 +134,7 @@ class Nurbs_CreateShoeRib:
             if 1:
                 ll=sk.addGeometry(Part.LineSegment(App.Vector(100+10*p,100+10*p,0),App.Vector(-100,-100,0)),False)
             else:
-                # nur als hilfslinien
+                # only as guidelines
                 ll=sk.addGeometry(Part.LineSegment(App.Vector(100+10*p,100+10*p,0),App.Vector(-100,-100,0)),True)
 
             sk.addConstraint(Sketcher.Constraint('Coincident',p,3,ll,1)) 
@@ -159,7 +159,7 @@ class Nurbs_CreateShoeRib:
         d=sk.addConstraint(Sketcher.Constraint('Parallel',28,29)) 
         sk.renameConstraint(d,'Parallel_28_29')
 
-        #rahmen rechteck
+        # frame rectangle
         if 0:
             sk.addConstraint(Sketcher.Constraint('Horizontal',17)) 
             sk.addConstraint(Sketcher.Constraint('Horizontal',23)) 
@@ -177,7 +177,7 @@ class Nurbs_CreateShoeRib:
             d=sk.addConstraint(Sketcher.Constraint('Angle',29,2,-1,1,np.pi/2)) 
             sk.renameConstraint(d, u'angleLeft')
 
-        # symmetrische Ecken
+        # symmetrical corners
         d=sk.addConstraint(Sketcher.Constraint('Symmetric',5,3,3,3,4,3))
         sk.renameConstraint(d, u'symmetryRight')
         d=sk.addConstraint(Sketcher.Constraint('Symmetric',11,3,13,3,12,3))
@@ -213,7 +213,7 @@ class Nurbs_CreateShoeRib:
         sk.renameConstraint(d, u'tangentTopB')
 
         if r+l<-10:
-            print ("verletzung --------------createshoerib zeile 152---- r+l",r+l)
+            print ("injury --------------createshoerib row 152---- r+l",r+l)
             print (r+l)
 
 
@@ -261,11 +261,11 @@ class Nurbs_CreateShoeRib:
         sk.renameConstraint(d, u'p8Y')
         App.ActiveDocument.recompute()
 
-        # kein verschieben
+        # no moving
         return sk
 
     #    print (name,"moves ...")
-    # wird nicht ausgefuehrt, weil die constraints das bereits verhindern #!#
+    # is not executed because the constraints already prevent it #!#
         for [k,x,y] in moves:
             print (k,x,y)
             sk.movePoint(k,3,App.Vector(x,y,0),0)

@@ -107,7 +107,7 @@ class MyBSpline(PartFeature):
                         Tangents.append(v)
                         Tangentflags.append(str(fp.TangentFlags[i]) == '1')
                     except:
-                        print("Fehler Tangenten Vektor ", i+1)
+                        print("Error Tangenten Vektor ", i+1)
                         Tangents.append(App.Vector(1, 0, 0))
                         Tangentflags.append(0)
                 try:
