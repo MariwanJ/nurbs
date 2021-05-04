@@ -75,7 +75,7 @@ class Morpher(FeaturePython):
         kbbv=vksb[-1]
         kaav=vksa[-1]
 
-        # beide flaechen auf gleiche polanzahl bringen
+        # bring both surfaces to the same number of poles
         for (k,m) in zip(uksa,umsa)[1:-1]:
             kb=k*kbb/kaa
             sfb.insertUKnot(kb,m,0)
@@ -111,24 +111,24 @@ class Morpher(FeaturePython):
             print ("corners 0 0")
             print (pa[0,0])
             print (pb[0,0])
-            print ("Eckebn -1 -1 ")
+            print ("Result -1 -1 ")
             print (pa[-1,-1])
             print (pb[-1,-1])
 
-            print ("Eckebn 0 1")
+            print ("Result 0 1")
             print (pa[0,-1])
             print (pb[0,-1])
-            print ("Eckebn 1 0")
+            print ("Result 1 0")
             print (pa[-1,0])
             print (pb[-1,0])
 
 
-        # pole morphen
+        # pole morph
         ka=obj.factorA
         kb=20-ka
         pc=(pa*ka+pb*kb)/20
 
-        # spezielles addieren
+        # add special
         # pc[:,:,1] *= 2
 
         mu,mv=sfa.getUMultiplicities(),sfa.getVMultiplicities()
@@ -146,7 +146,7 @@ class Morpher(FeaturePython):
 
 
 def createMorpher():
-    '''create a moprhing between two bezier faces'''
+    '''create a morphing between two bezier faces'''
 
 
     yy=App.ActiveDocument.addObject("Part::FeaturePython","Morpher")
@@ -274,7 +274,7 @@ class CurveMorpher(FeaturePython):
                 compsa +=[Part.makePolygon([App.Vector(p) for p in pts])]
                 tt.Shape=Part.Compound(compsa)
 
-            # glaetten
+            # smooth
             anz=(len(pts)-4)/2
             for i in range(anz):
                 k=3*i+3
@@ -397,7 +397,7 @@ class CurveMorpher(FeaturePython):
 #        except:
 #            return
 
-        #faden in 4 teile zerlegen und dann daraus flaeche machen
+        #cut the thread into 4 parts and then make a surface out of it
 
         #sh=App.ActiveDocument.Sketch006.Shape
         sh=obj.border.Shape
@@ -481,7 +481,7 @@ class Nurbs_createMorpher:
         self.curvemorphedFace()
         
     def curvemorphedFace(self):
-        '''create a face by morphing boder curves'''
+        '''create a face by morphing border curves'''
         yy=App.ActiveDocument.addObject("Part::FeaturePython","CurveMorpher")
         CurveMorpher(yy)
 

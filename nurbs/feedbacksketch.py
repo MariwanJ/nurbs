@@ -74,7 +74,7 @@ def dialog(obj):
     w.setLayout(box)
     w.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
-    l=QtGui.QLabel("Anzahl" )
+    l=QtGui.QLabel("number" )
     w.l=l
     box.addWidget(l)
 
@@ -140,7 +140,7 @@ class ViewProvider:
     def doubleClicked(self,vobj):
         print ("double clicked")
         self.myedit(vobj.Object)
-        print ("Ende double clicked")
+        print ("End double clicked")
 
 
 
@@ -169,7 +169,7 @@ def createGeometryS(obj=None):
     sk.addConstraint(Sketcher.Constraint('Radius',0,1500.)) 
     App.ActiveDocument.recompute()
 
-    # punkt A bewegen
+    # move point A
     sk.movePoint(0,1,App.Vector(-228.741898,243.874924,0),0)
 
     consAX=sk.addConstraint(Sketcher.Constraint('DistanceX',0,2,-284.619380)) 
@@ -180,7 +180,7 @@ def createGeometryS(obj=None):
     sk.renameConstraint(consAY, u'AY')
     App.ActiveDocument.recompute()
 
-    # punkt B bewegen
+    # move point B
     consBX=sk.addConstraint(Sketcher.Constraint('DistanceX',1,2,-284.619380)) 
     sk.setDatum(consBX,200)
     sk.renameConstraint(consBX, u'BX')
@@ -289,7 +289,7 @@ class FeedbackSketch(FeaturePython):
                     valwar=obj.Constraints[ci].Value
                     if debug: print ("old value was",gets,valwar)
                     if valwar == val_cgi:
-                        if debug: print ("nix zu aendern")
+                        if debug: print ("nothing to change")
                         continue
                     try:
                         changed[gets]
@@ -317,8 +317,8 @@ class FeedbackSketch(FeaturePython):
                                 print ("possible value",valneu)
                                 print(obj.Label, "solved with possible value",rc) 
                             obj.setDriving(ci,True)
-                            #hier abbrechen
-                            # wert zurück schreiben
+                            #cancel here
+                            #worth writing back
                             g.setDatum(cgi,valneu)
                             rc=g.solve()
                             if debug: print(obj.Label, "solve after rollback ",rc)
@@ -469,7 +469,7 @@ class FeedbackSketch(FeaturePython):
             self.Lock=True
             dats=[]
             for subs in obj.bases:
-#                print ("erstelle Sicherung ",subs
+#                print ("create backup ",subs
                 g=getattr(obj,"base"+subs)
                 if g !=None:
                     gs,cs,cons=storeSketch(g)
@@ -488,7 +488,7 @@ class FeedbackSketch(FeaturePython):
                 print ("RESTORE ...")
                 App.Console.PrintWarning("RESTORE after sketch solve failure\n")
                 if hasattr(self,'dats'):
-#                    print ("vereende self sicherung daten ")
+#                    print ("Use self backup data ")
                     dats=self.dats
                 for i,subs in enumerate(obj.bases):
 #                    print ("hole Section ",i,subs)
@@ -504,7 +504,7 @@ class FeedbackSketch(FeaturePython):
                 
             self.Lock=False
 
-#            print ("ERSTELLE SICHERUNG-------------# sichern"
+#            print ("CREATE BACKUP ------------- # back up"
             dats=[]
             for subs in obj.bases:
 #                print ("Section ",subs
@@ -517,7 +517,7 @@ class FeedbackSketch(FeaturePython):
 
 
 
-        # eigene Figur berechnen
+        # calculate your own figure
         import sketcher.demoshapes
         #reload(sketcher.demoshapes)
         
@@ -545,7 +545,7 @@ def createFeedbackSketch(name="MyFeedbackSketch"):
     return obj
 
 def copySketch(source,target):
-    '''Sketch uebernehmen'''
+    '''Sketch takeover'''
     for g in source.Geometry:
         target.addGeometry(g)
     for c in source.Constraints:
@@ -553,7 +553,7 @@ def copySketch(source,target):
 
 
 
-# Sketch kopieren
+# Copy sketch
 def fillSketch(target,gs,cs,cons):
     print ("Restore ",target.Label,len(gs),len(cs))
     for i,g in enumerate(gs):
@@ -565,7 +565,7 @@ def fillSketch(target,gs,cs,cons):
 
 def resetSketch(target):
     gc=target.GeometryCount
-    print ("Loesche Geometry",target.Label,gc)
+    print ("Delete Geometry",target.Label,gc)
     for i in range(gc):
         target.delGeometry(gc-i-1)
     target.solve()
@@ -599,7 +599,7 @@ def addgrp(fbs,grpname):
     fbs.addProperty("App::PropertyStringList",'seton'+grpname, grpname, )
     fbs.addProperty("App::PropertyStringList",'setoff'+grpname, grpname, )
     
-#TODO: This will fail, WE Dont have the example file
+#TODO: This will fail, WE Don't have the example file
 class FeedBackSketchTest2Clients:
     def Activated(self):
         self.run_test_two_clients()

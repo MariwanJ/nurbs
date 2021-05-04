@@ -91,7 +91,7 @@ from pyob import  FeaturePython,ViewProvider
 ##\endcond
 
 def copySketch(sketch,target):
-    '''copies sketch geometry and constraints into trarget sketch'''
+    '''copies sketch geometry and constraints into target sketch'''
     sb=sketch
     gs=sb.Geometry
     cs=sb.Constraints
@@ -878,7 +878,7 @@ class Beface(FeaturePython):
 
 
         if fp.cutend:
-            print ("kante ...")
+            print ("edge ...")
             pa=poles[-4].copy()
             pe=poles[-1].copy()
             poles[-3]=pa+(pe-pa)*0.2
@@ -991,7 +991,7 @@ class Beface(FeaturePython):
             fp.Shape=Part.Solid(Part.Shell([sh.Face1]))
             fp.Shape=Part.Solid(Part.Shell(comp2))
         except:
-            print ("Problem beim Erzeugen Solid")
+            print ("Problem creating Solid")
             fp.Shape=af.toShape()
 
 #        fp.Shape=Part.Solid(Part.Shell([sh.Face1]))
@@ -1004,7 +1004,7 @@ class Beface(FeaturePython):
 #
 # if the number is 3n+2, the Bezier generated is open and starts at the first point
 # \param start first knot of the rib
-# \param ende last knot of the ribs
+# \param ends last knot of the ribs
 # \param scale scaling of the curve
 # \param pos shifting the curve
 # \param source polygon or bezier curve
@@ -1158,7 +1158,7 @@ class Nurbs_CreateBeFaceFromSelBering:
         
         from PySide.QtCore import QT_TRANSLATE_NOOP
         """Set icon, menu and tooltip."""
-        _tooltip = ("Nurbs Create Be Face From Selelected Bering")
+        _tooltip = ("Nurbs Create Be Face From Selected Bering")
         return {'Pixmap': NURBSinit.ICONS_PATH+'drawing.svg',
                 'MenuText': QT_TRANSLATE_NOOP("Nurbs", "Nurbs_CreateBeFaceFromSelBering"),
                 'ToolTip': QT_TRANSLATE_NOOP("Nurbs Nurbs_CreateBeFaceFromSelBering", _tooltip)}
@@ -1167,7 +1167,7 @@ Gui.addCommand("Nurbs_CreateBeFaceFromSelBering", Nurbs_CreateBeFaceFromSelBerin
 
 
 
-#todo : The file (bering_testdaten.fcstd) is missing I cannot find it anywhere.
+#to-do : The file (bering_testdaten.fcstd) is missing I cannot find it anywhere.
 ## a testcase for bering and beface
 # this test uses the NURBSinit.DATA_PATH+bering_testdaten.fcstd
 class Nurbs_TestCaseBeringTest:
@@ -1576,7 +1576,7 @@ class Nurbs_createProduct:
     def Activated(self):
         self.createProduct()
     def createProduct(self):
-        '''create the procuct face of some curves
+        '''create the product face of some curves
         2 curves u,v
         3 curves u,v,u2
         4 curves u,v,u2,v2
@@ -1609,7 +1609,7 @@ Gui.addCommand("Nurbs_createProduct", Nurbs_createProduct())
 def debugP(pts,label):
     '''a method to display points *pts* as wire in a object with name *label*'''
 
-#    print ("debugP deaktiviert";return
+#    print ("debugP deactivated";return
 
     pts=[App.Vector(p) for p in pts]
     obj=App.ActiveDocument.getObject(label)
@@ -2193,15 +2193,15 @@ class Nurbs_BSplineToBezierCurve2:
                 if i == 1:
                     print ("in 1")
                     if (poles[0]-pp[0]).Length<0.1 or (poles[0]-pp[-1]).Length<0.1:
-                        print ("drehen")
+                        print ("rotate")
                         poles=poles[::-1]
                     if (poles[-1]-pp[-1]).Length <0.1:
-                        print ("drehen 2")
+                        print ("rotate 2")
                         pp=pp[::-1]
                     poles += pp[1:]
                 if i>1:
                     if (poles[-1]-pp[-1]).Length <0.1:
-                        print ("drehen 2")
+                        print ("rotate 2")
                         pp=pp[::-1]
                     poles += pp[1:]
 
@@ -2309,7 +2309,7 @@ class BezierSurface(FeaturePython):
 class Nurbs_BSplineToBezierSurface:
     def Activated(self):
         self.BSplineToBezierSurface()
-## create a Bezier Surface for a selectde BSpline Surface
+## create a Bezier Surface for a selected BSpline Surface
 
     def BSplineToBezierSurface(self):
         s=Gui.Selection.getSelection()[0]
@@ -2336,7 +2336,7 @@ Gui.addCommand("Nurbs_BSplineToBezierSurface", Nurbs_BSplineToBezierSurface())
 
 
 def SurfaceEditor():
-	'''alter editor fuer surface'''
+	'''old editor for surface'''
 ##\cond
 	layout = '''
 	MainWindow:
@@ -2568,7 +2568,7 @@ def SurfaceEditor():
 				pass
 
 			obj2.Shape=Part.Compound(comps+[s] + [bs3.toShape()])
-			print ("KUGELLLLLLLLLLLLLLLL")
+			print ("BULLET")
 			print (s)
 
 
@@ -2650,7 +2650,7 @@ def SurfaceEditor():
 				fp=self.obj
 			except: # not yet ready
 				return
-			print ("apply auf ",fp.Label)
+			print ("apply on ",fp.Label)
 
 
 			obj=App.ActiveDocument.getObject('temp_YY1')
@@ -3197,7 +3197,7 @@ Gui.addCommand("Nurbs_CreateBEplane", Nurbs_CreateBEplane())
 
 
 
-## a cylindric Bezier Face
+## a cylindrical Bezier Face
 # size and number of poles configurable
 # some random noise cam be added
 
@@ -3296,7 +3296,7 @@ class BeTube(FeaturePython):
 
 
 '''
-    def Xexecute(self,fp): # gehts
+    def Xexecute(self,fp): # ok
         uc=fp.uSegments*3+3
         vc=fp.vSegments*3+1
         poles=np.random.random(uc*vc*3).reshape(uc,vc,3)
@@ -3610,7 +3610,7 @@ class BeTriangle(FeaturePython):
 ##\cond
     def execute(self,fp):
 
-        #zusammensetzung
+        #composition
         spa=[[-100,0,0],[-80,20,0],[-20,80,0],[0,100,0]]
         spb=[[0,100,0],[20,80,0],[80,20,0],[100,0,0]]
         spc=[[-100,0,0],[-80,0,0],[-20,0,-20],[0,0,-20],[20,0,-20],[80,0,0],[100,0,0]]
@@ -3728,7 +3728,7 @@ class BeTriangle(FeaturePython):
         fp.Shape=bs.toShape()
 
         return
-        # ab hier tangentsspiele todo!!
+        # from here tangent games to-do!!
 
         #--------------------------------
         rA=np.array([rr[0],rr[0]+[-30,30,30]])
@@ -3933,7 +3933,7 @@ Gui.addCommand("Nurbs_createTangentStripes", Nurbs_createTangentStripes())
 #-----------------
 
 
-## a segmemt of a surface object
+## a segment of a surface object
 #
 
 class Cell(FeaturePython):
@@ -4019,11 +4019,11 @@ class Cell(FeaturePython):
 
 def selectionToNurbs():
 
-    '''convert selection to a nurbs face and all edges tos nurbs curvse'''
+    '''convert selection to a nurbs face and all edges to nurbs curves'''
     if 0:
         obj=Gui.Selection.getSelection()[0]
 
-        #eine Flaeche oder alle
+        #one area or all
         if len(obj.Shape.Faces) == 0:
             for e in obj.Shape.Edges:
                 print (e)
@@ -4059,7 +4059,7 @@ def selectionToNurbs():
 
 
 def createYankee():
-    '''create a yankee face (two finger)'''
+    '''create a Yankee face (two finger)'''
 
     obj1=App.ActiveDocument.FaceConnection_Cell
     obj2=App.ActiveDocument.FaceConnection001_Cell001
@@ -4098,7 +4098,7 @@ def createYankee():
     Part.show(sf.toShape())
 
 ## create a quadrangle by 4 points
-# \todo  documentation
+# \to-do  documentation
 
 class QuadPm(FeaturePython):
 
@@ -4399,7 +4399,7 @@ class Nurbs_Stretchandbend:
     #            sf.getUKnots(),sf.getVKnots(),
     #            False,False,sf.UDegree,sf.VDegree)
     #    Part.show(bs.toShape())
-    #    App.ActiveDocument.ActiveObject.Label="moprh only"
+    #    App.ActiveDocument.ActiveObject.Label="morph only"
 
 
         poles=poles2+poles3
@@ -4457,7 +4457,7 @@ def AA():
     pts=[v.Point for v in ss.Vertexes]
     ptss=pts[1:]+pts[:1]
 
-    #biegekraft
+    #bending force
     lp=len(pts)
     su=0
     for i in range(1,lp-1):
@@ -4477,7 +4477,7 @@ def AA():
 
 
 def genbase(fp,pts,center=App.Vector(),offset=2):
-    # Basiszelle
+    # Base cell
 
     ptsa=[App.Vector(p[0],p[1],p[2]) +center for p in pts]
     ptsb=ptsa[offset:]+ptsa[:offset]
@@ -4552,7 +4552,7 @@ def gencircle(fp,n,h=300,radius=400,center=None):
     bb=genk(0,0,1,App.Vector(),sk,sk.Name)
     bb.ViewObject.hide()
 
-    print (" Ergebnis ",bb.Name)
+    print (" Result ",bb.Name)
 
     return bb,ptsb
 
@@ -4648,7 +4648,7 @@ def createEndface(pts,label,offset=0):
 # MAIN -----------------
 
 
-## create a cylindric hole in a nurbs surface cell
+## create a cylindrical hole in a nurbs surface cell
 #
 
 
@@ -4792,15 +4792,15 @@ def createHole(fp,height=100):
 #    Gui.updateGui()
 
     if fp.endfaces:
-        fo=createEndface(ptsd,"oben",2)
-#        createEndface(ptsc,"mitte",2)
-        fu=createEndface(ptsa,"untenb",2)
+        fo=createEndface(ptsd,"above",2)
+#        createEndface(ptsc,"center",2)
+        fu=createEndface(ptsa,"below",2)
 
 
 
 
 def _createHoleGUI():
-    '''Gui for creater of a hole'''
+    '''Gui for creating a hole'''
 
 
     class MyApp(MikiApp):
@@ -4840,7 +4840,7 @@ MainWindow:
 
 
 class Nurbs_CreateHOLEGUI:
-    '''Gui for creater of a hole'''
+    '''Gui for creating a hole'''
     def Activated(self):
         self.createHoleGUI()
 
@@ -4872,7 +4872,7 @@ Gui.addCommand("Nurbs_CreateHOLEGUI", Nurbs_CreateHOLEGUI())
 
 
 ## gordon surface as a set of ribs and meridians
-# \todo works only with compound
+# \to-do works only with compound
 #
 
 class GordonFace(FeaturePython):
@@ -5122,7 +5122,7 @@ class Nurbs_createGordon:
 
 ##\cond
 def aGUI():
-    '''Gui dialog for  template/later'''
+    '''Gui dialog for template/later'''
 
     class App(MikiApp):
 
@@ -5416,7 +5416,7 @@ class Border(FeaturePython):
 
 
     def execute(self,fp):
-        '''create a closed path olf the border poles of a bspline surface'''
+        '''create a closed path of the border poles of a bspline surface'''
 
         bs=fp.source.Shape.Faces[fp.faceNumber].Surface
         poles=np.array(bs.getPoles())
@@ -5501,7 +5501,7 @@ Gui.addCommand("Nurbs_CreateBorderGUI", Nurbs_CreateBorderGUI())
 
 
 ##  the approximation of a curve by a bezier curve
-# with parametric number of (equidistant) controlpoints
+# with parametric number of (equidistant) control points
 
 class Approx(FeaturePython):
 
@@ -5622,7 +5622,7 @@ class Nurbs_createApprox:
         self.createApprox()
     
     ## create an approximation of a cure by a bezier curve
-    # use equidistant points on the source curve as controlpoints
+    # use equidistant points on the source curve as control points
     # number of segments and force of the tangents is parametric
     # \param sels selected curve objects
 
@@ -5661,7 +5661,7 @@ Gui.addCommand("Nurbs_createApprox", Nurbs_createApprox())
 
 
 def drawcurveA(pts,face,facepos=App.Vector()):
-    '''draw a curve on a face and create the two subfaces defined by the curve'''
+    '''draw a curve on a face and create the two sub faces defined by the curve'''
 
     sf=face.Surface
     interpolate=0
@@ -6051,7 +6051,7 @@ class Nurbs_FlattenTheWire:
             tt.Shape=pol
 
             db=da.cross(dc)
-    #        print ("vectoren"
+    #        print ("vectors"
     #        print (da.x,da.y,da.z)
     #        print (db.x,db.y,db.z)
     #        print (dc.x,dc.y,dc.z)

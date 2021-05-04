@@ -30,15 +30,15 @@ from __future__ import unicode_literals
 '''
 SketcherObjectPython example oo
 for Offset curve generation
-<A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Buch</A>
+<A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Book</A>
 
 ''' 
 
 
-# <A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Buch 2</A> 
+# <A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Book 2</A> 
 # Author  microelly
 # Warning huhuwas
-# weiter
+# further
 
 
 #http://free-cad.sourceforge.net/SrcDocu/dc/d77/classSketcher_1_1SketchObjectPy.html
@@ -185,7 +185,7 @@ class Ufo(pyob.FeaturePython):
 #----------------------
 
 def runOffsetSpline(name="MyOffSp"):
-    '''run(name="Sole with borders"): a demo skript
+    '''run(name="Sole with borders"): a demo script
         the demo script creates an empty  Sketch Python Object and sets
         the border distances for the offset curves to 10
         @ Author anton
@@ -225,7 +225,7 @@ def dirs(obj,vn):
         if e.Vertexes[0].Point == p:
             t=e.tangentAt(0)
             dire=np.arctan2(t.y,t.x)
-            print ("startpoint", dire *180.0/np.pi)
+            print ("start point", dire *180.0/np.pi)
             rc.append(np.pi+dire)
         if len(e.Vertexes)>1 and  e.Vertexes[1].Point == p:
             t=e.tangentAt(1)
@@ -277,7 +277,7 @@ class Star(pyob.FeaturePython):
             if obj.tangentCond > len(rc): obj.tangentCond =len(rc)
             if obj.tangentCond < 0: obj.tangentCond = 0
 
-            print ("genutzer Winkel ", rc[obj.tangentCond-1] *180/np.pi)
+            print ("used angle ", rc[obj.tangentCond-1] *180/np.pi)
             if obj.tangentInverse:
                 relpos.Rotation.Angle += np.pi + rc[obj.tangentCond-1]
             else:

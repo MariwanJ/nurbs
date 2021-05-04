@@ -200,7 +200,7 @@ class EventFilter(QtCore.QObject):
                     return False
 
                 try:
-                    # only two function keys implemented, no modifieres
+                    # only two function keys implemented, no modifiers
                     if e.key()== QtCore.Qt.Key_F2:
                         say("------------F2-- show mode and moddata---------------")
                         return False
@@ -215,13 +215,13 @@ class EventFilter(QtCore.QObject):
 
 #+hack
                     elif e.key() ==  QtCore.Qt.Key_F6:
-                        say("--------appy and new-----7----------")
+                        say("--------apply and new-----7----------")
                         self.pts += [None]
 
 
 
                     elif e.key() ==  QtCore.Qt.Key_F7:
-                        say("--------appy and new-----7----------")
+                        say("--------apply and new-----7----------")
                         self.dialog.applyandnew()
 
                     elif e.key() ==  QtCore.Qt.Key_F8:
@@ -359,14 +359,14 @@ class EventFilter(QtCore.QObject):
 
 ##\endcond
 
-## draw a curve on a face and create the two subfaces defined by the curve
+## draw a curve on a face and create the two sub-faces defined by the curve
 
 def drawcurve(wire,face,facepos=App.Vector()):
     '''draw a curve on a face and create the two subfaces defined by the curve'''
 
     print ("drawcurve")
 
-    #startposition
+    #start position
     wplace=wire.Placement
 #    print wplace
     wpos=wplace.Base
@@ -387,7 +387,7 @@ def drawcurve(wire,face,facepos=App.Vector()):
 
     bs=sf
 
-    print ("hacks SSetze uv, sv auf 1")
+    print ("hacks SSetze uv, sv on 1")
     su=face.ParameterRange[1]
     sv=face.ParameterRange[3]
 
@@ -458,11 +458,11 @@ def drawcurve(wire,face,facepos=App.Vector()):
 def _drawring(name,wires,dirs,face,facepos=App.Vector()):
     '''draw a curve on a face and create the two subfaces defined by the curve'''
 
-    print ("drawring")
+    print ("draw ring")
 
     es=[]
     for wireA in wires:
-        #startposition
+        #start position
         wplace=wireA.Placement
     #    print wplace
         wpos=wplace.Base
@@ -470,7 +470,7 @@ def _drawring(name,wires,dirs,face,facepos=App.Vector()):
         wire=wireA
 
 
-        #--------------- teil 1
+        #--------------- part 1
         w=wireA.Shape
         t=face
 
@@ -508,10 +508,10 @@ def _drawring(name,wires,dirs,face,facepos=App.Vector()):
         sp.ViewObject.ShapeColor=wireA.ViewObject.ShapeColor
 
         es.append(e1_1)
-    #-------------------- teoil 2
+    #-------------------- part 2
 
         if 0:
-            #--------------- teil 1
+            #--------------- part 1
             w=wire2.Shape
             t=face
 
@@ -524,7 +524,7 @@ def _drawring(name,wires,dirs,face,facepos=App.Vector()):
             su=bs.UPeriod()
             sv=bs.VPeriod()
 
-            print ("hacks etze uv, sv auf 1")
+            print ("hacks etze uv, sv on 1")
             su=face.ParameterRange[1]
             sv=face.ParameterRange[3]
 
@@ -942,7 +942,7 @@ def createGrid(name="MyGrid"):
 ## create a map control for the first face of the selected object
 
 def createMap(mode=''):
-    ''' create a mpa control for the first face of the selected object '''
+    ''' create a map control for the first face of the selected object '''
 
     # last selection == face
     # other sels: wires to project
@@ -956,7 +956,7 @@ def createMap(mode=''):
     return moa
 
 
-## stop the facecdraw eventserver
+## stop the facedraw eventserver
 
 def stop():
     ''' stop eventserver'''
@@ -1006,7 +1006,7 @@ class Nurbs_FaceDraw:
         }
 
 Gui.addCommand('Nurbs_FaceDraw', Nurbs_FaceDraw())
-Nurbs_FaceDraw.__doc__ = """FaceDraw: Tobe written later
+Nurbs_FaceDraw.__doc__ = """FaceDraw: To be written later
                             """
 
 class Nurbs_DrawIsoFace:
@@ -1034,5 +1034,5 @@ class Nurbs_DrawIsoFace:
         }
 
 Gui.addCommand('Nurbs_DrawIsoFace', Nurbs_DrawIsoFace())
-Nurbs_DrawIsoFace.__doc__ = """Nurbs_DrawIsoFace: Tobe written later
+Nurbs_DrawIsoFace.__doc__ = """Nurbs_DrawIsoFace: To be written later
                             """

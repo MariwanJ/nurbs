@@ -93,7 +93,7 @@ class createSeol:
         sk.addConstraint(Sketcher.Constraint('Coincident', llast, 2, ll, 1))
 
         cLL = sk.addConstraint(Sketcher.Constraint('DistanceX', 10, 2, LL))
-        # App.ActiveDocument.sohle.renameConstraint(cLL, u'LL')
+        # App.ActiveDocument.sole.renameConstraint(cLL, u'LL')
 
         for p in range(11):
             print(p)
@@ -160,7 +160,7 @@ class Sole(curves.OffsetSpline):
         # \endcond
 
     def onChanged(proxy, obj, prop):
-        '''change on lastlength, inner and outer offset'''
+        '''change on last length, inner and outer offset'''
         if prop == 'LL':
             # This is causing a problem .. I don't know what is index 79 Mariwan
             obj.setDatum(79, obj.LL)

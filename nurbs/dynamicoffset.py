@@ -55,7 +55,7 @@ import scipy.interpolate
 ## calculates a scipy.interpolate.interp1d 
 # for the floatlist obj.datalist
 #
-# in debugmode the calculated shape contains wires for both curves and 
+# in debug mode the calculated shape contains wires for both curves and 
 # connecting lines between corresponding points on all curves
 
 

@@ -227,7 +227,7 @@ class PointCloudApprox(FeaturePython):
             if smooth == None:
                 smooth.smoothWire(hop, "smooth"+"_"+name)
             else:
-                print("setze smooth count ", dd)
+                print("put smooth count ", dd)
                 smooth.Wire = hop
                 smooth.discretizeCount = dd
 
@@ -238,7 +238,7 @@ class PointCloudApprox(FeaturePython):
 
 
 # a BSpline approximation is calculated for a point cloud and a start curve
-# the interferences are removed with scipy.signal.filtfilt
+# the interference are removed with scipy.signal.filtfilt
 # the deviation from the suggested curve is used as the amplitude
 
 def createPointCloudApprox():
@@ -513,7 +513,7 @@ class ImagePoints2(FeaturePython):
                         bs.insertUKnot(p, 1, 0)
                         ups += [p]
                     except:
-                        print("fehler", i, p)
+                        print("error", i, p)
                         pass
                 ups += [c.parameterAtDistance(l)]
             else:
@@ -575,7 +575,7 @@ class ImagePoints2(FeaturePython):
             poles = np.array(bs.getPoles())
 
             # -------------------------------------
-            print("Figur shape", poles.shape)
+            print("Figure shape", poles.shape)
             print("upuesl", bs.getUKnots())
             print("vpuesl", bs.getVKnots())
 
@@ -620,7 +620,7 @@ class ImagePoints2(FeaturePython):
     #                print u
     #                print yinterp
                     ssab += [yinterp]
-    #            print ("erstes shape"
+    #            print ("first shape"
     #            print np.array(ssab).shape
     #            print  (len(bs.getUKnots())
     #            print bs.getUKnots()
@@ -651,8 +651,8 @@ class ImagePoints2(FeaturePython):
 
                 ssba = np.array(ssba)
 
-                print("Zielarray poles2 shape ", poles2.shape)
-                print("belegugn", len(bs.getUKnots()), len(bs.getVKnots()))
+                print("Target array poles2 shape ", poles2.shape)
+                print("evidence", len(bs.getUKnots()), len(bs.getVKnots()))
 
                 for u in range(len(bs.getUKnots())):
                     for v in range(len(bs.getVKnots())):
@@ -718,7 +718,7 @@ class ImagePoints2(FeaturePython):
 
                 ssba = np.array(ssba)
 
-                print("Zielarray poles2 shape ", poles2.shape)
+                print("Target array poles2 shape ", poles2.shape)
                 print("evidence", len(bs.getUKnots()), len(bs.getVKnots()))
 
                 for u in range(len(bs.getUKnots())):
@@ -817,7 +817,7 @@ Gui.addCommand("Nurbs_BumpFacefromImageGUI", Nurbs_BumpFacefromImageGUI())
 class MinLengthBezier(FeaturePython):
     '''given 7 points spline, find optimal curve through center point, through end point and end tangents'''
 
-    def __init__(self, obj, mode='minimal Lenght', method='Default'):
+    def __init__(self, obj, mode='minimal Length', method='Default'):
         FeaturePython.__init__(self, obj)
         obj.addProperty("App::PropertyLink", "path", "source")
         obj.addProperty("App::PropertyFloat", "factor", "config")  # .factor=30
@@ -847,7 +847,7 @@ class MinLengthBezier(FeaturePython):
         obj.addProperty("App::PropertyInteger", "Wire", "source").Wire = -1
 
         obj.addProperty("App::PropertyEnumeration", "mode", "approx")
-        obj.mode = ['minimal Lenght', 'Length',
+        obj.mode = ['minimal Length', 'Length',
             'curvature', 'myMinA', 'myMinSoft']
 
         obj.addProperty("App::PropertyFloat", "length", "result")
@@ -920,7 +920,7 @@ class MinLengthBezier(FeaturePython):
         fp.Proxy.loops = 0
         fp.Proxy.time = time.time()
 
-#        # diagramm
+#        # diagram
 #        if 1: # in midi-area
 #            import Plot
 #            Plot.figure("directions of tangents")
@@ -1066,7 +1066,7 @@ class MinLengthBezier(FeaturePython):
         fp.Proxy.loops = 0
         fp.Proxy.time = time.time()
 
-#        # diagramm
+#        # diagram
 #        if 1: # in midi-area
 #            import Plot
 #            Plot.figure("directions of tangents")
@@ -1133,7 +1133,7 @@ class MinLengthBezier(FeaturePython):
 
     def runMyMinSoft(self, fp, ptsa, f=0.5):
 
-        # Tangenten
+        # Tangents
         # print ("ptsa",ptsa
         zz = (len(ptsa)-4)/3
         # assert(zz==2)
@@ -1149,7 +1149,7 @@ class MinLengthBezier(FeaturePython):
         fp.Proxy.loops = 0
         fp.Proxy.time = time.time()
 
-#        # diagramm
+#        # diagram
 #        if 1: # in midi-area
 #            import Plot
 #            Plot.figure("directions of tangents")
@@ -1219,7 +1219,7 @@ class MinLengthBezier(FeaturePython):
         minSoft(rc.x)
 
 
-# --------ende run min soft----------------------
+# --------end run with soft----------------------
 
 
     def addExtraKnots(self, fp):
@@ -1305,7 +1305,7 @@ class Nurbs_minimumLengthBezier:
         for s in Gui.Selection.getSelection():
             yy = App.ActiveDocument.addObject(
                 "Part::FeaturePython", "MinLenBezier")
-            MinLengthBezier(yy, mode='minimal Lenght')
+            MinLengthBezier(yy, mode='minimal Length')
             ViewProvider(yy.ViewObject)
 
             yy.path = s
@@ -1507,7 +1507,7 @@ class ConstantCurvatureBezier(FeaturePython):
 
 #            print (rc)
 #            if fp.Proxy.loops>3000:
-#                print ("loops ende"
+#                print ("loops ends"
 #                return 0
 
             return rc * 10**4
@@ -1537,7 +1537,7 @@ class ConstantCurvatureBezier(FeaturePython):
             if fp.Shape == None or fp.path == None:
                 return
 
-            try:  # Draft Wire oder Draft BSpline
+            try:  # Draft Wire or Draft BSpline
                 pts = fp.path.Points
             except:
                 pts = [v.Point for v in fp.path.Shape.Vertexes]
@@ -1746,7 +1746,7 @@ def runMyMinA(fp, pts):
                     sp = intersection([pts[i+1], pts[i+1]+pts[i]-pts[i+2],
                                     pts[i+2], pts[i+2]+pts[i+3]-pts[i+1]])
                 except:
-                    print("Problem Schnittpuinkt", i)
+                    print("Problem with intersection", i)
                     for pui in [pts[i+1], pts[i+1]+pts[i]-pts[i+2], pts[i+2], pts[i+2]+pts[i+3]-pts[i+1]]:
                         print(pui)
                     sp = pts[i+1]
@@ -1914,7 +1914,7 @@ class PolesFrame(FeaturePython):
 
             pols = s.Shape.Edge1.Curve.getPoles()
             lmin = min(len(pols), lmin)
-            print("Rippe", rc, s.Label, len(pols))
+            print("Rib", rc, s.Label, len(pols))
             ptsa += [pols]
 
         cols = []
@@ -1991,7 +1991,7 @@ def swapCurves(sel=None, mode='polygons', extraknots=None):
 
 
 def curvestoFace(polsarr=None, mode="Bezier Face"):
-    '''calculate the area from Polefeld yourself'''
+    '''calculate the area from Pole field yourself'''
 
     if polsarr == None:
         polsarr = []
@@ -2085,13 +2085,13 @@ Gui.addCommand("Nurbs_DontKnowWhatThisDo_B", Nurbs_DontKnowWhatThisDo_B())
 
 #
 # if knots are missing, where should they go
-# experimentell #+#
+# experimental #+#
 #
 
 def extraKnots():
     '''allocation of extra knots '''
 
-    # -----zuordnung
+    # -----	assignment
     i1 = [0, 1, 2, 4, 5]
     i2 = [0, 1, 2, 3, 4]
     # ---------
@@ -2650,7 +2650,7 @@ def AA():
         minFun(params, True)
 #    return
 
-    # bounds fuer 4,5,7
+    # bounds for 4,5,7
     methods=[methods[i] for i in [1]]
 
     print("evaluation------------")

@@ -37,7 +37,7 @@ import NURBSinit
 # toggle all position constraints of a gui selected shoe rib
 #
 # Rippe auswaehlen
-# Menu Shoe -> toggle constraints of a rib  (oder symbol blaue sohle)
+# Menu Shoe -> toggle constraints of a rib  (oder symbol blaue sole)
 #
 # Alle Positionsconstraints sind blau
 #

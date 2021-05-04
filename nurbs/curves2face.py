@@ -71,5 +71,5 @@ class Nurbs_DrawCurves2Face:
                 'ToolTip': QT_TRANSLATE_NOOP("Nurbs_DrawCurves2Face", _tooltip)}
 
 Gui.addCommand("Nurbs_DrawCurves2Face", Nurbs_DrawCurves2Face())
-Nurbs_DrawCurves2Face.__doc__ = """Nurbs Draw Curves to Face: Tobe written later
+Nurbs_DrawCurves2Face.__doc__ = """Nurbs Draw Curves to Face: To be written later
                             """

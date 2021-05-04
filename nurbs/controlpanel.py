@@ -69,7 +69,7 @@ def createListWidget(obj=None, propname=None):
         listWidget.addItem(item)
 
     def f(*arg):
-        print("itemsele cahgned")
+        print("selected item changed")
         print(arg, listWidget)
         print(listWidget.selectedItems())
         for item in listWidget.selectedItems():
@@ -95,7 +95,7 @@ def createListWidget(obj=None, propname=None):
             else:
                 print("skip ", a.Label)
 
-        # wrte list back to objects
+        # write list back to objects
         setattr(ref, propname, bb)
         setattr(obj, propname, bb)
 
@@ -462,7 +462,7 @@ class ControlPanel(PartFeature):
             setattr(obj, propname, aa)
 
     # add a object property to controller,
-    # set some gui configruation values
+    # set some gui configuration values
     # \param obj object
     # \param propname name of the property
     # \param maxV maximum value for dialer

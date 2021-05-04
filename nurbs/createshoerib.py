@@ -60,7 +60,7 @@ class _ViewProvider(pyob.ViewProvider):
         return NURBSinit.ICONS_PATH+'sketchrib.svg'
 
 
-## create a special ful constrainted Sketcher Bspline
+## create a special full constrained Sketcher Bspline
 #
 # @param name of the rib
 # @param moves post creation movement of the points inside the sketch(deactivated) 
@@ -79,7 +79,7 @@ class Nurbs_CreateShoeRib:
         debug=True
         debug=False
 
-        print ("----createshoerib------------------")
+        print ("----create shoe rib------------------")
         print (name)
         print (moves)
         print (box)
@@ -213,7 +213,7 @@ class Nurbs_CreateShoeRib:
         sk.renameConstraint(d, u'tangentTopB')
 
         if r+l<-10:
-            print ("injury --------------createshoerib row 152---- r+l",r+l)
+            print ("injury --------------create shoe rib row 152---- r+l",r+l)
             print (r+l)
 
 

@@ -132,7 +132,7 @@ def mergeSketchSpline(pts=None, label="BSpline Sketch", periodic=True, name="Ske
             int(round(p.x)), int(round(p.y)), 0), App.Vector(0, 0, 1), 10), True)
         sk
 
-        # wenn schon was da ist,verbinden
+        # if something is already there, connect
         if i == 0 and int(sk.GeometryCount) >= 2:
             sk.addConstraint(Sketcher.Constraint('Coincident', j-2, 3, j, 3))
 
@@ -185,7 +185,7 @@ def closecurve(sk):
 
 
 def runobj(obj, label=None):
-    ''' erzeugt fuer ein objekt den SketchSpline'''
+    '''creates the SketchSpline for an object'''
 
     sk = createSketchSpline(
         obj.Shape.Edge1.Curve.getPoles(), str(obj.Label) + " Sketch")
@@ -197,7 +197,7 @@ class Nurbs_CreateSketchSpline_runsubs:
     def Activated(self):
         self.runsubs()
     def runsubs(self):
-        ''' erzeugt sketche fuer mehrere subkanten'''
+        '''creates sketches for several sub-edges'''
         sx = Gui.Selection.getSelection()
         s = sx[0]
         for so in s.SubObjects:
@@ -230,7 +230,7 @@ class Nurbs_CreateSketchSpline_Runall:
         self.runall()
         
     def runall(self):
-        ''' erzeugt sketche fuer mehrere subkanten'''
+        '''creates sketches for several sub-edges'''
         rc=None
         sx = Gui.Selection.getSelection()
         s = sx[0]
@@ -268,7 +268,7 @@ Gui.addCommand("Nurbs_CreateSketchSpline_Runall", Nurbs_CreateSketchSpline_Runal
 class Nurbs_createSketchSpline:
     '''convert a draft bspline to a sketcher bspline'''
     def Activated(self):
-        '''erzeugt fuer jedes selektierte Objekte aus Edge1 einen Sketch'''
+        '''creates a sketch for each selected object from Edge1'''
 
         if len(Gui.Selection.getSelection()) == 0:
             showdialog('Oops', 'nothing selected - nothing to do for me',

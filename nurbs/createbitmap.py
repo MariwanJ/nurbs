@@ -87,7 +87,7 @@ class Nurbs_CreateBtimap:
         App.ActiveDocument.recompute()
 
     def qrcodeFace(self,message='qr', degree=2, showPoints=False, window=None):
-        # bitmuster as string
+        # bit pattern as string
         pts2=None 
         ts = time.time()
 
