@@ -91,7 +91,7 @@ from pyob import  FeaturePython,ViewProvider
 ##\endcond
 
 def copySketch(sketch,target):
-    '''copies sketch geometry and constraints into trarget sketch'''
+    '''copies sketch geometry and constraints into target sketch'''
     sb=sketch
     gs=sb.Geometry
     cs=sb.Constraints
@@ -110,7 +110,7 @@ def copySketch(sketch,target):
     sk.recompute()
     App.ActiveDocument.recompute()
 
-## Eine spezielle Bezier-Kurve, auf der alles aus dem Bering-Modul aufbaut
+## A special Bezier curve on which everything from the Bering-module is based
 
 class _VPBering(ViewProvider):
     pass
@@ -137,14 +137,14 @@ class Bering(FeaturePython):
         obj.addProperty("App::PropertyEnumeration","mode").mode=['curve','poles','compound']
         obj.addProperty("App::PropertyBool","stripmode","Strip Mode","in stripmode two more tangent helper paths are created")
         obj.addProperty("App::PropertyBool","stripsymmetric","Strip Mode","to get a smooth surface on this rib when used in beface")
-        obj.addProperty("App::PropertyFloat","stripalpha","Strip Mode","Anschraegung fuer pre und post Height").stripalpha=90
+        obj.addProperty("App::PropertyFloat","stripalpha","Strip Mode","Bevel for pre and post height").stripalpha=90
         obj.addProperty("App::PropertyBool","_showStripMode","Strip Mode")
         obj._showStripMode=False
 
 
         obj.addProperty("App::PropertyPlacement","prePlacement","Pretangent","relative position of the pretangent curve in stripmode")
         obj.addProperty("App::PropertyVector","preScale","Pretangent","relative scale of the pretangent curve")
-        obj.addProperty("App::PropertyFloat","preHeight","Pretangent","fuer Anschraegung mit stripalpha")
+        obj.addProperty("App::PropertyFloat","preHeight","Pretangent","for bevel with stripalpha")
         obj.addProperty("App::PropertyBool","presymmetric","Pretangent")
         obj.addProperty("App::PropertyBool","_showPretangent","Pretangent")
         obj.addProperty("App::PropertyBool","flipPrePost","Pretangent")
@@ -153,7 +153,7 @@ class Bering(FeaturePython):
 
         obj.addProperty("App::PropertyPlacement","postPlacement","Posttangent","relative position of the posttangent curve in stripmode")
         obj.addProperty("App::PropertyVector","postScale","Posttangent","relative scale of the pretangent curve")
-        obj.addProperty("App::PropertyFloat","postHeight","Posttangent","fuer Anschraegung mit stripalpha")
+        obj.addProperty("App::PropertyFloat","postHeight","Posttangent","for bevel with stripalpha")
         obj.addProperty("App::PropertyBool","_showPosttangent","Posttangent")
         obj.addProperty("App::PropertyBool","postsymmetric","Posttangent")
 
@@ -180,8 +180,8 @@ class Bering(FeaturePython):
         self.showprops(fp,prop)
 
         if prop=='detach' and fp.detach:
-            print ("muss sketch erzeugen")
-            # nix machen, ist schon da
+            print ("must create sketch")
+            # do nothing, it's already there
             return
 
             try:
@@ -197,7 +197,7 @@ class Bering(FeaturePython):
                 for  i in range((len(pts)-4)/3):
                     fp.addConstraint(Sketcher.Constraint('Parallel',3*i+2,3*i+3))
             except:
-                sayex("probleme beim detach")
+                sayex("problems with detach")
 
 
 
@@ -240,7 +240,7 @@ class Bering(FeaturePython):
 
 
 
-        # testen ob geschlossenes oder offnes modell
+        # test whether closed or open model
         if len(ptsa)%3 == 2:
             sayexc(
                     "error number of vertexes" +
@@ -254,20 +254,20 @@ class Bering(FeaturePython):
             pts=ptsa
 
         if fp.start==0 and fp.end==0:
-            ecken=(len(pts))/3-1
+            corners=(len(pts))/3-1
 
         if fp.end>0:
-            ecken=fp.end-fp.start-1
-            pts=pts[fp.start*3:fp.start*3+ecken*3+4]
-            print(fp.start*3,ecken*3+4)
+            corners=fp.end-fp.start-1
+            pts=pts[fp.start*3:fp.start*3+corners*3+4]
+            print(fp.start*3,corners*3+4)
 
-        ms=[4]+[3]*ecken+[4]
+        ms=[4]+[3]*corners+[4]
 
         if fp.inverse:
                 pts=pts[::-1]
 
         if not fp.detach:
-            # punkte zuruecktransformieren
+            # transform points back
 
             ptsback=[]
             pmi=pms.inverse()
@@ -446,7 +446,7 @@ class Bering(FeaturePython):
             fp.Shape=Part.Compound(comp)
 
 #        print ("---------- create the inner geometry")
-#        print (" ignoriert -fehler m")
+#        print (" ignores -error m")
 #        return
         #try:
         if 1:
@@ -461,7 +461,7 @@ class Bering(FeaturePython):
                 for  i in range(len(pts)-2):
                     fp.addConstraint(Sketcher.Constraint('Coincident',i,2,i+1,1))
         #except:
-        #    print ("probleme bei der sketch erstellung")
+        #    print ("problems with sketching")
 
         fp.Placement=pm
 
@@ -470,7 +470,7 @@ class Bering(FeaturePython):
 
     def executeHACK(self,fp):
         
-        print ("HACK for DEmo continuity curvature")
+        print ("HACK for Demo continuity curvature")
                
 
         pms=fp.source.Placement
@@ -499,7 +499,7 @@ class _VPBeface(ViewProvider):
     pass
 
 
-## Eine Bezier-Fläche, die aus Berings zusammengesetzt ist
+## A Bezier surface composed of berings
 
 class Beface(FeaturePython):
     '''a special bezier surface based on bezier curves(berings)'''
@@ -602,23 +602,23 @@ class Beface(FeaturePython):
         (a,b,c)=poles.shape
 
         if not fp.generatedBackbone:
-            ecken=(a-1)/3
+            corners=(a-1)/3
 
             if fp.end>0:
-                ecken=fp.end-fp.start
+                corners=fp.end-fp.start
                 poles=poles[3*fp.start:3*fp.end+1]
 
-            ya=[4]+[3]*(ecken-1)+[4]
+            ya=[4]+[3]*(corners-1)+[4]
 
             (a,b,c)=poles.shape
             print ("poles.shape a,b",a,b)
 
-            # die bezier variante
+            # the bezier variant
             yb=fpberings[0].Shape.Edge1.Curve.getMultiplicities()
 
             db=min(3,a-1)
             if db==3:
-                ya=[4]+[3]*(ecken-1)+[4]
+                ya=[4]+[3]*(corners-1)+[4]
             if db==2:
                 ya=[3,3]
             if db==1:
@@ -840,7 +840,7 @@ class Beface(FeaturePython):
             assert ll == len(pps)
             ptsa += [pps]
 
-        # zusammengesetzt
+        # composed
         ptsa=[]
         ll=-1
         stripmode=False
@@ -878,7 +878,7 @@ class Beface(FeaturePython):
 
 
         if fp.cutend:
-            print ("kante ...")
+            print ("edge ...")
             pa=poles[-4].copy()
             pe=poles[-1].copy()
             poles[-3]=pa+(pe-pa)*0.2
@@ -890,22 +890,22 @@ class Beface(FeaturePython):
 
 
         if not fp.generatedBackbone:
-            ecken=(a-1)/3
+            corners=(a-1)/3
 
             if fp.end>0:
-                ecken=fp.end-fp.start
+                corners=fp.end-fp.start
                 poles=poles[3*fp.start:3*fp.end+1]
 
-            ya=[4]+[3]*(ecken-1)+[4]
+            ya=[4]+[3]*(corners-1)+[4]
 
             (a,b,c)=poles.shape
 
-            # die bezier variante
+            # the bezier variant
             yb=fpberings[0].Shape.Edge1.Curve.getMultiplicities()
 
             db=min(3,a-1)
             if db==3:
-                ya=[4]+[3]*(ecken-1)+[4]
+                ya=[4]+[3]*(corners-1)+[4]
             if db==2:
                 ya=[3,3]
             if db==1:
@@ -921,7 +921,7 @@ class Beface(FeaturePython):
                 range(len(ya)),range(len(yb)),
                 False,False,db,3)
 
-#        # geschlossen
+#        # closed
 #        if fp.closed:
 #            print ya
 #            print (a,b,c)
@@ -956,14 +956,14 @@ class Beface(FeaturePython):
             if ya[i]<3:
                 af.insertUKnot(i,3,0)
 
-        # hier feinteilung flaeche
+        # here fine division area
         if fp.endu>0 and fp.endv!=0:
             afsegment(fp.startu,fp.endu,fp.startv,fp.endv)
         # afsegment(0,5,1.5,2.5)
 
         sh=af.toShape()
 
-        # endflaechen
+        # end faces
         comp=[sh]
         comp2=[sh.Face1]
         if fp.endPlanes:
@@ -991,25 +991,25 @@ class Beface(FeaturePython):
             fp.Shape=Part.Solid(Part.Shell([sh.Face1]))
             fp.Shape=Part.Solid(Part.Shell(comp2))
         except:
-            print ("Problem beim Erzeugen Solid")
+            print ("Problem creating Solid")
             fp.Shape=af.toShape()
 
 #        fp.Shape=Part.Solid(Part.Shell([sh.Face1]))
 
 
-## erzeuge eine Bezierkurve auf der Basis einer Punktmenge
-# \param source BSpline oder Polygon (Wire), desse Pole/punkte als Pole verwendet werden
+## generate a Bezier curve based on a set of points
+# \param source BSpline or Polygon (Wire), whose pole / points are used as poles
 #
-# wenn die Anzahl der Punkte durch 3 teilbar ist, wird eine geschlossene Kurve erzeugt
+# if the number of points is divisible by 3, a closed curve is generated
 #
-# wenn die Anzahl 3n+2 ist, ist die erzeugte Bezier offen und beginnt beim ersten Punkt
-# \param start erster Knoten der Rippe
-# \param ende letzter Knoten der Rippen
-# \param scale Skalierung der Kurve
-# \param pos Verschiebung der Kurve
-# \param source Polygon oder Bezierkurve
-# \param name Name des erzeugtn Objekts
-# \param show Wenn Falsch, wird erzeugts Objekt nicht angezeigt
+# if the number is 3n+2, the Bezier generated is open and starts at the first point
+# \param start first knot of the rib
+# \param ends last knot of the ribs
+# \param scale scaling of the curve
+# \param pos shifting the curve
+# \param source polygon or bezier curve
+# \param name Name of the created object
+# \param show If false, the created object is not displayed
 
 
 
@@ -1038,7 +1038,7 @@ def genk(start,ende,scale,pos,source,name="BeringSketch",show=True):
 
 
 def genA():
-    '''erzeugt ein Test-Beface mit 3 Rippen'''
+    '''creates a test face with 3 ribs'''
 
     source=App.ActiveDocument.Sketch002;end=2;start=0
     source=App.ActiveDocument.Sketch003;end=5;start=0
@@ -1060,7 +1060,7 @@ def genA():
 
 
 def genB():
-    '''erzeugt ein Test-Beface mit 13 Rippen = 4 Segmente'''
+    '''creates a test face with 13 ribs = 4 segments'''
 
     #source=App.ActiveDocument.Sketch;end=5:start=1
     source=App.ActiveDocument.Sketch001;end=0;start=0
@@ -1158,7 +1158,7 @@ class Nurbs_CreateBeFaceFromSelBering:
         
         from PySide.QtCore import QT_TRANSLATE_NOOP
         """Set icon, menu and tooltip."""
-        _tooltip = ("Nurbs Create Be Face From Selelected Bering")
+        _tooltip = ("Nurbs Create Be Face From Selected Bering")
         return {'Pixmap': NURBSinit.ICONS_PATH+'drawing.svg',
                 'MenuText': QT_TRANSLATE_NOOP("Nurbs", "Nurbs_CreateBeFaceFromSelBering"),
                 'ToolTip': QT_TRANSLATE_NOOP("Nurbs Nurbs_CreateBeFaceFromSelBering", _tooltip)}
@@ -1167,7 +1167,7 @@ Gui.addCommand("Nurbs_CreateBeFaceFromSelBering", Nurbs_CreateBeFaceFromSelBerin
 
 
 
-#todo : The file (bering_testdaten.fcstd) is missing I cannot find it anywhere.
+#to-do : The file (bering_testdaten.fcstd) is missing I cannot find it anywhere.
 ## a testcase for bering and beface
 # this test uses the NURBSinit.DATA_PATH+bering_testdaten.fcstd
 class Nurbs_TestCaseBeringTest:
@@ -1576,7 +1576,7 @@ class Nurbs_createProduct:
     def Activated(self):
         self.createProduct()
     def createProduct(self):
-        '''create the procuct face of some curves
+        '''create the product face of some curves
         2 curves u,v
         3 curves u,v,u2
         4 curves u,v,u2,v2
@@ -1609,7 +1609,7 @@ Gui.addCommand("Nurbs_createProduct", Nurbs_createProduct())
 def debugP(pts,label):
     '''a method to display points *pts* as wire in a object with name *label*'''
 
-#    print ("debugP deaktiviert";return
+#    print ("debugP deactivated";return
 
     pts=[App.Vector(p) for p in pts]
     obj=App.ActiveDocument.getObject(label)
@@ -1710,8 +1710,8 @@ class FaceConnection(FeaturePython):
 
         print (poles.shape)
         (_a,_b,_c)=poles.shape
-        ecken=(_a-4)/3
-        ms=[4]+[3]*ecken+[4]
+        corners=(_a-4)/3
+        ms=[4]+[3]*corners+[4]
 
         af=Part.BSplineSurface()
         af.buildFromPolesMultsKnots(poles,
@@ -1727,8 +1727,8 @@ class FaceConnection(FeaturePython):
 
         if fp.displayConnect:
 
-            ecken=(_b-4)/3
-            ms=[4]+[3]*ecken+[4]
+            corners=(_b-4)/3
+            ms=[4]+[3]*corners+[4]
 
             af=Part.BSplineSurface()
             af.buildFromPolesMultsKnots(poles,
@@ -2193,15 +2193,15 @@ class Nurbs_BSplineToBezierCurve2:
                 if i == 1:
                     print ("in 1")
                     if (poles[0]-pp[0]).Length<0.1 or (poles[0]-pp[-1]).Length<0.1:
-                        print ("drehen")
+                        print ("rotate")
                         poles=poles[::-1]
                     if (poles[-1]-pp[-1]).Length <0.1:
-                        print ("drehen 2")
+                        print ("rotate 2")
                         pp=pp[::-1]
                     poles += pp[1:]
                 if i>1:
                     if (poles[-1]-pp[-1]).Length <0.1:
-                        print ("drehen 2")
+                        print ("rotate 2")
                         pp=pp[::-1]
                     poles += pp[1:]
 
@@ -2309,7 +2309,7 @@ class BezierSurface(FeaturePython):
 class Nurbs_BSplineToBezierSurface:
     def Activated(self):
         self.BSplineToBezierSurface()
-## create a Bezier Surface for a selectde BSpline Surface
+## create a Bezier Surface for a selected BSpline Surface
 
     def BSplineToBezierSurface(self):
         s=Gui.Selection.getSelection()[0]
@@ -2336,7 +2336,7 @@ Gui.addCommand("Nurbs_BSplineToBezierSurface", Nurbs_BSplineToBezierSurface())
 
 
 def SurfaceEditor():
-	'''alter editor fuer surface'''
+	'''old editor for surface'''
 ##\cond
 	layout = '''
 	MainWindow:
@@ -2568,7 +2568,7 @@ def SurfaceEditor():
 				pass
 
 			obj2.Shape=Part.Compound(comps+[s] + [bs3.toShape()])
-			print ("KUGELLLLLLLLLLLLLLLL")
+			print ("BULLET")
 			print (s)
 
 
@@ -2650,7 +2650,7 @@ def SurfaceEditor():
 				fp=self.obj
 			except: # not yet ready
 				return
-			print ("apply auf ",fp.Label)
+			print ("apply on ",fp.Label)
 
 
 			obj=App.ActiveDocument.getObject('temp_YY1')
@@ -3197,7 +3197,7 @@ Gui.addCommand("Nurbs_CreateBEplane", Nurbs_CreateBEplane())
 
 
 
-## a cylindric Bezier Face
+## a cylindrical Bezier Face
 # size and number of poles configurable
 # some random noise cam be added
 
@@ -3296,7 +3296,7 @@ class BeTube(FeaturePython):
 
 
 '''
-    def Xexecute(self,fp): # gehts
+    def Xexecute(self,fp): # ok
         uc=fp.uSegments*3+3
         vc=fp.vSegments*3+1
         poles=np.random.random(uc*vc*3).reshape(uc,vc,3)
@@ -3463,7 +3463,7 @@ Gui.addCommand("Nurbs_createPlaneTubeConnector", Nurbs_createPlaneTubeConnector(
 
 
 ## connects a tube and a helmet
-# schuhspitze an leisten
+# toe to end
 
 
 
@@ -3610,7 +3610,7 @@ class BeTriangle(FeaturePython):
 ##\cond
     def execute(self,fp):
 
-        #zusammensetzung
+        #composition
         spa=[[-100,0,0],[-80,20,0],[-20,80,0],[0,100,0]]
         spb=[[0,100,0],[20,80,0],[80,20,0],[100,0,0]]
         spc=[[-100,0,0],[-80,0,0],[-20,0,-20],[0,0,-20],[20,0,-20],[80,0,0],[100,0,0]]
@@ -3728,7 +3728,7 @@ class BeTriangle(FeaturePython):
         fp.Shape=bs.toShape()
 
         return
-        # ab hier tangentsspiele todo!!
+        # from here tangent games to-do!!
 
         #--------------------------------
         rA=np.array([rr[0],rr[0]+[-30,30,30]])
@@ -3933,7 +3933,7 @@ Gui.addCommand("Nurbs_createTangentStripes", Nurbs_createTangentStripes())
 #-----------------
 
 
-## a segmemt of a surface object
+## a segment of a surface object
 #
 
 class Cell(FeaturePython):
@@ -4019,11 +4019,11 @@ class Cell(FeaturePython):
 
 def selectionToNurbs():
 
-    '''convert selection to a nurbs face and all edges tos nurbs curvse'''
+    '''convert selection to a nurbs face and all edges to nurbs curves'''
     if 0:
         obj=Gui.Selection.getSelection()[0]
 
-        #eine Flaeche oder alle
+        #one area or all
         if len(obj.Shape.Faces) == 0:
             for e in obj.Shape.Edges:
                 print (e)
@@ -4059,7 +4059,7 @@ def selectionToNurbs():
 
 
 def createYankee():
-    '''create a yankee face (two finger)'''
+    '''create a Yankee face (two finger)'''
 
     obj1=App.ActiveDocument.FaceConnection_Cell
     obj2=App.ActiveDocument.FaceConnection001_Cell001
@@ -4098,7 +4098,7 @@ def createYankee():
     Part.show(sf.toShape())
 
 ## create a quadrangle by 4 points
-# \todo  documentation
+# \to-do  documentation
 
 class QuadPm(FeaturePython):
 
@@ -4223,7 +4223,7 @@ Gui.addCommand("Nurbs_CreateQuadPlacement", Nurbs_CreateQuadPlacement())
 
 
 def _checkCurveGUI():
-    ''' testcase checkcurve'''
+    '''testcase checkcurve'''
     obj=Gui.Selection.getSelection()[0]
     curve=obj.Shape.Edge1.Curve
     checkcurve(curve)
@@ -4235,7 +4235,7 @@ class Nurbs_FaceToBezierSurface:
         self.FaceToBezierSurface()
         
     def FaceToBezierSurface(self):
-        '''selektierte flaeche in bspline surface umwandeln'''
+        '''convert selected area into bspline surface'''
         obj=Gui.Selection.getSelection()[0]
         a=Gui.Selection.getSelection()[0]
         for s in a.SubObjects:
@@ -4287,7 +4287,7 @@ class Nurbs_Stretchandbend:
         self.stretchandbend()
         
     def stretchandbend(self):
-        #  transformation berechnen
+        #  calculate transformation
 
         pass2=False
         pass2=0
@@ -4363,7 +4363,7 @@ class Nurbs_Stretchandbend:
                 False,False,3,3,)
 
 
-        # da s muss parametric werden
+        # that has to be parametric
         bs3.insertUKnot(0.25,3,0)
         bs3.insertUKnot(0.5,3,0)
         bs3.insertUKnot(0.75,3,0)
@@ -4399,7 +4399,7 @@ class Nurbs_Stretchandbend:
     #            sf.getUKnots(),sf.getVKnots(),
     #            False,False,sf.UDegree,sf.VDegree)
     #    Part.show(bs.toShape())
-    #    App.ActiveDocument.ActiveObject.Label="moprh only"
+    #    App.ActiveDocument.ActiveObject.Label="morph only"
 
 
         poles=poles2+poles3
@@ -4452,12 +4452,12 @@ Gui.addCommand("Nurbs_Stretchandbend", Nurbs_Stretchandbend())
 
 
 def AA():
-    '''berechne  Verformungskraft'''
+    '''calculate deformation force'''
     ss=App.ActiveDocument.Sketch.Shape
     pts=[v.Point for v in ss.Vertexes]
     ptss=pts[1:]+pts[:1]
 
-    #biegekraft
+    #bending force
     lp=len(pts)
     su=0
     for i in range(1,lp-1):
@@ -4477,7 +4477,7 @@ def AA():
 
 
 def genbase(fp,pts,center=App.Vector(),offset=2):
-    # Basiszelle
+    # Base cell
 
     ptsa=[App.Vector(p[0],p[1],p[2]) +center for p in pts]
     ptsb=ptsa[offset:]+ptsa[:offset]
@@ -4552,7 +4552,7 @@ def gencircle(fp,n,h=300,radius=400,center=None):
     bb=genk(0,0,1,App.Vector(),sk,sk.Name)
     bb.ViewObject.hide()
 
-    print (" Ergebnis ",bb.Name)
+    print (" Result ",bb.Name)
 
     return bb,ptsb
 
@@ -4563,7 +4563,7 @@ class Nurbs_CreateSketchCircle:
     def createSketchCircle(self):
         '''create a circle bspline curve for sketcher'''
 
-        # kreis 100 mm
+        # circle 100 mm
         radius=25*2**0.5
         c = 0.551915024494
         #radius=fp.radius
@@ -4625,7 +4625,7 @@ Gui.addCommand("Nurbs_CreateSketchCircle", Nurbs_CreateSketchCircle())
 
 
 def createEndface(pts,label,offset=0):
-    # abschlussfleche erzeugen oben
+    # create terminating areas at the top
     pts=pts[offset:]+pts[:offset]
     aa=np.array([pts[1:5],pts[4:8],pts[7:11][::-1],pts[7:11][::-1],]).reshape(4,4,3)
 
@@ -4648,7 +4648,7 @@ def createEndface(pts,label,offset=0):
 # MAIN -----------------
 
 
-## create a cylindric hole in a nurbs surface cell
+## create a cylindrical hole in a nurbs surface cell
 #
 
 
@@ -4687,7 +4687,7 @@ class HoleFace(FeaturePython):
 
 
 def createHole(fp,height=100):
-    ''' anschluss kreis an zelle '''
+    '''connection circle to cell'''
 
     obj=fp.source
 
@@ -4697,7 +4697,7 @@ def createHole(fp,height=100):
     radius=4
     height=3
 
-    # zelle
+    # cell
     pts=[
             [400,301],
             [400,400],
@@ -4761,7 +4761,7 @@ def createHole(fp,height=100):
 
     sf=App.ActiveDocument.getObject(fp.Name+"_hole")
 
-# testweise deaktiviern
+# deactivate as a test
     if sf == None:
         sf=App.ActiveDocument.addObject('Sketcher::SketchObjectPython',fp.Name+"_hole")
         #sf.ViewObject.hide()
@@ -4792,15 +4792,15 @@ def createHole(fp,height=100):
 #    Gui.updateGui()
 
     if fp.endfaces:
-        fo=createEndface(ptsd,"oben",2)
-#        createEndface(ptsc,"mitte",2)
-        fu=createEndface(ptsa,"untenb",2)
+        fo=createEndface(ptsd,"above",2)
+#        createEndface(ptsc,"center",2)
+        fu=createEndface(ptsa,"below",2)
 
 
 
 
 def _createHoleGUI():
-    '''Gui for creater of a hole'''
+    '''Gui for creating a hole'''
 
 
     class MyApp(MikiApp):
@@ -4840,7 +4840,7 @@ MainWindow:
 
 
 class Nurbs_CreateHOLEGUI:
-    '''Gui for creater of a hole'''
+    '''Gui for creating a hole'''
     def Activated(self):
         self.createHoleGUI()
 
@@ -4872,7 +4872,7 @@ Gui.addCommand("Nurbs_CreateHOLEGUI", Nurbs_CreateHOLEGUI())
 
 
 ## gordon surface as a set of ribs and meridians
-# \todo works only with compound
+# \to-do works only with compound
 #
 
 class GordonFace(FeaturePython):
@@ -4921,7 +4921,7 @@ class Nurbs_createGordon:
                 polsv=np.array([a.Shape.Edge1.Curve.getPoles() for a in obj.grid.Links[suc+1:suc+svc+2]])
 
             except:
-                print ("Berechne selbst die dimensionen des Feldes")
+                print ("Calculate the dimensions of the field yourself")
                 a=obj.grid
                 lenedges=[len(e.Curve.getPoles()) for e in a.Shape.Edges]
                 print ("Length edges",lenedges)
@@ -4941,7 +4941,7 @@ class Nurbs_createGordon:
                 print (polsu.shape)
                 print (polsv.shape)
 
-                #diagnose lage der kurven zueinander
+                #diagnosis of the position of the curves to one another
                 print()
                 print( App.Vector(polsu[-1,0]))
                 print( App.Vector(polsu[0,0]))
@@ -5122,7 +5122,7 @@ class Nurbs_createGordon:
 
 ##\cond
 def aGUI():
-    '''Gui dialog for  template/later'''
+    '''Gui dialog for template/later'''
 
     class App(MikiApp):
 
@@ -5186,7 +5186,7 @@ MainWindow:
 
 
 def _createGordonGUI():
-    '''variant ohne dialog'''
+    '''variant without dialog'''
     name="Gordon"
     tt=App.ActiveDocument.getObject(name)
     if 1 or tt==None:
@@ -5207,9 +5207,9 @@ def _createGordonGUI():
                 App.ActiveDocument.BeringSketch004,
             ]
         else:
-            # compound in richtiger reihenfolge
+            # compound in the correct order
             #tt.grid=App.ActiveDocument.Compound
-            # grid anorndung von begrid
+            # grid arrangement of begrid
 #            tt.grid=App.ActiveDocument.BeGrid
             tt.grid=Gui.Selection.getSelection()[0]
             try:
@@ -5227,7 +5227,7 @@ def _createGordonGUI():
 
 
 def compareMaps():
-    '''vergleich zwei Maps '''
+    '''compare two maps'''
     (ma,mb)=Gui.Selection.getSelection()
     comp=[]
     for p,q in zip(ma.Shape.Vertexes,mb.Shape.Vertexes):
@@ -5248,7 +5248,7 @@ class Nurbs_polishG1GUI:
         self.polishG1GUI()
 
     def  polishG1GUI(self):
-        ''' make surface G1 continues'''
+        '''make surface G1 continues'''
         obj=Gui.Selection.getSelection()[0]
         sf=obj.Shape.Face1.Surface
         poles=np.array(sf.getPoles())
@@ -5280,7 +5280,7 @@ class Nurbs_polishG1GUI:
         # parallel ?
         if te.cross(tw).Length >10**-5:
             print ("run",u,v)
-            print ("ost west nicht parallel")
+            print ("east west not parallel")
             print (te.cross(tw).Length)
 
             tu=(te+tw)
@@ -5295,7 +5295,7 @@ class Nurbs_polishG1GUI:
         # parallel ?
         if tn.cross(ts).Length >10**-5:
             print ("run",u,v)
-            print ("nord sued nicht parallel")
+            print ("north south not parallel")
             print (tn.cross(ts).Length)
             tu=(tn+ts)
 
@@ -5327,7 +5327,7 @@ class Nurbs_polishG1GUI:
                     False,False,3,3)
         Part.show(bs.toShape())
 
-        if 0: #erzeuge unstete flaeche
+        if 0: #create unsteady surface
 
             sf=App.ActiveDocument.ProductFace001.Shape.Face1.Surface
             poles2=np.array(sf.getPoles())
@@ -5416,7 +5416,7 @@ class Border(FeaturePython):
 
 
     def execute(self,fp):
-        '''create a closed path olf the border poles of a bspline surface'''
+        '''create a closed path of the border poles of a bspline surface'''
 
         bs=fp.source.Shape.Faces[fp.faceNumber].Surface
         poles=np.array(bs.getPoles())
@@ -5501,7 +5501,7 @@ Gui.addCommand("Nurbs_CreateBorderGUI", Nurbs_CreateBorderGUI())
 
 
 ##  the approximation of a curve by a bezier curve
-# with parametric number of (equidistant) controlpoints
+# with parametric number of (equidistant) control points
 
 class Approx(FeaturePython):
 
@@ -5622,7 +5622,7 @@ class Nurbs_createApprox:
         self.createApprox()
     
     ## create an approximation of a cure by a bezier curve
-    # use equidistant points on the source curve as controlpoints
+    # use equidistant points on the source curve as control points
     # number of segments and force of the tangents is parametric
     # \param sels selected curve objects
 
@@ -5661,7 +5661,7 @@ Gui.addCommand("Nurbs_createApprox", Nurbs_createApprox())
 
 
 def drawcurveA(pts,face,facepos=App.Vector()):
-    '''draw a curve on a face and create the two subfaces defined by the curve'''
+    '''draw a curve on a face and create the two sub faces defined by the curve'''
 
     sf=face.Surface
     interpolate=0
@@ -5705,7 +5705,7 @@ def drawcurveA(pts,face,facepos=App.Vector()):
 
 
 def AA():
-    '''draw a curve onto surface  create border and split face '''
+    '''draw a curve onto surface  create border and split face'''
     App.open(u"/home/thomas/Downloads/tangent_gap_problem2.fcstd")
     App.setActiveDocument("tangent_gap_problem2")
     App.ActiveDocument=App.getDocument("tangent_gap_problem2")
@@ -5929,7 +5929,7 @@ def glaetten():
                 #pall=pall.swapaxes(0,1)
 
 
-            if 0: # zeige gesamte flaeche
+            if 0: # show entire area
                 poles=pall
                 ya=[4,3,4]
                 yb=[4,3,4]
@@ -6024,7 +6024,7 @@ class Nurbs_FlattenTheWire:
             for n in nms:
                 nm += n
             db=nm.normalize()
-            ## abweichung
+            ## deviation
             s=0
             for n in nms:
                 s += abs(1-db.dot(n))
@@ -6051,7 +6051,7 @@ class Nurbs_FlattenTheWire:
             tt.Shape=pol
 
             db=da.cross(dc)
-    #        print ("vectoren"
+    #        print ("vectors"
     #        print (da.x,da.y,da.z)
     #        print (db.x,db.y,db.z)
     #        print (dc.x,dc.y,dc.z)

@@ -28,7 +28,7 @@ from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
 '''interactive drawing of a curve onto a face'''
 # -------------------------------------------------
-# -- interctive draw on face
+# -- interactive draw on face
 # --
 # -- microelly 2017  0.2
 # --
@@ -123,9 +123,9 @@ class EventFilter(QtCore.QObject):
 #                    cursor.setPos(p.x()+100, p.y()+100)
             # -----------------------------------
 
-            if t != None:  # if objects are under the mouse
+            if t != None:  # if objects are below the mouse
                 for tix, tt in enumerate(t):
-                    print("objunder ", tix, tt, tt['Object'], tt['Component'])
+                    print("obj below ", tix, tt, tt['Object'], tt['Component'])
                     print(self.fob.Label)
                     uxx = ef.xy2u(px, py)
                     vxx = ef.xy2v(px, py)
@@ -192,7 +192,7 @@ class EventFilter(QtCore.QObject):
                     return False
 
                 try:
-                    # only two function keys implemented, no modifieres
+                    # only two function keys implemented, no modifiers
                     if e.key() == QtCore.Qt.Key_F2:
                         say("------------F2-- show mode and moddata---------------")
                         return False
@@ -341,7 +341,7 @@ def drawcurve(wire, face, facepos=App.Vector()):
 
     print("drawcurve")
 
-    # startposition
+    # start position
     wplace = wire.Placement
 #    print wplace
     wpos = wplace.Base
@@ -428,18 +428,18 @@ def drawcurve(wire, face, facepos=App.Vector()):
 def _drawring(name, wires, dirs, face, facepos=App.Vector()):
     '''draw a curve on a face and create the two subfaces defined by the curve'''
 
-    print("drawring")
+    print("draw ring")
 
     es = []
     for wireA in wires:
-        # startposition
+        # start position
         wplace = wireA.Placement
     #    print wplace
         wpos = wplace.Base
     #    print ("facepos ",facepos
         wire = wireA
 
-        # --------------- teil 1
+        # --------------- part 1
         w = wireA.Shape
         t = face
 
@@ -452,7 +452,7 @@ def _drawring(name, wires, dirs, face, facepos=App.Vector()):
         su = bs.UPeriod()
         sv = bs.VPeriod()
 
-        print("hacks etze uv, sv auf 1")
+        print("hacks etze uv, sv on 1")
         su = face.ParameterRange[1]
         sv = face.ParameterRange[3]
 
@@ -489,10 +489,10 @@ def _drawring(name, wires, dirs, face, facepos=App.Vector()):
         sp.ViewObject.ShapeColor = wireA.ViewObject.ShapeColor
 
         es.append(e1_1)
-    # -------------------- teoil 2
+    # -------------------- part 2
 
         if 0:
-            # --------------- teil 1
+            # --------------- part 1
             w = wire2.Shape
             t = face
 
@@ -924,7 +924,7 @@ class Nurbs_CreateMapToFace:
         self.mode = ''
 
     def Activated(self):
-        ''' create a mpa control for the first face of the selected object '''
+        ''' create a map control for the first face of the selected object '''
         # last selection == face
         # other sels: wires to project
         s0 = Gui.Selection.getSelection()

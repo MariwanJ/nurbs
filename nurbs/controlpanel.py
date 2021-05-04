@@ -69,7 +69,7 @@ def createListWidget(obj=None, propname=None):
         listWidget.addItem(item)
 
     def f(*arg):
-        print("itemsele cahgned")
+        print("selected item changed")
         print(arg, listWidget)
         print(listWidget.selectedItems())
         for item in listWidget.selectedItems():
@@ -95,7 +95,7 @@ def createListWidget(obj=None, propname=None):
             else:
                 print("skip ", a.Label)
 
-        # wrte list back to objects
+        # write list back to objects
         setattr(ref, propname, bb)
         setattr(obj, propname, bb)
 
@@ -149,7 +149,7 @@ Gui.addCommand("Nurbs_ControlPanelAdd", Nurbs_ControlPanelAdd())
 
 
 def clear(window):
-    ''' delete the window widget '''
+    '''delete the window widget '''
     # window.deleteLater()
     # App.ActiveDocument.Spreadsheet.ViewObject.update()
     App.ActiveDocument.recompute()
@@ -282,7 +282,7 @@ def createPropWidget(obj, propname):
 
 
 def dialogV(obj):
-    '''erzeugen dialog vLayout'''
+    '''create dialog vLayout'''
 
     w = QtGui.QWidget()
     box = QtGui.QVBoxLayout()
@@ -304,7 +304,7 @@ def dialogV(obj):
 # create controller main dialog
 
 def dialog(obj):
-    '''erzeuge dialog grid'''
+    '''create dialog grid'''
 
     grid = QtGui.QGridLayout()
     grid.setSpacing(10)
@@ -449,7 +449,7 @@ class ControlPanel(PartFeature):
 
     # read the propertyx values from the source objects into the local property holder
     def refresh(proxy):
-        print("aktualisiere attribute")
+        print("update attributes")
         obj = proxy.Object
         for propname in obj.props:
             print(obj)
@@ -462,7 +462,7 @@ class ControlPanel(PartFeature):
             setattr(obj, propname, aa)
 
     # add a object property to controller,
-    # set some gui configruation values
+    # set some gui configuration values
     # \param obj object
     # \param propname name of the property
     # \param maxV maximum value for dialer

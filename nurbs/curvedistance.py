@@ -37,7 +37,7 @@ import os,sys
 try:
     import numpy as np 
 except ImportError:
-    print ("Trying to Install required module: nump")
+    print ("Trying to Install required module: numpy")
     
 import Draft
 

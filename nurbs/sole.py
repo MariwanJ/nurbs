@@ -178,7 +178,7 @@ class Nurbs_CreateOrUpdateSoleEnvironmentSheet:
             div12 = model.div12
             tt = np.array(model.tt)
 
-            print("Fehler dubug ...")
+            print("Error dubug ...")
             App._debug_LL = LL
             App._debug_tt = tt
             print(LL)

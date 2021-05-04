@@ -83,7 +83,7 @@ class FloatList(pyob.FeaturePython):
 # 
 # *Properties*
 #
-#  - **size** - length of the list (default 12,hiddeen)
+#  - **size** - length of the list (default 12,hidden)
 #  - **factor** - to scale the values (default 10) 
 #  - **val001 ... val999**
 #  - **datalist**  - all values as list (hidden)

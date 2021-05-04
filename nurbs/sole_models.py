@@ -79,7 +79,7 @@ class model():
 ## breite Sohle
 
 class modelA(model):
-    ''' breite sohle '''
+    ''' breite sole '''
     ##\cond
     def __init__(self):
         model.__init__(self)

@@ -45,7 +45,7 @@ class MyWidget(QtGui.QLineEdit):
         QtGui.QLineEdit.__init__(self)
         self.setText(text)
         self.path = path
-        self.path = "BaseApp/Preferences/Mod//editor"
+        self.path = "BaseApp/Preferences/Mod/editor"
         self.name = "MyTestparam"
         self.textChanged.connect(self.ttChanged)
 
@@ -75,7 +75,7 @@ if 0:
     w.loadA()
 
 
-path = "BaseApp/Preferences/Mod//editor"
+path = "BaseApp/Preferences/Mod/editor"
 
 
 def setcf(name, value):

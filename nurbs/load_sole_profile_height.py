@@ -63,7 +63,7 @@ class Nurbs_LoadHeightProfileFromFile:
         try:
             aktiv = App.ActiveDocument
             if aktiv == None:
-                showdialog("Fehler", "no Sole Document",
+                showdialog("Error", "no Sole Document",
                            "first open or create a sole document")
 
             fn = App.ParamGet(

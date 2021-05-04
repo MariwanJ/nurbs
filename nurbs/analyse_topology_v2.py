@@ -27,7 +27,7 @@ from __future__ import unicode_literals
 
 # -*- coding: utf-8 -*-
 # -------------------------------------------------
-# -- analyse topology of parts
+# -- analyze topology of parts
 # --
 # -- microelly 2017 v 0.3
 # --
@@ -57,7 +57,7 @@ except ImportError:
     print("Please install the required module : numpy")
     
 
-# modul variables
+# module variables
 g=nx.Graph()
 points={}
 
@@ -75,7 +75,7 @@ def rf(v):
 
 
 def createFaceMidPointmodel(a):
-    '''create an extended model with facepoints'''
+    '''create an extended model with face points'''
 
     fs = a.Shape.Faces
 
@@ -272,9 +272,9 @@ def runAna(model, silent=False):
             #            print (v,ptokey(v.Point),points[ptokey(v.Point)])
             pix = points[ptokey(v.Point)]
 #            print (g.node[pix])
-            # flaechennormale anfuegen
+            # attach surface normals
             (u, v) = f.Surface.parameter(v.Point)
-#            print( pix,"Addiere Flaechennoirmalw",(u,v),f.normalAt(u,v))
+#            print( pix,"add the surface area",(u,v),f.normalAt(u,v))
             try:
                 g.node[pix]['fdirs'].append(f.normalAt(u, v))
             except:
@@ -316,7 +316,7 @@ def runAna(model, silent=False):
         if rc == 0:
             break
     last = i
-    # zeige alle indentifizierten Punkte im Verbund
+    # show all identified points in the compound
     if not silent:
         for i in range(1, last):
             zeigeQ(i)
@@ -358,7 +358,7 @@ def valuesFromLevel (i=1):
     return anz
 
 def displayNB(nodes):
-    ''' diasplay neighbor edges as Part'''
+    ''' display neighbor edges as Part'''
     col = []
     for n in nodes:
         col += getNeighborEdges(n)
@@ -411,7 +411,7 @@ def loadModel(s):
         i1 = ptokey(p1)
         p2 = e.Vertexes[1].Point
         i2 = ptokey(p2)
-        print("addedge", points[i1], points[i2])
+        print("add edge", points[i1], points[i2])
         ge = g.add_edge(points[i1], points[i2],
                         weight=round(e.Length, 2),
                         vector=p2-p1,
@@ -432,7 +432,7 @@ def loadModel(s):
                 vs += g.edge[n][e]['vector']
                 edirs += [g.edge[n][e]['vector']]
             vsn = App.Vector(vs)
-            # some trouble ist the sum of all vectors is zero
+            # some trouble if the sum of all vectors is zero
             if 0:  # still look for a better solution
                 if vsn.Length < 1:
                     vsn = g.edge[n][esl[0]]['vector'].cross(
@@ -547,7 +547,7 @@ class MainAnalysisMethodRunAna:
         for model in s:
             #        g=nx.Graph()
             #        App.g=g
-            print("Startrnstand")
+            print("Starting position")
             for v in g.nodes():
                 print(g.node[v]['fdirs'])
                 print(g.node[v]['edirs'])
@@ -590,7 +590,7 @@ class MainAnalysisMethodRunAna:
                 # print keyd[k]
                 pts.append(keyd[k][0][0])
                 pts.append(keyd[k][1][0])
-                # moeglich sortieren auf koerper einzeln
+                # possible to sort individually on body
                 # print keyd[k][0][1]
                 # print keyd[k][1][1]
 
@@ -615,7 +615,7 @@ class MainAnalysisMethodRunAna:
         print
         print("after keys issued")
         for k in keys:
-            if k[0] % 100 != 0:  # ignore reine flaechen
+            if k[0] % 100 != 0:  # ignore pure areas
                 print
                 print(k)
                 for p in keyd[k]:
@@ -627,7 +627,7 @@ class MainAnalysisMethodRunAna:
         print("after keys issued only pairs -------------------------------")
         for k in keys:
             first = True
-            if k[0] % 100 != 0:  # ignore reine flaechen
+            if k[0] % 100 != 0:  # ignore pure areas
                 if len(keyd[k]) == 2:
                     [p, q] = keyd[k]
                     if p[1][0] != q[1][0]:
@@ -651,7 +651,7 @@ class MainAnalysisMethodRunAna:
                 random.random(), random.random(), random.random())
             App.ActiveDocument.ActiveObject.ViewObject.PointSize = 10
 
-            App.ActiveDocument.ActiveObject.Label = "Gefundene unique keys -- bestes ergebnis"
+            App.ActiveDocument.ActiveObject.Label = "Unique keys found - best result"
 
     #    if pts!=[]:
     #        #print pts
@@ -816,7 +816,7 @@ class Nurbs_AnalyseLoadTest1:
     def Activated(self):
         self.loadTest1()
     def loadTest1(self):
-        # hier relativen pfad reintun
+        # take a relative path here
         App.open(NURBSinit.DATA_PATH+"zwei_gleiche_fenster.fcstd")
         App.setActiveDocument("zwei_gleiche_fenster")
         App.ActiveDocument = App.getDocument("zwei_gleiche_fenster")
@@ -894,7 +894,7 @@ class Nurbs_AnalyseTest4:
             print(k, keys[k])
 
         uniqs = getUniques(keys)
-        print("uniques start ")
+        print("unique start ")
         print(uniqs)
 
         for n in uniqs:
@@ -950,10 +950,10 @@ class Nurbs_AnalyseTest4:
             random.random(), random.random(), random.random())
         App.ActiveDocument.ActiveObject.ViewObject.PointSize = 10
 
-        App.ActiveDocument.ActiveObject.Label = "Eindeutige Punkte"
+        App.ActiveDocument.ActiveObject.Label = "Clear points"
 
         print
-        print("nicht zuordenbar ...")
+        print("not assignable ...")
         noups = []
         for n in g.nodes():
             if n not in uniqs:
@@ -969,7 +969,7 @@ class Nurbs_AnalyseTest4:
             random.random(), random.random(), random.random())
         App.ActiveDocument.ActiveObject.ViewObject.PointSize = 10
 
-        App.ActiveDocument.ActiveObject.Label = "Nich eindeutige Punkte"
+        App.ActiveDocument.ActiveObject.Label = "No clear points"
 
     def GetResources(self):
         

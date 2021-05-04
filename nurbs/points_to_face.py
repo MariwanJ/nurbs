@@ -1279,7 +1279,7 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
                 print (l1,l2)
 
             if maxradius != 0 and r0> maxradius:
-                print ("Fehler radius zu gross",round(r0,1),round(maxradius,1))
+                print ("Error radius zu gross",round(r0,1),round(maxradius,1))
                 continue
 
             cylsrc += [[trafo.multVec(center)+p1,trafo.multVec(axis),r0,l1,l2,i]]
@@ -1480,7 +1480,7 @@ def run_cone6p():
             print ("r0",r0)
             print (l1,l2)
             if r0> 10000:
-                print ("Fehler radius zu gross")
+                print ("Error radius zu gross")
                 continue
             #cylsrc += [[trafo.multVec(center)+p1,trafo.multVec(axis),r0,l1,l2,i]]
             cyls += [[center,axis,r0,l1,l2,i]]

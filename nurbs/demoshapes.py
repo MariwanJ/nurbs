@@ -46,7 +46,7 @@ def methodA(obj):
         v1=obj.baseClientA.Shape.Vertexes
         v2=obj.baseClientB.Shape.Vertexes
     except:
-        print ("cannont build shape for .." )
+        print ("cannot build shape for .." )
         print (obj.Label)
         print (obj.baseClientA.Label)
         print (obj.baseClientB.Label)

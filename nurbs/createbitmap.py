@@ -87,7 +87,7 @@ class Nurbs_CreateBtimap:
         App.ActiveDocument.recompute()
 
     def qrcodeFace(self,message='qr', degree=2, showPoints=False, window=None):
-        # bitmuster as string
+        # bit pattern as string
         pts2=None 
         ts = time.time()
 
@@ -106,7 +106,7 @@ class Nurbs_CreateBtimap:
             for y in range(l):
                 pts.append(App.Vector(x, y, float(str(lns[x][y]))))
 
-        if 0:  # idee zweite bild ueberlagern
+        if 0:  # idea superimpose second image
             number2 = pyqrcode.create('abbceraaaYaaawqwqwwr')
             s2 = number2.text()
             lns2 = s2.splitlines()
@@ -267,7 +267,7 @@ class Nurbs_CreateBtimap:
 
             fa.ViewObject.show()
 
-        if 0:  # laufzeittest
+        if 0:  # runtime test
             a = 0
             b = 0
             for d in range(3, 3):

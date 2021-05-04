@@ -211,7 +211,7 @@ def pointEditor(obj,scale=1):
         w.setArr=setArr
         w.getArr=getArr
     else: 
-        raise Exception("Unhandled type " + dt)
+        raise Exception("Unhanded type " + dt)
 
     w.scale=scale
     w.obj=obj

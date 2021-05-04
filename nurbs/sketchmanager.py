@@ -676,13 +676,13 @@ def genQuadrangle():
         reportSketch(sk)
         App.ActiveDocument.commitTransaction()
 
-        # Fehler erkennen
+        # Error erkennen
         App.ActiveDocument.openTransaction("set length_c 1205")
         try:
             sk.setDatum(length_c,1200)
             App.ActiveDocument.commitTransaction()
         except:
-            print ("Fehler gemacht")
+            print ("Error gemacht")
             reportSketch(sk)
             print ("roll back")
             #App.ActiveDocument.abortTransaction()
