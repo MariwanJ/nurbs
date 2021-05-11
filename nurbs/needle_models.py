@@ -82,7 +82,7 @@ class model():
 
 
 class modelA(model):
-    ''' halbscharfe kante '''
+    ''' semi-sharp edge '''
 
     def __init__(self):
         model.__init__(self)
@@ -105,7 +105,7 @@ class modelA(model):
 
 
 class modelB(model):
-    ''' schiefe abschlussebene '''
+    ''' inclined final plane '''
 
     def __init__(self):
         model.__init__(self)
@@ -472,11 +472,11 @@ class modelS1(model):
 
 
 
-class modelSchlauch(model):
+class modelHose(model):
 
     def __init__(self,bbl=40):
         model.__init__(self)
-        self.info='schlauchn'
+        self.info='hose'
         self.curve=[
                 [200,0,0],
                 [200,600,0],
@@ -527,10 +527,10 @@ class modelFillet(model):
     def __init__(self,bbl=4):
         model.__init__(self)
         self.curve=[
-                [180,5,0],[210,0,0],[220,0,0],[230,0,0], [250,0,0],[260,0,0], # Tangentialuebergang  1
-                [50,50,0], # innere Form des Profiles
-                [0,150,0],[0,130,0],[0,120,0],[0,110,0],[0,105,0],[0,100,0], # Tangentialuebergang 2
-                [50,50,0],[-50,-50,0],    [100,50,0] # Form des Profils aussen
+                [180,5,0],[210,0,0],[220,0,0],[230,0,0], [250,0,0],[260,0,0], # Tangential transition  1
+                [50,50,0], # inner shape of the profile
+                [0,150,0],[0,130,0],[0,120,0],[0,110,0],[0,105,0],[0,100,0], # Tangential transition 2
+                [50,50,0],[-50,-50,0],    [100,50,0] # outside shape of the profile 
             ]
 
         self.sc=[[1,1]]*bbl
@@ -539,7 +539,7 @@ class modelFillet(model):
 
 
         self.bb=[[0,0,300*i] for i in range(bbl)]
-        self.info="Testmodel Fillet"
+        self.info="Test model Fillet"
 
 
 
@@ -553,10 +553,10 @@ class modelCarRoof(model):
         self.curve=[
                 [0,0,0],
                 [0,-99,0],[0,-100,0],[0,-100,1],[0,-100,40],
-                #breite kante
+                #wide edge
                 [0,-70,40],    [0,-70,35],
                 
-                # mittelsteg
+                # middle bridge
                 [0,-10,35],
                 [0,-10,40],
                 [0,-9,40],
@@ -564,7 +564,7 @@ class modelCarRoof(model):
                 [0,10,40],
                 [0,10,35],
                 
-                # schmale kante
+                # narrow edge
                 [0,90,35],[0,90,40],
                 [0,100,40],[0,100,1],[0,100,0],[0,91,0]
             ]
@@ -599,10 +599,10 @@ class modelS(model): # car
         self.curve=[
                 [0,0,0],
                 [0,-199,0],[0,-200,0],[0,-200,1],[0,-200,40],
-                #breite kante
+                #wide edge
 #                [0,-70,40],    [0,-70,35],
                 
-                # mittelsteg
+                # middle bridge
 #                [0,-10,35],
 #                [0,-10,40],
                 [0,-150,180],
@@ -613,7 +613,7 @@ class modelS(model): # car
 #                [0,10,40],
 #                [0,10,35],
                 
-                # schmale kante
+                # narrow edge
 #                [0,90,35],[0,90,40],
                 [0,200,40],[0,200,1],[0,200,0],[0,199,0]
             ]
@@ -655,7 +655,7 @@ class modelS(model): # car
         self.sc[9]=[4,4.8]
         self.sc[8]=[4,4.8]
 
-        self.info="Testmodel Autodach"
+        self.info="Test model car roof"
 
 
 
@@ -719,7 +719,7 @@ class modelColadose(model):
         
         bbl=15
         model.__init__(self)
-        self.info="coladose geknickt"
+        self.info="coladose kinked"
         
         self.curve=[
                 [100,0,0],[70,00,70],[0,0,100],[-70,0,70],
@@ -746,18 +746,18 @@ class modelK(model):
 
     def __init__(self):
         model.__init__(self)
-        self.info="hyperboloid 90 grad gedreht"
+        self.info="hyperboloid rotated 90 degrees"
         
-        # naeherung rippe als bspline ueber ein regelmaessiges  24-eck 
+        # approximation of the rib as a bspline over a regular 24-corner
         self.curve=[[100*np.sin(np.pi/24*i),100*np.cos(np.pi/24*i),0] for i in range(48)]
         
-        # hoehe 500
+        # height 500
         self.bb=[[0,0,0],[0,0,500]]
         
-        # keine skalierung
+        # no scaling
         self.sc=[[1,1],[1,1]]
         
-        #anfangsdrehung 90
+        #initial rotation 90
         self.twister=[[0,0,0],[0,0,90]]
 
 #-------------------------------------------------

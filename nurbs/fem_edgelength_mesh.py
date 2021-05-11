@@ -27,7 +27,7 @@ from __future__ import unicode_literals
 
 # -*- coding: utf-8 -*-
 # -------------------------------------------------
-# -- simualtion force by edge length
+# -- simulation force by edge length
 # --
 # -- microelly 2017 v 0.2
 # --
@@ -53,10 +53,10 @@ except ImportError:
 import random
 import os,sys
 
-#todo : This will fail . we don't have the files.
+#to-do : This will fail . we don't have the files.
 class Nurbs_FEM_EdgeLengthMeshExample:
     def Activated(self):
-    # load a testfile
+    # load a test file
         try:
             App.open(NURBSinit.DATA_PATH+"netz_test_data.fcstd")
             App.setActiveDocument("netz_test_data")
@@ -127,7 +127,7 @@ def findnode(conix, n):
     for k in conix:
         if n in conix[k]:
             return k
-    print("findnode fehler bei ", n)
+    print("find node error at ", n)
     print()
     return -1
 
@@ -135,7 +135,7 @@ def findnode(conix, n):
 def getGraph(sk):
     '''sketch to graph'''
 
-    # modul variables
+    # module variables
     g = nx.Graph()
     points = {}
 
@@ -166,7 +166,7 @@ def getGraph(sk):
             (int(Second), int(SecondPos))
         )
 
-    # umwandeln in echten topologischen graphen
+    #convert to real topological graphs
     conix = {}
     g2 = nx.Graph()
 
@@ -204,7 +204,7 @@ def getGraph(sk):
 
 
 def add_zdim(g2):
-    ''' add the 3D dimension to sketcher 2D data'''
+    '''add the 3D dimension to sketcher 2D data'''
     for n2 in g2.nodes():
         try:
             z = g2.node[n2]['radius']
@@ -263,7 +263,7 @@ class Nurbs_FemEdgeLengthMesh:
 
         for lp in range(itercount):
 
-            # cleasr the force sketch
+            # clears the force sketch
             gct = ska.GeometryCount
             for i in range(gct):
                 ska.delGeometry(gct-i-1)
@@ -311,7 +311,7 @@ class Nurbs_FemEdgeLengthMesh:
                 n3 = App.ActiveDocument.getObject("grid")
                 if n3 == None:
                     n3 = App.ActiveDocument.addObject("Part::Feature", "grid")
-            else:  # create new grif each time
+            else:  # create new grid each time
                 n3 = App.ActiveDocument.addObject("Part::Feature", "grid")
                 n3.ViewObject.Transparency = 70
             n3.ViewObject.LineColor = color
@@ -324,7 +324,7 @@ class Nurbs_FemEdgeLengthMesh:
             for n in g2.nodes():
                 g2.node[n]['vector'] = g2.node[n]['vector2']
 
-        # erzuegen einer flaeche
+        #create an area
         if 0:
             import os
 

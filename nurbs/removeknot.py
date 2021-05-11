@@ -59,7 +59,7 @@ import Draft
 if 0:
     pass
 
-    # Hilfswire machen
+    # Make help wire
     [a] = Gui.Selection.getSelection()
     bc = a.Shape.Edge1.Curve
     pts = a.Shape.Edge1.Curve.getPoles()
@@ -83,7 +83,7 @@ class Nurbs_RemoveKnots:
         for pos in range(1, kc):
             print(pos)
             # for t in (30000,40000,10000,5000,2000,1000,500,200,100,50,20,10,5,3,2,1):
-            # 1.5 und 1 gehen nicht
+            # 1.5 and 1 do not work
             for t in (20, 16, 14, 12, 6, 2, 1.5, 1):
                 bc = bc0.copy()
                 print("huhu")

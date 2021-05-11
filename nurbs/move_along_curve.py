@@ -25,7 +25,7 @@ from __future__ import unicode_literals
 # * Author : Mariwan Jalal   mariwan.jalal@gmail.com                       *
 # **************************************************************************
 
-'''objekt auf curve positionieren und ausrichten'''
+'''position and align object on curve'''
 
 import FreeCAD as App
 import FreeCADGui as Gui
@@ -97,7 +97,7 @@ def movepos(bc,c,v):
 
 from PySide import QtGui, QtCore
 
-## Dialog mit einem Dialer zur Postionsbestimmung
+## Dialogue with a dialer to determine position
 
 def MyDialog(path,target):
 
@@ -140,9 +140,9 @@ def MyDialog(path,target):
 # 1. animated object,
 # 2. path to follow 
 
-# selektion:
-# 1. pfad spline
-# 2. zu platzierendes objekt
+# selection:
+# 1. path spline
+# 2. object to be placed
 
 class Nurbs_MoveAlongCurve:
     def Activated(self):

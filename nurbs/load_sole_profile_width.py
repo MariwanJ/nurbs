@@ -64,7 +64,7 @@ class Nurbs_LoadSoleProfile:
             and recomputes the sole
             '''
 
-    #        raise Exception("test fehler")
+    #        raise Exception("test error")
             aktiv = App.ActiveDocument
 
             fna = App.ParamGet(
@@ -79,7 +79,7 @@ class Nurbs_LoadSoleProfile:
             sss = dok.findObjects("Sketcher::SketchObject")
             s = sss[0]
 
-            # werte aus sketch holen
+            # get values ​​from sketch
             rs = []
             ls = []
             for i in range(1, 12):
@@ -88,7 +88,7 @@ class Nurbs_LoadSoleProfile:
 
             App.closeDocument(dok.Name)
 
-            # eigentliche Arbeitsdatei
+            # actual work file
             dok2 = aktiv
             App.setActiveDocument(dok2.Name)
 
@@ -96,14 +96,14 @@ class Nurbs_LoadSoleProfile:
     #        print sss,dok2.Name
             ss = dok2.Spreadsheet
 
-            # daten ins spreadsheet
+            # data in the spreadsheet
             for s in range(1, 12):
                 cn = cellname(s + 1, 14)
                 ss.set(cn, str(rs[s - 1]))
                 cn = cellname(s + 1, 15)
                 ss.set(cn, str(ls[s - 1]))
 
-            # aktualisieren
+            # to update
             dok2.recompute()
             sole.run()
             dok2.recompute()

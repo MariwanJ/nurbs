@@ -45,13 +45,13 @@ import NURBSinit
 
 # \endcond
 
-# Segment eines BSpline als parametrisches Part::FeaturePython
+# Segment of a BSpline as a parametric Part::FeaturePython
 
 
 class Segment(pyob.FeaturePython):
-    '''Segment einer bspline Flaeche oder Kurve
-    Einschraenkung:
-    es wird die erste Flaeche Face1 bzw. die erste Kante Edge1 verarbeitet
+    '''Segment of a bspline surface or curve
+    Restriction:
+    the first surface Face1 or the first edge Edge1 is processed
     '''
 
     # \cond
@@ -72,7 +72,7 @@ class Segment(pyob.FeaturePython):
         pyob.ViewProvider(obj.ViewObject)
     # \endcond
 
-    # Die Properties umin, umax, vmin, vmax werden als Nummern der begrenzenden Knoten interpretiert
+    # The properties umin, umax, vmin, vmax are interpreted as numbers of the limiting nodes
     #
 
     def execute(self, obj):
@@ -97,9 +97,9 @@ class Segment(pyob.FeaturePython):
 
 
 def createSegment(name="MySegment"):
-    '''erzeugt ein Segment aus der source Flaeche oder Kurve
-    Segmente sind nur fuer die gegebenen Knoten moeglich
-    umin, ... vmax: Eingabe der Knotennummer
+    '''creates a segment from the source area or curve
+    Segments are only possible for the given nodes
+    umin, ... vmax: Enter the node number
     '''
 
     ffobj = App.ActiveDocument.addObject(
@@ -108,10 +108,10 @@ def createSegment(name="MySegment"):
     return ffobj
 
 
-# Modifikation eines BSpline als parametrisches Part::FeaturePython
+# Modification of a BSpline as a parametric one Part::FeaturePython
 
 class NurbsTrafo(pyob.FeaturePython):
-    '''Rotieren des Pole-array, um die Naht zu verschieben'''
+    '''Rotate the pole array to move the seam'''
 
     # \cond
     def __init__(self, obj):
@@ -132,7 +132,7 @@ class NurbsTrafo(pyob.FeaturePython):
     # \endcond
 
     def execute(proxy, obj):
-        ''' rotiert die Pole '''
+        ''' rotates the pole '''
         if len(obj.source.Shape.Faces) >= 1:
             face = obj.source.Shape.Face1
             bs = face.Surface.copy()
@@ -147,7 +147,7 @@ class NurbsTrafo(pyob.FeaturePython):
 
             k = obj.start
 #            if not bs.isVPeriodic():
-#                print ("nicht vperiodic - kann nichts tun - cancellation"
+#                print ("not vperiodic - can't do anything - cancellation"
 #                return
 
             if obj.swapaxes:
@@ -187,20 +187,20 @@ class NurbsTrafo(pyob.FeaturePython):
 
 
 def createNurbsTrafo(name="MyNurbsTafo"):
-    ''' erzeugt ein NurbsTrafo Objekt '''
+    ''' creates a NurbsTrafo object '''
 
     ffobj = App.ActiveDocument.addObject(
         "Part::FeaturePython", name)
     NurbsTrafo(ffobj)
     return ffobj
 
-# Feines Segment eines BSpline als parametrisches Part::FeaturePython
+# Fine segment of a BSpline as a parametric one Part::FeaturePython
 
 
 class FineSegment(pyob.FeaturePython):
-    ''' erzeugt ein feines Segment, dass feienr ist als die normale Segmentierung des nurbs
-    factor gibt die Anzahl der Abstufungen an
-    die Zahlen umin, ... vmax sind ganzzahlige Anteile von factor
+    ''' creates a fine segment that is finer than the normal segmentation of the nurb
+    factor indicates the number of the gradations
+    the numbers umin, ... vmax are integral parts of factor
     '''
 
     # \cond
@@ -228,10 +228,10 @@ class FineSegment(pyob.FeaturePython):
 #    def execute(proxy, obj):
 #        pass
 
-    # Die Properties umin, umax, vmin, vmax werden durch factor geteilt
-    # und dann als der begrenzenden Knoten interpretiert
+    # The properties umin, umax, vmin, vmax are divided by factor
+    # and then interpreted as the limiting node
     #
-    # FineSegment kann bei einem grossen wert von *factor* sehr genau zuschneiden
+    # FineSegment can cut very precisely with a large value of * factor *
     #
 
     def onChanged(self, obj, prop):
@@ -266,7 +266,7 @@ class FineSegment(pyob.FeaturePython):
 
             if bs.isVPeriodic() and not vmax < bs.getVKnots()[-1]:
                 vmax = bs.getVKnots()[-1]
-# geht so nicht:
+# does not work like that:
 #                obj.vmax=int(round(vmax*obj.factor,0))
 
             if bs.isUPeriodic() and not umax < bs.getUKnots()[-1]:
@@ -300,7 +300,7 @@ class FineSegment(pyob.FeaturePython):
 
 
 def createFineSegment(name="MyFineSegment"):
-    ''' erzeugt ein FineSegment Objekt '''
+    ''' creates a FineSegment object '''
 
     ffobj = App.ActiveDocument.addObject("Part::FeaturePython", name)
     FineSegment(ffobj)
@@ -308,7 +308,7 @@ def createFineSegment(name="MyFineSegment"):
 
 
 def runsegment():
-    '''Anwendungsfall fuer die Gui.Selection wird ein Segment erzeugt'''
+    '''Use case for the Gui.Selection a segment is generated'''
 
     source = None
     if len(Gui.Selection.getSelection()) != 0:
@@ -320,7 +320,7 @@ def runsegment():
 
 
 def runfinesegment():
-    '''Anwendungsfall fuer die Gui.Selection wird ein FineSegement erzeugt'''
+    '''Use case for the Gui.Selection a FineSegement is generated'''
 
     source = None
     if len(Gui.Selection.getSelection()) != 0:
@@ -330,7 +330,7 @@ def runfinesegment():
 
 
 def runnurbstrafo():
-    '''Anwendungsfall fuer die Gui.Selection wird ein NurbsTrafo erzeugt'''
+    '''Use case for the Gui.Selection a NurbsTrafo is generated'''
 
     source = None
     if len(Gui.Selection.getSelection()) != 0:

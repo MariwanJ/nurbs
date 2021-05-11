@@ -272,7 +272,7 @@ def HorizontalGroup(title=''):
         "QGroupBox { border: 2px solid green; border-radius: 5px;"
         "margin: 7px; margin-bottom: 7px; padding: 0px}"
         "QGroupBox::title {top:-7 ex;left: 10px; subcontrol-origin: border}")
-    w.setTitle("horizonmmtal layout group")
+    w.setTitle("horizontal layout group")
     layout = QtGui.QHBoxLayout()
     layout.setAlignment(QtCore.Qt.AlignLeft)
     w.setLayout(layout)
@@ -543,7 +543,7 @@ class Miki(object):
                         child = self.lines[l[6]][7]
                         self.addChild(parent, child)
                     except:
-                        # link eines attribs
+                        # link of an attribute
                         method = l[4]
                         v = self.lines[l[6]][6]
                         kk = eval("parent." + l[4])
@@ -563,7 +563,7 @@ class Miki(object):
                         elif cn == 'str':
                             ex = "parent." + l[4] + "='" + v + "'"
                         else:
-                            print ("nicht implementierter typ")
+                            print ("not implemented type")
                             print ([v,cn])
                             print (l)
                             ex = ''
@@ -592,7 +592,7 @@ class Miki(object):
                         elif cn == 'str':
                             ex = "parent." + l[4] + "='" + v + "'"
                         elif cn=='Vector':
-                            print ("nicht implementierter typ  Ax")
+                            print ("not implemented type  Ax")
                             print ([v,cn])
                             print (l)
                             print (parent)
@@ -602,11 +602,11 @@ class Miki(object):
                             parent.setValue(v)
                             continue
                         else:
-                            print ("nicht implementierter typ  Ayy")
+                            print ("not implemented type  Ayy")
                             print ([v,cn])
                             print (l)
                             ex='' 
-                            print ("nicht implementierter typ")
+                            print ("not implemented type")
 
                         exec(ex)
                         continue
@@ -637,7 +637,7 @@ class Miki(object):
                     elif cn=='Vector':
                             ex="parent."+l[4]+"(App."+str(v)+")"
                     else:
-                        print ("nicht implementierter typ B")
+                        print ("not implemented type B")
                         print ([v,cn])
                         print (l)
                         aaa=v
@@ -723,7 +723,7 @@ class Miki(object):
                         if c.startswith('__MAGIC_'):
                             run_magic(p,c)
                     except:
-                        App.Console.PrintError("\naddObject funktioniert nicht A")
+                        App.Console.PrintError("\naddObject does not work A")
                         App.Console.PrintError([p, c])
         except:
                 try:
@@ -733,7 +733,7 @@ class Miki(object):
                         if c.startswith('__MAGIC_'):
                             run_magic(p,c)
                     except:
-                        App.Console.PrintError("\naddObject funktioniert nicht B")
+                        App.Console.PrintError("\naddObject does not work B")
                         App.Console.PrintError([p, c])
 
 
@@ -884,7 +884,7 @@ class MikiDockWidget(QtGui.QDockWidget):
         # pylint: disable=attribute-defined-outside-init
         self.dwl = dwl
 
-        if 0:  # Top level Icon leiste optional sichtbar machen
+        if 0:  # Optionally make the top level icon bar visible
             self.layout.addWidget(dw)
         # self.setTitleBarWidget(dw)
 
@@ -1352,7 +1352,7 @@ class Nurbs_miki_gTestDialog:
                 'MenuText': QT_TRANSLATE_NOOP("Nurbs", "Nurbs_miki_gTestDialog"),
                 'ToolTip': QT_TRANSLATE_NOOP("Nurbs ", _tooltip)}
 
-# All these commands cuases error in the NurbsWB
+# All these commands causes error in the NurbsWB
 #Gui.addCommand("Nurbs_miki_gTestDialog_1", Nurbs_miki_gTestDialog().testDialog())
 #Gui.addCommand("Nurbs_miki_gTestDialog_2", Nurbs_miki_gTestDialog().testDialogMainWindow())
 #Gui.addCommand("Nurbs_miki_gTestDialog_3", Nurbs_miki_gTestDialog().testDialogTab())

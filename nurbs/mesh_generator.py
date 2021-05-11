@@ -27,7 +27,7 @@ from __future__ import unicode_literals
 
 # -*- coding: utf-8 -*-
 #-------------------------------------------------
-#-- test data for sculpter
+#-- test data for sculptor
 #--
 #-- microelly 2018  0.1
 #--

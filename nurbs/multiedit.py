@@ -233,11 +233,11 @@ class Multiface(object):
             pp=self.points[t]
             pp.printFaces()
         except:
-            print ("nicht gefunden")
+            print ("not found")
         for i,p in enumerate(self.points):
             print (i,(vec-App.Vector(p)).Length)
             if (vec-App.Vector(p)).Length<0.1 :
-                print ("gefunden ",i)
+                print ("found ",i)
                 return App.Vector(p)
 
     def movePoint(self,vec,mov,scanonly=False,params=None):
@@ -277,10 +277,10 @@ class Multiface(object):
                     found=-1
                     for i,p in enumerate(poles):
                         if vec != None  and (vec-App.Vector(p)).Length<0.1 :
-#                            print ("gefunden ",i
+#                            print ("found ",i
                             found=i
                     if found == -1:
-#                        print ("NICHT gefunden /kein Vector"
+#                        print ("NOT found /no Vector"
                         comp += [self.comp[sfi]]
                     else:
                         base=poles[found]
@@ -321,8 +321,8 @@ class Multiface(object):
                                 pps +=[(ui,vi-1)]
 
                         poles=poles.reshape(sf.NbUPoles,sf.NbVPoles,3)
-    #                    print ("nachbarn ",pps
-                        # nachbaren mitnehmen
+    #                    print ("neighbours ",pps
+                        # take neighbors with you
                         
                         print ("tangent rotations !!!")
                         turot=params.root.ids['turot'].value()
@@ -364,7 +364,7 @@ class Multiface(object):
 #                    print ("Time step ",time.time()-ta
                 except:
                 #else:
-                    print ("Problem bei ",sfi)
+                    print ("Problem at ",sfi)
                     saysayexc("sfi-problem")
                     comp += [self.comp[sfi]]
 
@@ -409,13 +409,14 @@ class Multiface(object):
                 print ("Time compC  ",time.time()-ta)
 
 
-    # neue version ohne suchen
+    # new version without searching
+
     def XmovePoint(self,vec,mov,scanonly=False,params=None,useselections=False):
             points=self.points
             print ("Move points...XXX.....")
-#            print ("suche ", vec
+#            print ("find ", vec
 
-            print ("useselections ",useselections)
+            print ("use selections ",useselections)
             
             arc=50-random.random()*100
             arc=0
@@ -445,10 +446,10 @@ class Multiface(object):
                         found=-1
                         for i,p in enumerate(poles):
                             if vec != None  and (vec-App.Vector(p)).Length<0.1 :
-    #                            print ("gefunden ",i
+    #                            print ("found ",i
                                 found=i
                         if found == -1:
-    #                        print ("NICHT gefunden /kein Vector"
+    #                        print ("NOT found /no Vector"
                             comp += [self.comp[sfi]]
                         else:
                             base=poles[found]
@@ -489,8 +490,8 @@ class Multiface(object):
                                     pps +=[(ui,vi-1)]
 
                             poles=poles.reshape(sf.NbUPoles,sf.NbVPoles,3)
-        #                    print ("nachbarn ",pps
-                            # nachbaren mitnehmen
+        #                    print ("neighbours ",pps
+                            # take neighbors with you
                             for (u,v) in pps:
         #                        print (u,v)
                                 
@@ -525,7 +526,7 @@ class Multiface(object):
     #                    print ("Time step ",time.time()-ta
                     except:
                     #else:
-                        print ("Problem bei ",sfi)
+                        print ("Problem at ",sfi)
                         saysayexc("sfi-problem")
                         comp += [self.comp[sfi]]
 
@@ -536,7 +537,7 @@ class Multiface(object):
                     pts += [App.Vector(p) for p in ptsa]
 
             else:
-                print ("useselections")
+                print ("use selections")
                 print (self.selection)
             #--------------------------------------------
                 for (sfi,ui,vi,p) in self.selection:
@@ -793,7 +794,7 @@ class Multiface(object):
         else:
             print ("no force")
 
-        # alle poles ausrechnen
+        # calculate all poles
         pts=[]
         for c in comp:
             sf=c.Surface
@@ -1337,7 +1338,7 @@ def SurfaceEditor():
             '''command line execution after pressing enter in the command line '''
             print ("TEXTPROZESSOR 3")
             print ("ux:",self.root.ids['ux'].text())
-            # anylize the text
+            # analyze the text
             w=self.root.ids['ux'].text()
             # print w.split()
             cmds=w.split(';')
@@ -1394,7 +1395,7 @@ def SurfaceEditor():
                         self.update()
 
                     except:
-                        print ("kann kommndo nicht ausfuehren")
+                        print ("cannot execute command")
                     
                     if cmd=='selu':
                         print ("select u ring")
@@ -1724,7 +1725,7 @@ def SurfaceEditor():
                 movb= mm-mb
                 print ("move b",movb)
 
-                print ("Bereich a",umia,umaa,vmia,vmaa)
+                print ("Area a",umia,umaa,vmia,vmaa)
                 pps=[]
                 pps += [(uk,vk) for uk in range(umia,umaa+1) for vk in range(vmia,vmaa+1)]
                 for (u,v) in pps:
@@ -1757,7 +1758,7 @@ def SurfaceEditor():
                     polesb=np.array(comp[sib].Surface.getPoles())
                 print ("result ab",polesb[uia,via])
 
-                print ("Bereich b" ,umib,umab,vmib,vmab)
+                print ("Area b" ,umib,umab,vmib,vmab)
                 pps=[]
                 pps += [(uk,vk) for uk in range(umib,umab+1) for vk in range(vmib,vmab+1)]
                 print ("ha----------")

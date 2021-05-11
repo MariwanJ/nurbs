@@ -29,7 +29,7 @@ from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
 '''interactive drawing of a curve onto a face'''
 # -------------------------------------------------
-# -- interctive draw on face
+# -- interactive draw on face
 # --
 # -- microelly 2017  0.2
 # --
@@ -266,7 +266,7 @@ class EventFilter(QtCore.QObject):
                     return False
 
                 try:
-                    # only two function keys implemented, no modifieres
+                    # only two function keys implemented, no modifiers
                     if e.key() == QtCore.Qt.Key_F2:
                         say("------------F2-- show mode and moddata---------------")
                         return False
@@ -465,7 +465,7 @@ def drawcurve(wire, face, facepos=App.Vector()):
 
     print("drawcurve")
 
-    # startposition
+    # start position
     wplace=wire.Placement
 #    print wplace
     wpos=wplace.Base
@@ -553,11 +553,11 @@ def drawcurve(wire, face, facepos=App.Vector()):
 def _drawring(name, wires, dirs, face, facepos=App.Vector()):
     '''draw a curve on a face and create the two subfaces defined by the curve'''
 
-    print("drawring")
+    print("draw ring")
 
     es=[]
     for wireA in wires:
-        # startposition
+        # start position
         wplace=wireA.Placement
     #    print wplace
         wpos=wplace.Base
@@ -621,7 +621,7 @@ def _drawring(name, wires, dirs, face, facepos=App.Vector()):
             su=bs.UPeriod()
             sv=bs.VPeriod()
 
-            print("hacks etze uv, sv auf 1")
+            print("hacks etze uv, sv on 1")
             su=face.ParameterRange[1]
             sv=face.ParameterRange[3]
 

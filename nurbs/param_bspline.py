@@ -33,7 +33,7 @@ from __future__ import unicode_literals
 # --
 # -- GNU Lesser General Public License (LGPL)
 # -------------------------------------------------
-# bspline von poles erzeugen
+# generate bspline from poles
 
 import Part
 import FreeCAD as App
@@ -91,7 +91,7 @@ class MyBSpline(PartFeature):
                 sp.interpolate(pts, InitialTangent=fp.InitialTangent,
                                FinalTangent=fp.FinalTangent)
             elif 1:
-                # tangenten an einzelne Punkte
+                # tangents to individual points
                 Tangents = []
                 Tangentflags = []
                 tt = fp.Tangents
@@ -107,7 +107,7 @@ class MyBSpline(PartFeature):
                         Tangents.append(v)
                         Tangentflags.append(str(fp.TangentFlags[i]) == '1')
                     except:
-                        print("Error Tangenten Vektor ", i+1)
+                        print("Error tangents vector ", i+1)
                         Tangents.append(App.Vector(1, 0, 0))
                         Tangentflags.append(0)
                 try:
@@ -159,9 +159,9 @@ def runtest():
     import Draft
 
     if App.ActiveDocument == None:
-        App.newDocument("Unbenannt")
-        App.setActiveDocument("Unbenannt")
-        App.ActiveDocument = App.getDocument("Unbenannt")
+        App.newDocument("Unnamed")
+        App.setActiveDocument("Unnamed")
+        App.ActiveDocument = App.getDocument("Unnamed")
 
     points = [App.Vector(-30, 0.0, 0.0), App.Vector(-20, 30, 0.0), App.Vector(20, 40, 0.0),
               App.Vector(40, -20, 0.0), App.Vector(150, -20, 0.0), App.Vector(190, 80, 0.0)]

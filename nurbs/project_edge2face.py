@@ -98,17 +98,17 @@ def OLDrunAll():
         elif (w.Vertexes[0].Point-w2.Vertexes[0].Point).Length < 0.1:
             wsort += [w]
         elif (w.Vertexes[1].Point-w2.Vertexes[1].Point).Length < 0.1:
-            print("gedreht")
+            print("Mitered")
             w.reverse()
             wsort += [w]
         elif (w.Vertexes[1].Point-w2.Vertexes[0].Point).Length < 0.1:
-            print("gedreht")
+            print("Mitered")
             w.reverse()
             wsort += [w]
 
         else:
             print("Error")
-            raise Exception("Gehrte")
+            raise Exception("Mitered")
 
     w = Part.Wire(wsort)
     Part.show(w)
@@ -144,7 +144,7 @@ def runAll():
 #                print p.Vertexes[0].Point
 #                print p.Vertexes[1].Point
 # Part.show(p)
-            print("Diskret")
+            print("Discreet")
             pgs += p.Wires[0].discretize(200)
 #                Draft.makeWire(p.Wires[0].discretize(200))
 
@@ -176,17 +176,17 @@ def runAll():
         elif (w.Vertexes[0].Point-w2.Vertexes[0].Point).Length < 0.1:
             wsort += [w]
         elif (w.Vertexes[1].Point-w2.Vertexes[1].Point).Length < 0.1:
-            print("gedreht")
+            print("turned")
             w.reverse()
             wsort += [w]
         elif (w.Vertexes[1].Point-w2.Vertexes[0].Point).Length < 0.1:
-            print("gedreht")
+            print("turned")
             w.reverse()
             wsort += [w]
 
         else:
             print("Error")
-            raise Exception("Gehrte")
+            raise Exception("Mitered")
 
         w = Part.Wire(wsort)
 #            Part.show(w)
@@ -210,7 +210,7 @@ def runAll():
 
 
 def concatenateBSplines():
-    ''' Draft BSsplines  zusammenfuegen'''
+    ''' Draft BSsplines put together'''
 
     import Draft
 
@@ -239,7 +239,7 @@ def concatenateWires(wires):
     )
 
     if dista == (wires[0][0]-wires[1][0]).Length or dista == (wires[0][0]-wires[1][-1]).Length:
-        print("Drehe Start")
+        print("Turn Start")
         pts.reverse()
 
     wa = pts
@@ -251,7 +251,7 @@ def concatenateWires(wires):
         )
         wb = w
         if dista == (wa[-1]-w[-1]).Length:
-            print("Drehe")
+            print("Turn")
             wb.reverse()
 
         pts += wb
@@ -262,7 +262,7 @@ def concatenateWires(wires):
     pts2 = []
     for i, p in enumerate(pts):
         if (p-pts[i-1]).Length < 0.001:
-            print("Doppel", i)
+            print("Double", i)
             print((p-pts[i-1]).Length)
         else:
             pts2 += [p]

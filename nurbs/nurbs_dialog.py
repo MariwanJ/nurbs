@@ -694,12 +694,12 @@ class MyApp(object):
                     self.root.ids['hd'].setValue(h)
 
                     self.root.ids['h'].setText(str(h))
-                    print ("hole weight von ",((v)*uc+u,"uc,vc",uc,vc))
+                    print ("get weight from ",((v)*uc+u,"uc,vc",uc,vc))
         #            print (self.obj.Object.weights
                     w=self.obj.Object.weights[(v)*uc+u]
                     self.root.ids['wd'].setValue(w)
         #            self.root.ids['w'].setText(str(h))
-                    print ("hole  werte u,v ", u,v,"h,w",h,w)
+                    print ("get values u,v ", u,v,"h,w",h,w)
 
         self.obj.Object.Proxy.updatePoles()
         self.obj.Object.Proxy.showGriduv()
@@ -723,7 +723,7 @@ class MyApp(object):
         self.root.ids['vcombo'].setCurrentIndex(int(v)-1)
         self.root.ids['ucombo'].setCurrentIndex(int(u)-1)
 
-        # wenn nicht rechteckmode setze pole
+        # if not square mode set poles
         rc=self.root.ids['focusmode'].currentText()
 #        if rc != 'Rectangle':
         if  self.root.ids['pole1active'].isChecked():
@@ -742,8 +742,8 @@ class MyApp(object):
             self.root.ids['hd'].setValue(h)
             self.root.ids['h'].setText(str(h))
 
-#        print ("hole weight von ",((v)*uc+u)
-#        print ("hole weight von ",((v)*uc+u,"uc,vc",uc,vc)
+#        print ("get weight from ",((v)*uc+u)
+#        print ("get weight from ",((v)*uc+u,"uc,vc",uc,vc)
 #        print (self.obj.Object.weights
 
 
@@ -850,7 +850,7 @@ class MyApp(object):
         uc.setCurrentIndex(int(rc)-start)
         self.root.ids['h'].setText(rc)
         self.root.ids['hd'].setValue(int(rc))
-        print ("rufe modHeight")
+        print ("shout modHeight")
         self.modHeight()
         self.update(True)
         print ("done")

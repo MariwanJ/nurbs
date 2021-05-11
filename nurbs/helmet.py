@@ -101,7 +101,7 @@ class _VPH(ViewProvider):
         print("double clicked")
         self.myedit(vobj.Object)
 
-        print("Ende double clicked")
+        print("Ends double clicked")
 
 # -------------------------------
 
@@ -150,7 +150,7 @@ class Helmet(FeaturePython):
 #            obj.meridian=App.ActiveDocument.Sketch001
 #        except:
 
-#            print ("keine Hilfskurven verfuegbar"
+#            print ("no auxiliary curves available"
 
     def attach(self, vobj):
         print("attach -------------------------------------")
@@ -177,7 +177,7 @@ class Helmet(FeaturePython):
             try:
                 run(fp)
             except:
-                sayexc("fhelre run")
+                sayexc("error run")
 #        run(fp)
 
     def execute(self, fp):
@@ -202,7 +202,7 @@ def createSketch(sk):
 
     # sk=App.ActiveDocument.addObject('Sketcher::SketchObject','helmlet')
 
-    # aussenring
+    # outer ring
 
     pts2 = [
         (-200, 0, 0), (-200, -50, 0), (-150, -75, 0), (-100, -100, 0),
@@ -224,7 +224,7 @@ def createSketch(sk):
 
     sk.addConstraint(Sketcher.Constraint('Coincident', 15, 2, 0, 1))
 
-    # innenring
+    # inner ring
 
     pts2 = [(-50, -30, 0), (50, -30, 0), (50, 30, 0), (-50, 30, 0)]
     pts = [App.Vector(p) for p in pts2]
@@ -239,7 +239,7 @@ def createSketch(sk):
 
     sk.addConstraint(Sketcher.Constraint('Coincident', 19, 2, 16, 1))
 
-    # parallele gruppen
+    # parallel groups
 
     sk.addConstraint(Sketcher.Constraint('Parallel', 0, 15))
     for i in range(7):

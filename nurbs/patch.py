@@ -64,7 +64,7 @@ def machkurve(pss):
     ps = [App.Vector(p) for p in pss]
     bc = Part.BSplineCurve()
     bc.buildFromPoles(ps)
-    res = App.ActiveDocument.addObject("Part::Spline", "kurve")
+    res = App.ActiveDocument.addObject("Part::Spline", "curve")
     res.Shape = bc.toShape()
 
     return bc
@@ -175,7 +175,7 @@ def ThousandsOfRunWhatShouldIdo():
         p1a = eda.Vertex1
         p2a = eda.Vertex2
 
-    # erzeuge zwei normalisierte subkurven
+    # generate two normalized sub-curves
     c = createSubEdge(ed, p1, p2)
     ca = createSubEdge(eda, p1a, p2a)
 
@@ -201,7 +201,7 @@ def ThousandsOfRunWhatShouldIdo():
     pl1xa = [p+App.Vector(20, 0, -20) for p in pl2]
     pl1xb = [p+App.Vector(30, 0, -30) for p in pl2]
 
-    # bergruecken
+    # ridge
     pl3x = []
     for i in range(len(pl2)):
         pl3x += [pl2[i]*0.7+pl3[i]*0.3+App.Vector(0, 0, 500*random.random())]
@@ -221,7 +221,7 @@ def ThousandsOfRunWhatShouldIdo():
 
 
 def runB():
-    ''' testcase for a expression baes mountain profile '''
+    ''' testcase for a expression base mountain profile '''
 
     
     print("WARNING:this is a testcase only")

@@ -72,7 +72,7 @@ class PartFeature:
         obj.Proxy = self
         self.Object = obj
 
-# grundmethoden zum sichern
+# basic methods to secure
 
     def attach(self, vobj):
         self.Object = vobj.Object
@@ -122,10 +122,10 @@ class Nurbs_createShape:
                                     self.obj.mapobject.Proxy.uv2y, self.obj.mapobject.Proxy.xy2u, self.obj.mapobject.Proxy.xy2v]
 
         if xy2v == None:
-            print("Kann umkehrung nicht berechnen xy2v nicht vorhanden")
+            print("Cannot calculate inversion xy2v does not exist")
             return
 
-        # diese daten vom mapobjekt lesen #+#
+        # read this data from the map object #+#
 
         mpv = 0.5
         mpu = 0.5
@@ -136,7 +136,7 @@ class Nurbs_createShape:
         fy = 1.
         fx = 1.
 
-        # +# facenumer aus obj param holen
+        # +# get facenumer from obj param
         face = self.obj.face.Shape.Face1
         bs = face.Surface
     #    w=obj.wire.Shape.Wires[0]
@@ -166,7 +166,7 @@ class Nurbs_createShape:
 
             pts2 = []
 
-            # refpos geht noch nicht
+            # refpos does not work yet
             mpv = 0.
             mpu = 0.
 
@@ -181,7 +181,7 @@ class Nurbs_createShape:
                 y = fx*(p.x-refpos.x)
                 x = fy*(p.y-refpos.y)
 
-                # fuer ruled surface !!
+                # for ruled surface !!
                 x = fx*p.y
                 y = fy*p.x
 
@@ -277,7 +277,7 @@ class Nurbs_createIsodrawFace:
 
 
 Gui.addCommand('Nurbs_createIsodrawFace', Nurbs_createIsodrawFace())
-Nurbs_createIsodrawFace.__doc__ = """createIsodrawFace: Tobe added later     """
+Nurbs_createIsodrawFace.__doc__ = """createIsodrawFace: To be added later     """
 
 # ------------------------------------------------------
 
@@ -328,7 +328,7 @@ class Brezel(PartFeature):
 
         # outside edge 
         wire1 = obj.wire1
-        # innenrand fuer erstes loch
+        # inner edge for first hole
         wire2 = obj.wire2
 
         wires = []
@@ -435,7 +435,7 @@ class Map(PartFeature):
                         "Map", "discretize for 3D to 2D")
         obj.pointsPerEdge = 3
 
-        # mitte
+        # center
 #        obj.addProperty("App::PropertyFloat","vm","Map","v center")
 #        obj.addProperty("App::PropertyFloat","um","Map","u center")
 
@@ -625,7 +625,7 @@ class createMap:
         }
 
 Gui.addCommand('createMap', createMap())
-createMap.__doc__ = """createMap: Tobe added later     """
+createMap.__doc__ = """createMap: To be added later     """
 
 
 class createGrid:
@@ -691,7 +691,7 @@ class createGrid:
         mpv = obj.uMapCenter/100
         mpu = obj.vMapCenter/100
 
-        # skalierung/lage
+        # scaling / location
         fx = obj.fx
         fy = obj.fy
 
@@ -845,7 +845,7 @@ class createGrid:
 
                 if obj.mode == 'curvature':
                     # z=uv2z(uv,vv)
-                    # drekt nutzen statt interpolator
+                    # use directly instead of interpolator
                     # z=bs.curvature(vv,uv,"Mean")
                     try:
                         z2 = bs.curvature(uv2, vv2, obj.modeCurvature)
@@ -877,7 +877,7 @@ class createGrid:
             ptsa.append(pts)
 
         if upmode:
-            print("Rahmen 3D", obj.uMin, obj.uMax, obj.vMin, obj.vMax)
+            print("Frame 3D", obj.uMin, obj.uMax, obj.vMin, obj.vMax)
             print(obj.faceObject.TypeId)
 
 #           try: sweep=obj.faceObject.TypeId=='Part::Sweep'
@@ -944,7 +944,7 @@ class createGrid:
 
                 comps += [Part.makePolygon(ll)]
 
-            # markiere zentrum der karte
+            # mark the center of the map
             z = bs.value(sua+0.5*sul, sva+0.5*svl)
             circ = Part.Circle()
             circ.Radius = 10
@@ -980,7 +980,7 @@ class createGrid:
             t2 = th.multiply(pmh)
 #           t2=pmh.multiply(th)
 
-            # diese richtung stimmt noch nicht, deaktivert
+            # this direction is not yet correct, deactivated
 #    circ.Axis=t2.Base
 
             if obj.displayCircles:
@@ -990,7 +990,7 @@ class createGrid:
         else:  # 2d mode
             comps = []
 
-            # markiere zentrum der karte
+            # mark the center of the map
             uv = sua+0.5*sul
             vm = sva+0.5*svl
 
@@ -1020,7 +1020,7 @@ class createGrid:
             if obj.displayCircles:
                 comps += [circ.toShape()]
 
-            print("Rahmen 2D", obj.uMin, obj.uMax, obj.vMin, obj.vMax)
+            print("Frame 2D", obj.uMin, obj.uMax, obj.vMin, obj.vMax)
 
             if obj.flipxy:
                 if 1:
@@ -1167,7 +1167,7 @@ class ViewProviderSL(ViewProvider):
             ws.hide()
 
     def onDelete(self, obj, subelements):
-        print("on Delete Sahpelink")
+        print("on Delete Shapelink")
         print("from", obj.Object.workspace, obj.Object.Label, obj.Object.Name)
         ws = WorkSpace(obj.Object.workspace)
         objs = ws.dok.findObjects()
@@ -1317,7 +1317,7 @@ class WorkSpace():
             print(str(w2.windowTitle()))
             s = str(w2.windowTitle())
             if s == self.name + '1 : 1[*]':
-                print("gefundne")
+                print("found")
                 return w2
         print(self.name + '1:1[*]')
 
@@ -1547,7 +1547,7 @@ class Nurbs_ISOmap3Dto2D:
                 for e in wire.Shape.Edges:
                     print("Edge", e)
 
-                    # auf 5 millimeter genau
+                    # accurate to 5 millimeters
                     if mapobj != None:
                         dd = mapobj.pointsPerEdge
                     else:
@@ -1625,12 +1625,12 @@ class Nurbs_ISOmap3Dto2D:
                             y *= 100 * bs.Radius/100
                             x, y = y, x
 
-                        print("Umrechung u,v,x,y", u, v, x, y)
+                        print("Conversion u,v,x,y", u, v, x, y)
                         if mapobj != None and mapobj.flipxy:
                             p2 = App.Vector(y, x, 0)
                         else:
                             p2 = App.Vector(-y, -x, 0)
-                        # hack richgtung beim Schuh
+                        # hack direction at the shoe
                         p2 = App.Vector(y, x, 0)
 #                        p2=App.Vector(y,x,0)
                         print("p2", p2)
@@ -1659,7 +1659,7 @@ Nurbs_ISOmap3Dto2D.__doc__ = """Nurbs_ISOmap3Dto2D: Tobe added later     """
 class Nurbs_ISOmap2Dto3D():
 
     def Activated(self):
-        ''' 2D Kante(Sketch) auf  3D Flaeche Poles '''
+        '''2D edge (sketch) on 3D surface poles'''
 
         # last selection == face
         # other sels: wires to project
@@ -1735,7 +1735,7 @@ class map3Dgridto2Dgrid:
                 # print e
                 n += 1
                 # if n>6: break
-                # auf 5 millimeter genau
+                # accurate to 5 millimeters
                 if mapobj != None:
                     dd = mapobj.pointsPerEdge
                 else:
@@ -1779,7 +1779,7 @@ class map3Dgridto2Dgrid:
                         p2 = App.Vector(y, x, 0)
                     else:
                         p2 = App.Vector(-y, -x, 0)
-                    # hack richgtung beim Schuh
+                    # hack direction at the shoe
                     p2 = App.Vector(y, x, 0)
 
                     ptsb.append(p2)
@@ -1788,7 +1788,7 @@ class map3Dgridto2Dgrid:
                     try:
                         polcol += [Part.makePolygon(ptsb)]
                     except:
-                        print("kann kein polygon bauen")
+                        print("can't build a polygon")
                         print(ptsb)
 
             # Draft.makeWire(pts2)
@@ -1933,7 +1933,7 @@ class getmap:
         # print ("isomap YYparameter",su,sv,uc,vc)
 
         refpos = bs.value(mpv, mpu)
-        ptsa = []  # abbildung des uv-iso-gitter auf die xy-Ebene
+        ptsa = []  # illustration of the uv iso grid on the xy plane
 
         mpv = svl * mpv + sva
         mpu = sul * mpu + sua
@@ -2028,7 +2028,7 @@ class getmap:
 
         return [uv2x, uv2y, xy2u, xy2v]
 
-        if 0:  # testrechnung sollte auf gleiche stelle zurueck kommen
+        if 0:  # test calculation should come back to the same place
             u0 = 0.2
             v0 = 0.6
 
@@ -2050,7 +2050,7 @@ class getmap:
 
 
 # Gui.addCommand('getmap', getmap())
-# getmap.__doc__ = """getmap: Tobe added later     """
+# getmap.__doc__ = """getmap: To be added later     """
 
 
 class getmap3:
@@ -2070,7 +2070,7 @@ class getmap3:
         ur = 1.0*(u)/30  # mapobj.uCount
         vr = 1.0*(v)/30  # mapobj.vCount
 
-        # umrechnung auf parametrrangen
+        # conversion to parameter ranges
         su = face.ParameterRange[1]
         sv = face.ParameterRange[3]
 
@@ -2089,7 +2089,7 @@ class getmap3:
 
         try:
             cc = bs.curvature(ur, vr, tt)
-            # kewgelhack
+            # cone hack
             cc = bs.curvature(vr, ur, tt)
         except:
             cc = 0
@@ -2101,7 +2101,7 @@ class getmap3:
                 z = -z
         else:
             z = cc * 1000
-            # beschraenken nach oben
+            # limit upwards
             # if z>30: z=30
             # if z<-30: z=-30
 #        if z!=0: print ("!curvature ur,vr,z", round(ur),round(vr),z)
@@ -2109,7 +2109,7 @@ class getmap3:
         if tt == "Mean":
             z = 10000*cc
 
-        # bechcraenken der kurvature
+        # restriction of curvature
         if z > 1000:
             z = 1000
         if z < -1000:
@@ -2179,7 +2179,7 @@ class getmap3:
         uc = mapobj.uc
 
         refpos = bs.value(mpv, mpu)
-        ptsa = []  # abbildung des uv-iso-gitter auf die xy-Ebene
+        ptsa = []  # illustration of the uv iso grid on the xy plane
 
         mpv = svl*mpv + sva
         mpu = sul*mpu + sua
@@ -2299,10 +2299,10 @@ class getmap3:
 
 
 # Gui.addCommand('getmap3', getmap3())
-# getmap3.__doc__ = """getmap3: Tobe added later     """
+# getmap3.__doc__ = """getmap3: To be added later     """
 
 
-# pruefe qualitaet der umrechnung
+# check the quality of the conversion
 class Nurbs_IsoDrawtestC():
     def Activated(self):
         face = App.ActiveDocument.Poles
@@ -2338,7 +2338,7 @@ class Nurbs_IsoDrawtestC():
             'ToolTip':  'Nurbs_IsoDrawtestC'
         }
 Gui.addCommand('Nurbs_IsoDrawtestC', Nurbs_IsoDrawtestC())
-Nurbs_IsoDrawtestC.__doc__ = """Nurbs_IsoDrawtestC: Tobe added later     """
+Nurbs_IsoDrawtestC.__doc__ = """Nurbs_IsoDrawtestC: To be added later     """
 
 #TODO WRONG CODE .. KKU IS NOT DEFIEND 
 class Nurbs_IsoDrawtestD():

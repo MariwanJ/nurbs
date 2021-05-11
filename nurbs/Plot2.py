@@ -547,5 +547,5 @@ from __future__ import unicode_literals
 
 
 # def show():
-#     '''dummy, damit man Plot2 als matplotlib.pyplot nehmen kann'''
+#     '''dummy, so that one can take Plot2 as matplotlib.pyplot'''
 #    pass

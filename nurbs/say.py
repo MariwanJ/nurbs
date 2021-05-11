@@ -25,7 +25,7 @@ from __future__ import unicode_literals
 # * Author : Mariwan Jalal   mariwan.jalal@gmail.com                       *
 # **************************************************************************
 
-'''package ausgabe von programmablaufinformationen, importieren der wichtigsten module'''
+'''package output of program flow information, import of the most important modules'''
 
 # -*- coding: utf-8 -*-
 # -------------------------------------------------
@@ -65,7 +65,7 @@ except ImportError:
 
 ##
 #
-# <A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Buch 2</A>
+# <A HREF="http://www.freecadbuch.de/doku.php?id=blog">FreeCAD Book 2</A>
 #
 # @author microelly
 # @warning works only on linux, writes to /tmp/log.txt
@@ -138,8 +138,7 @@ def sayexc(mess=''):
         print(inspect.stack()[3][3])
 
 
-def showdialog(title="Error",
-               text="Look in the ReportView for more Details", detail=None):
+def showdialog(title="Error", text="Look in the ReportView for more Details", detail=None):
     '''display a window with: title,text and detail'''
 
     msg = QtGui.QMessageBox()

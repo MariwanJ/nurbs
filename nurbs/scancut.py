@@ -55,7 +55,7 @@ from PySide import QtGui
 import sys,traceback,random
 
 
-def showdialog(title="Error",text="Schau in den ReportView fuer mehr Details",detail=None):
+def showdialog(title="Error",text="See the ReportView for more details",detail=None):
     msg = QtGui.QMessageBox()
     msg.setIcon(QtGui.QMessageBox.Warning)
     msg.setText(text)
@@ -148,7 +148,7 @@ def run1(z0,mesh,plane,showpointsmap=True,showmedianfilter=True):
         App.ActiveDocument.ActiveObject.ViewObject.LineColor=color
         App.ActiveDocument.ActiveObject.Label="Wire "+ plst
     if 0:
-        # diusplay the used points inside the shoe
+        # display the used points inside the shoe
         sels=[pl.multVec(p) for p in pts2a]
         s2=Points.Points(sels)
         Points.show(s2)
@@ -161,7 +161,7 @@ class Nurbs_MainScanCut:
     def Activated(self):
             
     #    if len( Gui.Selection.getSelection())==0:
-    #        showdialog('Oops','nothing selected - nothing to do for me','Plese select a Draft Wire or a Draft BSpline')
+    #        showdialog('Oops','nothing selected - nothing to do for me','Please select a Draft Wire or a Draft BSpline')
     
         #default parameters
         p={
