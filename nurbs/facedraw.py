@@ -114,8 +114,8 @@ class EventFilter(QtCore.QObject):
             self.pts += [None]
 
         if event.type() == QtCore.QEvent.MouseMove:
-                (x,y)=Gui.ActiveDocument.ActiveView.getCursorPos()
-                t=Gui.ActiveDocument.ActiveView.getObjectsInfo((x,y))
+                (x,y)=Gui.activeView().getCursorPos()
+                t=Gui.activeView().getObjectsInfo((x,y))
                 
                 #---------------------
 
@@ -978,7 +978,8 @@ def stop():
         fob=ef.fob
         [fob.ViewObject.Visibility,fob.ViewObject.Transparency,fob.ViewObject.Selectable]=ef.stack
     except: pass
-    App.ActiveDocument.removeObject(ef.wirem.Name)
+    if hasattr(ef,'wirem'):
+        App.ActiveDocument.removeObject(ef.wirem.Name)
 
 
 

@@ -103,7 +103,7 @@ def Myarray2Poly(arr,bb):
 
 #---------------------------
 '''
-nachverarbeitung shoe
+nachprocessing   shoe
 testskript zum abloesen der methoden in shoe.py fuer die
 generierung des nurbs shoe last
 '''

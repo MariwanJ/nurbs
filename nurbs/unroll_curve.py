@@ -70,7 +70,7 @@ def unroll(mode):
     #e=App.ActiveDocument.map3D_for_Sketch001_on_Poles_by_MAP002_Spline.Shape.Edge1
     #e=App.ActiveDocument.map3D_for_map2D_for_Drawing_on_Poles__Face1_on_Poles_by_MAP_Spline.Shape.Edge1
 
-    # wenn nicht bereits spline
+    #if not already spline 
     # fall eoinfacher wire
     # w=App.ActiveDocument.Drawing_on_Poles__Face1.Shape
     w=edge.Shape

@@ -1147,7 +1147,7 @@ class Nurbs_DarkRoom(PartFeature):
                 sg.removeChild(1)
                 sg.removeChild(0)
 
-                # hier die lichter einfuegen
+                # insert the lights here 
                 lis = []
                 for ob in self.fp.Group:
                     # break
@@ -1159,7 +1159,7 @@ class Nurbs_DarkRoom(PartFeature):
                     except:
                         continue
 
-                    print("verarbeitung", ob.mode, ob.on)
+                    print("processing  ", ob.mode, ob.on)
                     if ob.on and ob.ViewObject.Visibility:
 
                         if ob.mode == "DirectionalLight":
@@ -1196,7 +1196,7 @@ class Nurbs_DarkRoom(PartFeature):
                     except:
                         continue
 
-                    print("verarbeitung", ob.mode, ob.on)
+                    print("processing  ", ob.mode, ob.on)
                     if ob.on and ob.ViewObject.Visibility:
 
                         if ob.mode == "DirectionalLight":

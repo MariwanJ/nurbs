@@ -138,8 +138,7 @@ def sayexc(mess=''):
         print(inspect.stack()[3][3])
 
 
-def showdialog(title="Error",
-               text="See the ReportView for more details", detail=None):
+def showdialog(title="Error", text="Look in the ReportView for more Details", detail=None):
     '''display a window with: title,text and detail'''
 
     msg = QtGui.QMessageBox()
