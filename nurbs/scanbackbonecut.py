@@ -56,7 +56,7 @@ import Points
 
 ##\endcond
 
-## calculate the aprroximated cut of a point set by a plane
+## calculate the approximated cut of a point set by a plane
 # @param label - label of the created cut
 # @param pl - Placement of the cutting plane
 # @param pts - points of the pointcloud
@@ -91,7 +91,7 @@ def displayCut(label,pl,pts,showpoints=True,showwire=False,showxypoints=False,sh
     plaa=plinv.inverse()
     plcc=plaa.multiply(plinv)
 
-# kann weg
+# can go
 #    print ("rotation A"
 #    print (" Base:" + str(plinv.Base) +" Rot Euler:" + str(plinv.Rotation.toEuler())
 #    print ("rotation B"

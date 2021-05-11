@@ -54,11 +54,11 @@ def getdata(index):
     c = index.column()
     ci = 0
 
-    if c == 0:  # command fuer curve
+    if c == 0:  # command for curve
         sel = "ccmd"
         return sel, ci, ri, index.data()
 
-    if c == 5:  # command fuer curve
+    if c == 5:  # command for curve
         sel = "bcmd"
         return sel, ci, ri, index.data()
 
@@ -89,7 +89,7 @@ def addRib(dialog):
     # modifications
     i = dialog.pos
     if i == 0:
-        print("kann keine ripee vroschieben")
+        print("can not push forward a rib")
         return
 
     t = (bb[i-1]+bb[i])*0.5
@@ -206,7 +206,7 @@ def CaddStrongRibEdge(obj, i):
     st = 0.98
 
     if bb.shape[0] == i:
-        print("Keine verlaengerung uebers einde hinaus moegliche")
+        print("No extension beyond one possible")
         return
 
     t = bb[i-1]*st+bb[i]*(1-st)
@@ -224,7 +224,7 @@ def CaddStrongRibEdge(obj, i):
     obj.Proxy.showRib(i)
 
 
-# sharp and round edge -- strong edge p -> 2p oder p ->git commit - 3p
+# sharp and round edge -- strong edge p -> 2p or p ->git commit - 3p
 
 def addStrongRibEdge(dialog):
     CaddStrongRibEdge(dialog.obj, dialog.pos+1)
@@ -273,7 +273,7 @@ def delMeridian(dialog):
     (curve, bb, scaler, twister) = App.ActiveDocument.MyNeedle.Proxy.Model()
 
     if curve.shape[0] < 5:
-        print("zu wenig Punkte ")
+        print("too few points")
         return
 
     # modifications
@@ -293,7 +293,7 @@ def CdelMeridian(obj, i):
     (curve, bb, scaler, twister) = obj.Proxy.Model()
 
     if curve.shape[0] < 5:
-        print("zu wenig Punkte ")
+        print("too few points")
         return
 
     # modifications
@@ -313,7 +313,7 @@ def CdelRib(obj, i):
     i = i
 
     if bb.shape[0] < 5:
-        print("zu wenig Punkte ")
+        print("too few points")
         return
 
     # modifications

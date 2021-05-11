@@ -45,7 +45,7 @@ def showIsoparametricVCurve(bsplinesurface,v=0.5):
     Part.show(bc.toShape())
 
 #  lib
-# sammlung von funktionen
+# collection of functions
 
 
 def kruemmung(sf,u,v):
@@ -55,7 +55,7 @@ def kruemmung(sf,u,v):
     d=0.0001
     t1,t2=sf.tangent(u,v)
     if t1 == None or t2 == None:
-        print ("keine Tagenten fuer ",u,v) 
+        print ("no Tagenten for ",u,v) 
         return -1,-1
 
     t1=t1.multiply(d)
@@ -98,7 +98,7 @@ def kruemmung(sf,u,v):
     if ku!=0: ru=round(1/ku,3)
     if kv!=0: rv=round(1/kv,3)
 
-    # print ("Krmmungen:",ku,kv,"Krmmungsradien:", ru,rv)
+    # print ("Curvatures:",ku,kv,"Curvaturesradien:", ru,rv)
 
 
     return ku,kv

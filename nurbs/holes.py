@@ -89,7 +89,7 @@ class Nurbs_Holes:
         }
 
 Gui.addCommand('Nurbs_Holes', Nurbs_Holes())
-Nurbs_Holes.__doc__ = """holes: Tobe added later     """
+Nurbs_Holes.__doc__ = """holes: To be added later     """
 
 
 class Nurbs_extractWires:
@@ -116,4 +116,4 @@ class Nurbs_extractWires:
 
 
 Gui.addCommand('Nurbs_extractWires', Nurbs_extractWires())
-Nurbs_extractWires.__doc__ = """Nurbs_extractWires: Tobe added later     """
+Nurbs_extractWires.__doc__ = """Nurbs_extractWires: To be added later     """

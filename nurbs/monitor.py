@@ -79,19 +79,19 @@ def dialog():
     w.setLayout(box)
     w.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
-    l=QtGui.QLabel("Anzahl" )
+    l=QtGui.QLabel("Number" )
     w.l=l
     box.addWidget(l)
 
-    w.mina = QtGui.QLabel("Anzahl" )
+    w.mina = QtGui.QLabel("Number" )
     w.mina.setText('3')
     box.addWidget(w.mina)
 
-    w.anz = QtGui.QLabel("Anzahl" )
+    w.anz = QtGui.QLabel("Number" )
     w.anz.setText('13')
     box.addWidget(w.anz)
 
-    w.maxa = QtGui.QLabel("Anzahl" )
+    w.maxa = QtGui.QLabel("Number" )
     w.maxa.setText('3')
     box.addWidget(w.maxa)
 
@@ -103,25 +103,25 @@ def dialogForce():
     w.setLayout(box)
     w.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
-    l=QtGui.QLabel("Anzahl" )
+    l=QtGui.QLabel("Number" )
     w.l=l
     box.addWidget(l)
 
-    w.mina = QtGui.QLabel("Anzahl" )
+    w.mina = QtGui.QLabel("Number" )
     w.mina.setText('3')
     box.addWidget(w.mina)
 
-#    w.anz = QtGui.QLabel("Anzahl" )
+#    w.anz = QtGui.QLabel("Number" )
 #    w.anz.setText('13')
 #    box.addWidget(w.anz)
 
-    w.maxa = QtGui.QLabel("Anzahl" )
+    w.maxa = QtGui.QLabel("Number" )
     w.maxa.setText('3')
     box.addWidget(w.maxa)
 
 
 
-#    w.random=QtGui.QCheckBox("Zufall")
+#    w.random=QtGui.QCheckBox("Coincidence")
 #    box.addWidget(w.random)
 
 #    w.r=QtGui.QPushButton("run")
@@ -286,7 +286,7 @@ class Monitor(PartFeature):
                 print ("huhu")
                 proxy.dialog.anz.setText("VALUE: " + str(obj.val))
 #            except:
-                print ("kann nichts machen")
+                print ("Can't make anything")
 
 class Nurbs_Monitor_Mymonitor:
     def Activated(self):

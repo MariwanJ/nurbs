@@ -62,19 +62,19 @@ from scipy import interpolate
 
 ##\endcond
 
-#                                                                      raise Exception("getmap, get,map3 moverd to isodraw")                    what is this?????? mariwan
+#                                                                      raise Exception("getmap, get,map3 moved to isodraw")                    what is this?????? mariwan
 
 
 
 ##\cond
 
 def run_fulltest(obj, mpv=0.5, mpu=0.5, fx=-1, fy=-1, vc=30, uc=30 ):
-    '''testmethode'''
+    '''test method'''
 
-    '''  Hilfsobjekte zeichnen   
-    mittelpunkt in uv: mpv, mpu
-    skalierung/lage der xy-Ebene: fx,fy 
-    anzahl der gitterlinien: vc,uc
+    '''  Draw auxiliary objects
+    center in uv: mpv, mpu
+    scaling / position of the xy plane: fx, fy
+    number of grid lines: vc, uc
     '''
 
     #fx,fy=1,1
@@ -166,7 +166,7 @@ def run_fulltest(obj, mpv=0.5, mpu=0.5, fx=-1, fy=-1, vc=30, uc=30 ):
 
 
 def run_test_1(obj,bs,uv2x,uv2y,fx,fy,refpos):
-    '''testmethode'''
+    '''test method'''
     
     ptss=[]
     ptsk=[]
@@ -216,7 +216,7 @@ def run_test_1(obj,bs,uv2x,uv2y,fx,fy,refpos):
 
 
 def run_test_2(obj,bs,xy2u,xy2v,fx,fy,refpos):
-    '''testmethode'''
+    '''test method'''
 
     col=[]
     col2=[]
@@ -284,7 +284,7 @@ def run_test_2(obj,bs,xy2u,xy2v,fx,fy,refpos):
 
 # drawcircle2
 def run_test_circle(bs,xy2u,xy2v,RM=15,uc=10,vc=10):
-    ''' zeichnet Kreise auf die Flaeche bs '''
+    '''draws circles on the surface bs'''
 
     col=[]
 

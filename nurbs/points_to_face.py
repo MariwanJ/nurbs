@@ -104,7 +104,7 @@ def drawConeA(name,i,bounds,apex,axis,alpha,trafo,pts):
         yy.ViewObject.Transparency=10
         yy.ViewObject.ShapeColor=(random.random(),random.random(),random.random())
 
-    # nure fleache als nurbs
+    # only area as nurbs
     ccokay=True
     
     if h2>10:
@@ -300,7 +300,7 @@ def run_conepnppp(name,trafo,displaynumber,displayFaces,p_1,p_2,p_3,p_4):
 
 
 class PointFace(FeaturePython):
-    '''a face reconstructed by some points and normales'''
+    '''a face reconstructed by some points and normals'''
 
     def __init__(self, obj):
         FeaturePython.__init__(self, obj)
@@ -367,7 +367,7 @@ class PointFace(FeaturePython):
             sp= [obj.P1,obj.P2,obj.P3,obj.P4]
             dirs=[obj.N1,obj.N2,obj.N3,obj.N4]
 
-        # 1. Variante Tripod
+        # 1. Variant Tripod
         elif obj.mode=='tripod':
             sp=[]
             dirs=[]
@@ -392,7 +392,7 @@ class PointFace(FeaturePython):
             else: 
                 sp += [ obj.P4]
 
-        # 2. Variante Parts
+        # 2. Variant Parts
         elif obj.mode== 'spheres and cones':
             sp=[]
             dirs=[]
@@ -533,7 +533,7 @@ def PointstoConePNPN():
 
     sel=Gui.Selection.getSelection()
 #    if len(sel) != 2:
-#        print ("selection reicht nicht 4 "
+#        print ("selection is not enough 4 "
 #        return
     
     yy=App.ActiveDocument.addObject("Part::FeaturePython","PointFace")
@@ -569,7 +569,7 @@ def PointstoBezierPNPNPNPN():
 
     sel=Gui.Selection.getSelection()
 #    if len(sel) != 2:
-#        print ("selection reicht nicht 4 "
+#        print ("selection is not enough 4 "
 #        return
     
     yy=App.ActiveDocument.addObject("Part::FeaturePython","PointFace")
@@ -636,7 +636,7 @@ def    run_conepnpn(p_1,n_1,p_2,n_2,name='PNPN_Test',trafo=None,displaynumber=0,
         print ("axis",axis)
 
         if 0:
-            print ("Laengen")
+            print ("Length")
             print (axis.dot((apex-p_1).normalize()))
             print (axis.dot((apex-p_2).normalize()))
 
@@ -654,11 +654,11 @@ def    run_conepnpn(p_1,n_1,p_2,n_2,name='PNPN_Test',trafo=None,displaynumber=0,
         [a,bounds]=    drawConeB(apex,axis,alpha,h,trafo,pts)
         cols += [a]
         if displayFaces:
-            drawConeA(name,0,bounds,apex,axis,alpha,trafo,pts) # kegelflaeche zeigen 
+            drawConeA(name,0,bounds,apex,axis,alpha,trafo,pts) # show conical surface
 
 
     if displaynumber  in [0,2]:
-        #+# 2. Loesung noch dazu 
+        #+# 2. Solution at that
 
         l_1=p_2.dot(n_2)/(n_2[2]-1);
         l_2=p_2[2]/(1-n_2[2]);
@@ -682,7 +682,7 @@ def    run_conepnpn(p_1,n_1,p_2,n_2,name='PNPN_Test',trafo=None,displaynumber=0,
         print ("axis",axis)
         
         if 0:
-            print ("Laengen")
+            print ("Length")
             print (axis.dot((apex-p_1).normalize()))
             print (axis.dot((apex-p_2).normalize()))
 
@@ -701,7 +701,7 @@ def    run_conepnpn(p_1,n_1,p_2,n_2,name='PNPN_Test',trafo=None,displaynumber=0,
         [a,bounds]=    drawConeB(apex,axis,alpha,h,trafo,pts)
         cols += [a]
         if displayFaces:
-            drawConeA(name,1,bounds,apex,axis,alpha,trafo,pts) # kegelflaeche zeigen 
+            drawConeA(name,1,bounds,apex,axis,alpha,trafo,pts) # show conical surface
 
     return cols
 
@@ -932,12 +932,12 @@ def PointstoCylinderPNPP():
 
 
     run_cylinderpnpp()
-    raise Exception("muss noch eingebettet werden")
+    raise Exception("still needs to be embedded")
 
 
     sel=Gui.Selection.getSelection()
 #    if len(sel) != 2:
-#        print ("selection reicht nicht 4 "
+#        print ("selection is not enough 4 "
 #        return
     
     yy=App.ActiveDocument.addObject("Part::FeaturePython","PointFace")
@@ -1097,10 +1097,10 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
         p_2=App.Vector(100,0,0)
         p_3=App.Vector(0,100,0)
         p_4=App.Vector(0,0,100)
-        p_5=App.Vector(100,0,100) # eine loesung falsch
+        p_5=App.Vector(100,0,100) # a wrong solution
         
-        p_5=App.Vector(100,100,100) # 5 fehler
-        p_5=App.Vector(0,100,100) # 3 fehler
+        p_5=App.Vector(100,100,100) # 5 error
+        p_5=App.Vector(0,100,100) # 3 error
         p_4,p_5=p_5,p_4
 
         p_4=App.Vector(100,0,100)
@@ -1224,7 +1224,7 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
     
     cyls=[]
     cylsrc=[]
-    # Generating the cones correspondinng to the real non-infinite eigenvalues
+    # Generating the cones corresponding to the real non-infinite eigenvalues
     for i in range(N):
 #        if(beta[i]!=0 and alphai[i]==0):
         if(alphai[i]==0):
@@ -1279,7 +1279,7 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
                 print (l1,l2)
 
             if maxradius != 0 and r0> maxradius:
-                print ("Error radius zu gross",round(r0,1),round(maxradius,1))
+                print ("Error radius to big",round(r0,1),round(maxradius,1))
                 continue
 
             cylsrc += [[trafo.multVec(center)+p1,trafo.multVec(axis),r0,l1,l2,i]]
@@ -1293,7 +1293,7 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
             print ("create 3D objects---------------------------------------------")
         for cyl in  cyls:
                 if cyl[2]>500:
-#                    print ("radius zu gross"
+#                    print ("radius to big"
                     continue
                 if np.isnan(cyl[3]):
                     print ("nan cancellation")
@@ -1330,7 +1330,7 @@ def run_cylinder5p(pts=None,display=True,pointsize=10,maxradius=100000):
 
 
 def run_cone6p():
-    raise Exception("# geht noch nicht c++ quelle auch nicht.")
+    raise Exception("# does not work yet c++ source does not work either.")
 
     p_1=App.Vector(0,0,0)
     p_2=App.Vector(10,0,0) #x!=0
@@ -1413,7 +1413,7 @@ def run_cone6p():
 
     cyls=[]
     cylsrc=[]
-    # Generating the cones correspondinng to the real non-infinite eigenvalues
+    # Generating the cones corresponding to the real non-infinite eigenvalues
     for i in range(N):
 #        if(beta[i]!=0 and alphai[i]==0):
         if(alphai[i]==0):
@@ -1425,7 +1425,7 @@ def run_cone6p():
             _ty=alphar[i]/beta[i]
             _t=vr2[N-2+i*N]/vr2[N-1+i*N]
 
-            print ("Vektor komponenten")
+            print ("Vektor component")
             print(_t)
             print (alphar[i]/beta[i])
 
@@ -1480,7 +1480,7 @@ def run_cone6p():
             print ("r0",r0)
             print (l1,l2)
             if r0> 10000:
-                print ("Error radius zu gross")
+                print ("Error radius to big")
                 continue
             #cylsrc += [[trafo.multVec(center)+p1,trafo.multVec(axis),r0,l1,l2,i]]
             cyls += [[center,axis,r0,l1,l2,i]]
@@ -1495,10 +1495,10 @@ def run_cone6p():
 
 
 
-#--------- massendaten auswerten
+#--------- evaluate mass data
 
 def discoverSpheres():
-    ''' sphere mittelwert aus punktemenge finden'''
+    ''' Find sphere mean from point set'''
 
     a=time.time()
 
@@ -1528,7 +1528,7 @@ def discoverSpheres():
 
 
 def PointstoCylinder5P ():
-    '''5 Punkte zu cylinder'''
+    '''5 Points to cylinder'''
 
     (cylsrc,aux)=run_cylinder5p()
     Part.show(Part.Compound(aux))
@@ -1546,7 +1546,7 @@ def PointstoSphere4P ():
 
 
 #def AA():
-#    '''5 Punkte zu cylinder'''
+#    '''5 Points to cylinder'''
 #    PointstoCylinder5P ()
 
 #---------------------------
@@ -1594,7 +1594,7 @@ class ReconstructFace(FeaturePython):
             return
 
 
-        try: # start not befor the last prop is created
+        try: # start not before the last prop is created
             obj.displayMode
         except:
             return
@@ -1761,7 +1761,7 @@ def borderPlane(shape,center,normal,tol=0.01):
     sno=[]
     edges={}
     for f in shape.Faces:
-        # ist flaeche daei
+        # is flat there
         ok=True
 #        print f
         for v in f.Vertexes:
@@ -1806,7 +1806,7 @@ def borderPlane(shape,center,normal,tol=0.01):
                 if edges[tuple(tt)] == 1:
                     borders += [e]
             except:
-                pass #kante nicht dabei
+                pass #edge not there
 
     return borders
 
@@ -1822,7 +1822,7 @@ def borderSphere(shape,center,radius,tol=0.01):
     sno=[]
     edges={}
     for f in shape.Faces:
-        # ist flaeche daei
+        # is flat there
         ok=True
 #        print f
         for v in f.Vertexes:
@@ -1865,7 +1865,7 @@ def borderSphere(shape,center,radius,tol=0.01):
                 if edges[tuple(tt)] == 1:
                     borders += [e]
             except:
-                pass #kante nicht dabei
+                pass #edge not there
 
     return borders
 
@@ -1879,7 +1879,7 @@ def borderCylinder(shape,center,axis,r0,tol=0.01):
     sno=[]
     edges={}
     for f in shape.Faces:
-        # ist flaeche daei
+        # is flat there
         ok=True
 #        print f
         for v in f.Vertexes:
@@ -1925,7 +1925,7 @@ def borderCylinder(shape,center,axis,r0,tol=0.01):
                 if edges[tuple(tt)] == 1:
                     borders += [e]
             except:
-                pass #kante nicht dabei
+                pass #edge not there
 
     return borders
 
@@ -1960,7 +1960,7 @@ def borderCylinderV2(shyes):
 
 
 def findCylinder(obj):
-        '''find faces which belong to a cylider by selected faces'''
+        '''find faces which belong to a cylinder by selected faces'''
         print("START FINDCYLINDER-----------------------")
         aaat=time.time()
 
@@ -2008,7 +2008,7 @@ def findCylinder(obj):
             [center,axis,r0,l1,l2,i]=r
             center=center - center.dot(axis)*axis
             
-            # ignoriere entfernte
+            # ignore distant
             if center.Length>1000 or r0>1000:
                 if debug:
                     print ("zu gross ---center.Length---radius ---",center.Length,r0)
@@ -2049,7 +2049,7 @@ def findCylinder(obj):
 
             if 1 or anz>10:
                 if debug:
-                    print ("centre",np.round(center,2))
+                    print ("center",np.round(center,2))
                     print ("radius",round(r0,2))
                     print ("axis",np.round(axis,2))
                 aata=time.time()
@@ -2062,7 +2062,7 @@ def findCylinder(obj):
                     print ("Time split Shape",round(time.time()-aata,3))
 
                 borders=[Part.Shape()]
-                if 1: #+# border is time consuming improive
+                if 1: #+# border is time consuming improve
                     aata=time.time()
                     #borders=borderCylinder(obj.Source.Shape,center,axis,r0,obj.tol)
                     borders=borderCylinderV2(shyes)
@@ -2469,7 +2469,7 @@ def findCluster():
 
     print ("cluster2")
     print (cluster2)
-    # Berechne Mittelwerte
+    # Calculate mean values
     for cl in cluster2:
         ces=App.Vector()
         axs=App.Vector()
@@ -2494,7 +2494,7 @@ def AA():
 
 
 class MultiShape(FeaturePython):
-    '''object with mutltiple shape to switch'''
+    '''object with multiple shape to switch'''
 
     def __init__(self, obj):
         FeaturePython.__init__(self, obj)
@@ -2681,7 +2681,7 @@ def AA():
 
 
 '''
-Idee fuer zurechtschneiden
+Idea for cutting to size
 f=App.ActiveDocument.Wire.Shape.Face1
 e=App.ActiveDocument.Circle.Shape.Edge1
 e=App.ActiveDocument.Wire001.Shape.Edge1

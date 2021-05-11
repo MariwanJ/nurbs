@@ -50,7 +50,7 @@ import spreadsheet_lib
 from spreadsheet_lib import ssa2npa, npa2ssa, cellname
 
 # \endcond
-# from .errors import showdialog
+# from .errors import show dialog
 
 from say import *
 
@@ -97,12 +97,12 @@ class Nurbs_LoadHeightProfileFromFile:
 
             ss = dok2.Spreadsheet
 
-            # daten ins spreadsheet schreiben
+            # write data in the spreadsheet
             for s in range(8):
                 cn = cellname(s+3, 9)
                 ss.set(cn, str(mpts[-s-1].y))
 
-            # ferse hochlegen
+            # put up your heel
             for j in range(7):
                 cn = cellname(j+2, 26)
                 ss.set(cn, str((mpts[-1].y)))

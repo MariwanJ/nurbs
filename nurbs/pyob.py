@@ -228,7 +228,7 @@ def _Sheet(FeaturePython):
         FeaturePython.__init__(self, obj)
 
 
-# anwendungsklassen
+# application classes
 
 
 def Sketch(name='MySketch'):

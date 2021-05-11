@@ -55,7 +55,7 @@ class PartFeature:
         obj.Proxy = self
         self.Object = obj
 
-# grundmethoden zum sichern
+#basic methods to secure
 
     def attach(self, vobj):
         self.Object = vobj.Object

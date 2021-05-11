@@ -205,7 +205,7 @@ class Geodesic(FeaturePython):
 
 
 def createGeodesicA(obj=None):
-    '''create a geodesic from the default psoition 50 50 and direction for testing'''
+    '''create a geodesic from the default position 50 50 and direction for testing'''
 
     a=App.ActiveDocument.addObject("Part::FeaturePython","Geodesic")
 
@@ -236,7 +236,7 @@ def createGeodesicA(obj=None):
 
 
 def createPatch(obj=None,wire=None):
-    '''create a patch on obj with borderdata from wire'''
+    '''create a patch on obj with border data from wire'''
 
     # reorder if the selection order is false
     try: _=obj.uvdUdim
@@ -322,7 +322,7 @@ def colorPath(pts,color='0 1 0',name=None):
 
 
 def genRibForGeodesic(fp,u,v,d,lang,ribflag,color='0 1 1'):
-        ''' erzeugt eine rippe fuer color grid '''
+        '''creates a rib for the color grid'''
 
         pts=[]
         uvs=[(u,v)]
@@ -541,7 +541,7 @@ def updateGeodesic(fp):
         if fp.lang4==-1: lang4=lang2
         else: lang4=int(round(10*fp.lang4/fp.gridsize))
 
-        #rueckwaerts
+        #backward
         ribb=''
         riba=''
 
@@ -551,7 +551,7 @@ def updateGeodesic(fp):
                 ribflag= i%5 == 0 and gridon
                 if i==lang3: ribflag=True
                 
-#                print ("erzeuge ribbe",i)
+#                print ("create rib",i)
                 a=t.dot(t1)
                 b=t.dot(t2)
                 a,b=b,a
@@ -636,7 +636,7 @@ def updateGeodesic(fp):
 
         #-------------------------------------
 
-        # vorwaerts rictung
+        #forward direction
 
         geto=[]
 
@@ -667,7 +667,7 @@ def updateGeodesic(fp):
                 ribflag= i%5 == 0 and gridon
                 if i==lang: ribflag=True
                 
-#                print ("erzeuge ribbe",i)
+#                print ("create rib",i)
                 a=t.dot(t1)
                 b=t.dot(t2)
                 a,b=b,a
@@ -761,7 +761,7 @@ def updateGeodesic(fp):
             if v>vmax:v=vmax
 
             if u<umin or v<vmin or u>umax or v>vmax:
-                print ("qcancellation!")
+                print ("cancellation!")
                 break
 
 
@@ -817,7 +817,7 @@ def updateGeodesic(fp):
         ut=fp.ut*0.01
         vt=fp.vt*0.01
 #        pt=Part.Point(sf.value(ut,vt))
-#        print ("Abstand"
+#        print ("Distance"
 #        print pt
 #        print shape.distToShape(pt.toShape())
 #        print (pt,shape.distToShape(pt.toShape())[0])
@@ -833,7 +833,7 @@ def updateGeodesic(fp):
         pt=Part.Point(sf.value(ut,vt))
         fp.dist= shape.distToShape(pt.toShape())[0]
 
-#        print ("Abstand",pts[-1],pend,shape.distToShape(pt.toShape())[0],(pts[-1]-pend).Length)
+#        print ("Distance",pts[-1],pend,shape.distToShape(pt.toShape())[0],(pts[-1]-pend).Length)
 #        print (u,v)
 
         fp.ue=u2*100
@@ -970,7 +970,7 @@ def updatePatch_old(fp):
                 ribflag= i%5 == 0 and gridon
                 if i==fp.lang: ribflag=True
  
-#                print ("erzeuge ribbe",i)
+#                print ("create rib",i)
                 a=t.dot(t1)
                 b=t.dot(t2)
                 de=180./np.pi*np.arctan2(b,a)
@@ -1011,7 +1011,7 @@ def updatePatch_old(fp):
             if v>vmax:v=vmax
 
             if u<umin or v<vmin or u>umax or v>vmax:
-                print ("qcancellation!")
+                print ("cancellation!")
                 break
             p=sf.value(u,v)
 
@@ -1053,7 +1053,7 @@ def updatePatch_old(fp):
         ut=fp.ut*0.01
         vt=fp.vt*0.01
 #        pt=Part.Point(sf.value(ut,vt))
-#        print ("Abstand"
+#        print ("Distance"
 #        print pt
 #        print shape.distToShape(pt.toShape())
 #        print (pt,shape.distToShape(pt.toShape())[0])
@@ -1061,12 +1061,12 @@ def updatePatch_old(fp):
 
         pend=sf.value(ut,vt)
         pt=Part.Point(sf.value(ut,vt))
-#        print ("Abstand"
+#        print ("Distance"
 #        print pt
 #        print shape.distToShape(pt.toShape())
         fp.dist= shape.distToShape(pt.toShape())[0]
 
-#        print ("Abstand",pts[-1],pend,shape.distToShape(pt.toShape())[0],(pts[-1]-pend).Length)
+#        print ("Distance",pts[-1],pend,shape.distToShape(pt.toShape())[0],(pts[-1]-pend).Length)
 #        print (u,v)
         fp.ue=u2*100
         fp.ve=v2*100
@@ -1142,7 +1142,7 @@ def updateCurvaturePath(fp,redirect,flip):
             if v>vmax:v=vmax
 
             if u<umin or v<vmin or u>umax or v>vmax:
-                print ("qcancellation!")
+                print ("cancellation!")
                 break
             p=sf.value(u,v)
             
@@ -1177,7 +1177,7 @@ def updateCurvaturePath(fp,redirect,flip):
         vt=fp.vt*0.01
         pend=sf.value(ut,vt)
         pt=Part.Point(sf.value(ut,vt))
-        print ("Abstand")
+        print ("Distance")
         print (pt)
         print (shape.distToShape(pt.toShape()))
         t= shape.distToShape(pt.toShape())
@@ -1212,7 +1212,7 @@ def runtest1():
 
 
 def createGeodesic():
-    '''geodesic auf koerper erzeugen'''
+    '''geodesic produce on body'''
     a=createGeodesicA(obj=Gui.Selection.getSelection()[0])
 
 class Nurbs_geodesicMapPatchToFace:
@@ -1220,7 +1220,7 @@ class Nurbs_geodesicMapPatchToFace:
         self.geodesicMapPatchToFace()
 
     def geodesicMapPatchToFace(self):
-        '''pfad(e) $2 auf geodesic $1 auflegen'''
+        '''pfad(e) $2 hang up on geodesic $1'''
         a=createPatch(obj=Gui.Selection.getSelection()[0],
         wire=Gui.Selection.getSelection()[1])
         App.ActiveDocument.recompute()
@@ -1243,7 +1243,7 @@ class Nurbs_AppendGeodesic:
         self.appendGeodesic()
     
     def appendGeodesic(self):
-        '''geodesic erzeugen, die an eine geodesic andockt'''
+        '''generate geodesic that docks to a geodesic'''
         a=createGeodesicA()
         a.pre=Gui.Selection.getSelection()[0]
 
@@ -1285,7 +1285,7 @@ class Nurbs_createGeodesicA:
         self.createGeodesicA()
         
     def createGeodesicA(self):
-        '''geodesic erzeugen, die an eine geodesic andockt'''
+        '''generate geodesic that docks to a geodesic'''
         a=createGeodesicA()
         a.pre=Gui.Selection.getSelection()[0]
 
@@ -1353,7 +1353,7 @@ def updatePatch(fp):
     usvarr=np.array(gd.uvdarray).reshape(udim,vdim,2)
     sf=gd.obj.Shape.Face1.Surface
 
-    # bound box fuer rahmen
+    #bound box for frame
     print(fp.wire.Shape.BoundBox)
     bb=fp.wire.Shape.BoundBox
     l3=-bb.XMin
@@ -1374,7 +1374,7 @@ def updatePatch(fp):
         gd.Proxy.execute(gd.obj)
 
 
-    # erster fall nur ein wire #+#
+    #first case just a wire #+#
     try: ws= fp.wire.Shape.Wires
     except: ws=None
     
@@ -1388,7 +1388,7 @@ def updatePatch(fp):
         print ("loop",w,ress)
         pts=w.discretize(1000)
 
-        # anderer weg der zerlegnung
+        # another way of dismantling
         pts=wireToPolygon(w)
 
         uvs=[]
@@ -1415,10 +1415,10 @@ def updatePatch(fp):
                 uvs += [(u,v)]
                 ul,vl=u,v
 
-        # ausgangskurve 2D
+        #output curve 2D
         pts2=[App.Vector(u,v,0) for (u,v) in uvs]
 
-        # berechne 3D Kurve ..
+        #calculate 3D curve ..
         pts=[]
         print (usvarr.shape)
         print ("A")
@@ -1533,7 +1533,7 @@ def approx_step():
     better=True
     print (ds,dsa)
     if ds<dsa:
-        print ("wird nicht besser A"
+        print ("doesn`t get better A"
         a.direction -= 1
         App.ActiveDocument.recompute()
         ds=a.dist
@@ -1543,7 +1543,7 @@ def approx_step():
 
         print (ds,dsa)
         if ds<dsa:
-            print ("wird nicht besser B"
+            print ("doesn`t get better B"
             a.direction += 1
             App.ActiveDocument.recompute()
             better=False
@@ -1559,7 +1559,7 @@ def approx_step():
 
     print (ds,dsa)
     if ds<=dsa:
-        print ("wird nicht besser C"
+        print ("doesn`t get better C"
         a.lang += 1
         App.ActiveDocument.recompute()
 
@@ -1570,7 +1570,7 @@ def approx_step():
 
         print (ds,dsa)
         if ds<=dsa:
-            print ("wird nicht besser D"
+            print ("doesn`t get better D"
             a.lang -= 1
             App.ActiveDocument.recompute()
             better=False
@@ -1592,7 +1592,7 @@ def approx_geodesic(n=10):
 
 
 def genRibForUpdateDistance(f,u=50,v=50,d=0,lang=30,gridsize=20):
-        ''' erzeugt eine rippe fuer color grid fuer kreis geodesics'''
+        '''creates a rib for color grid for circle geodesics'''
 
         pts=[]
         norms=[]
@@ -1607,7 +1607,7 @@ def genRibForUpdateDistance(f,u=50,v=50,d=0,lang=30,gridsize=20):
         v=vmin-(vmin-vmax)*v/100
 
 
-#        print ("uv neu xx",u,v)
+#        print ("uv new xx",u,v)
 
         (t1,t2)=sf.tangent(u,v)
         nn=f.normalAt(u,v)
@@ -1676,7 +1676,7 @@ def genRibForUpdateDistance(f,u=50,v=50,d=0,lang=30,gridsize=20):
 
 
 def genrib_outdated(f,u=50,v=50,d=0,lang=30,gridsize=20):
-        ''' erzeugt eine rippe fuer color grid fuer kreis geodesics'''
+        '''creates a rib for color grid for circle geodesics'''
 
         pts=[]
         norms=[]
@@ -1689,7 +1689,7 @@ def genrib_outdated(f,u=50,v=50,d=0,lang=30,gridsize=20):
 
         u=u*0.01
         v=v*0.01
-#        print ("uv neu",u,v)
+#        print ("uv new",u,v)
 
         (t1,t2)=sf.tangent(u,v)
         nn=f.normalAt(u,v)
@@ -1794,7 +1794,7 @@ def updateDistance(fp):
             if fp.thresholdForce>0:
                 if abs(dd)<fp.thresholdForce*0.01:
                     dd=0
-            # generelle schwelle
+            #general threshold
             if abs(dd)<0.1: dd=0
 
             distd += [dd]
@@ -1862,7 +1862,7 @@ def updateDistance(fp):
 
 
                 if 0 and i==lang:
-                    print ("dists absolut a promille,",j,
+                    print ("dists absolute a promille,",j,
                         round(dists[j,i]/factor,2),
                         round(1000.*dists[j,i]/(i*np.pi/dr)/factor,2),i)
 
@@ -1888,7 +1888,7 @@ class Nurbs_geodesicDistance:
         Geodesic(a,False)
         a.obj=obj
 
-        # werte fuer random cylinder
+        #values ​​for random cylinder
         a.u=48
         a.v=45
         a.gridsize=200
@@ -1922,7 +1922,7 @@ Gui.addCommand("Nurbs_geodesicDistance", Nurbs_geodesicDistance())
 
 
 #-------------------------------
-# aus Draft.py
+# from Draft.py
 
 class MyDraftLabel:
     
@@ -2019,7 +2019,7 @@ class MyDraftLabel:
 
             u=umin-(umin-umax)*obj.u/100
             v=vmin-(vmin-vmax)*obj.v/100
-    #        print ("uv neu  aa",u,v)
+    #        print ("uv new  aa",u,v)
             obj.TargetPoint=obj.obj.Shape.Faces[obj.facenumber].Surface.value(u,v)
 
         except:
@@ -2029,7 +2029,7 @@ class MyDraftLabel:
 
             u=umin-(umin-umax)*obj.u/100
 #            v=vmin-(vmin-vmax)*obj.v/100
-            print ("u neu  aa",u)
+            print ("u new  aa",u)
             obj.TargetPoint=obj.obj.Shape.Edges[obj.facenumber].Curve.value(u)
 
 
@@ -2383,7 +2383,7 @@ class Nurbs_FindGeodesicToTarget:
                             if la<minl:
                                 minl=la
                                 minp=[lang+faktor*dl,d+faktor*dd]
-                                print ("wechsel ",minp)
+                                print ("change ",minp)
                                 found=True
 
                             cp=colorPath(ptsa,color='0 1 0',name=None)
@@ -2397,7 +2397,7 @@ class Nurbs_FindGeodesicToTarget:
                 dti=time.time()-ta
                 print ("Loop time ",dti,len(pts),dti/len(pts))
                 if not found: 
-                    print ("nichts mehr gefunden")
+                    print ("found nothing more")
                     break
 
             print (lange,de)
@@ -2479,7 +2479,7 @@ class Nurbs_CreateShoeMarkers:
         'E',51.54,50.6,
         'G',30.9,50.6,
 
-        # Ferse
+        # Heel
         'HF1',98.,29.,
         'HF2',98.,70.,
 
@@ -2487,7 +2487,7 @@ class Nurbs_CreateShoeMarkers:
         'H2',98.,60.,
 
 
-        # Knoechel
+        # Ankle
         'K2', 70.,60.,
         'K1', 70.,40.,
 

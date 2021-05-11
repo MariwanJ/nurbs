@@ -81,7 +81,7 @@ class WorkSpace():
             print(str(w2.windowTitle()))
             s = str(w2.windowTitle())
             if s == self.name + '1 : 1[*]':
-                print("gefundne")
+                print("found")
                 return w2
         print(self.name + '1:1[*]')
 
@@ -94,7 +94,7 @@ class PartFeature:
         obj.Proxy = self
         self.Object = obj
 
-# grundmethoden zum sichern
+# basic methods to secure
 
     def attach(self, vobj):
         self.Object = vobj.Object

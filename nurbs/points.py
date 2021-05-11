@@ -330,7 +330,7 @@ def createAll(mode="all",obj=None,dimU=500,dimV=500,
     pa4=np.array(pa3)
     pa4.shape
     
-    if 0: # auswertung der anderen baender
+    if 0: # evaluation of the other bands
         pmin=np.array(pmin)
         print (pmin.shape)
         pmax=np.array(pmax)
@@ -408,7 +408,7 @@ def createAll(mode="all",obj=None,dimU=500,dimV=500,
             print ("create surf all ", tc-tb)
 
 
-#    if not createpart: return
+#    if not create part: return
     if not mode=='part': 
         return
 
@@ -709,7 +709,7 @@ class Nurbs_PointsRUNA:
 Gui.addCommand("Nurbs_PointsRUNA", Nurbs_PointsRUNA())
 
 
-#-------------------------glaetten 
+#-------------------------smooth 
 
 
 import random
@@ -738,7 +738,7 @@ def init(d):
             pts += [App.Vector(100*x,80*random.random()+160+50*np.sin(5.0*np.pi*x),0)]
 
 
-    # polare Transformation
+    # polar Transformation
     
     ptsp=[App.Vector(p.y*np.cos(p.x*np.pi*0.02),p.y*np.sin(p.x*np.pi*0.02),0) for p in pts]
     Points.show(Points.Points(ptsp))

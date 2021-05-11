@@ -62,7 +62,7 @@ import traceback
 import random
 
 
-def showdialog(title="Error", text="Schau in den ReportView fuer mehr Details", detail=None):
+def showdialog(title="Error", text="See the ReportView for more details", detail=None):
     msg = QtGui.QMessageBox()
     msg.setIcon(QtGui.QMessageBox.Warning)
     msg.setText(text)
@@ -82,7 +82,7 @@ def sayexc(title='Error', mess=''):
     showdialog(title, text=mess, detail="--> ".join(l2))
 
 
-''' punktmenge in pfad ueberfuehren '''
+''' transfer point set into path '''
 
 
 def orderdata(obj, inner=False, plotit=False, medianfil=0, cf=True):
@@ -107,7 +107,7 @@ def orderdata(obj, inner=False, plotit=False, medianfil=0, cf=True):
     pl2 = App.Placement()
     pl2.Base = vm
 
-    # beschraenkende kreise
+    # restrictive circles
     if 0 and cf:
         if medianfil > 0:
             circle = Draft.makeCircle(radius=lea, placement=pl2, face=False)
@@ -136,7 +136,7 @@ def orderdata(obj, inner=False, plotit=False, medianfil=0, cf=True):
         #    print np.arctan2(vm.x,vm.y)
         try:
             if aps[np.arctan2(vn.x, vn.y)] != vn:
-                print("Error 2 punkte gleiche richtung")
+                print("Error 2 points same direction")
                 print(v)
                 print(aps[np.arctan2(vn.x, vn.y)])
         except:
@@ -257,7 +257,7 @@ def ThousandsOfRunWhatShouldIdo():
 
     if len(Gui.Selection.getSelection()) == 0:
         showdialog('Oops', 'nothing selected - nothing to do for me',
-                   'Plese select a point cloud')
+                   'Please select a point cloud')
 
     inner = False
     outer = False

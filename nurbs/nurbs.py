@@ -83,7 +83,7 @@ class PartFeature:
         obj.Proxy = self
         self.obj2 = obj
 
-# grundmethoden zum sichern
+# basic methods to secure
 
     def attach(self, vobj):
         self.Object = vobj.Object
@@ -323,7 +323,7 @@ class Nurbs(PartFeature):
         nNodes_v = bs.NbVPoles
 
         for iu in range(nNodes_u):
-            # meridiane
+            # meridians
             pps = []
             p = bs.getPole(1+iu, 1)
             pps = [p.add(App.Vector(0, -20, 0))]
@@ -337,13 +337,13 @@ class Nurbs(PartFeature):
 
             ss = Part.makePolygon(pps)
 
-            # fuer geschlossenes
+            # for closed
             ss = Part.makePolygon(pps[1:-1])
             # if iu==nNodes_u-1:
             sss.append(ss)
 
         for iv in range(nNodes_v):
-            # breitengrade
+            # latitude
             p = bs.getPole(1, 1+iv)
             pps = [p.add(App.Vector(-20, 0, 0))]
             for iu in range(nNodes_u):
@@ -355,16 +355,16 @@ class Nurbs(PartFeature):
 
             ss = Part.makePolygon(pps)
 
-            # fuer geschlossenes
+            # for closed
             pps2 = pps[1:-1]
             pps2.append(pps[1])
             try:
                 ss = Part.makePolygon(pps2)
-                # horizontale
+                # horizontal
                 # if iv!=1:
                 sss.append(ss)
             except:
-                print("kein polygon fuer", pps2)
+                print("no polygon for", pps2)
 
         comp = Part.Compound(sss)
         return comp
@@ -600,7 +600,7 @@ class Nurbs(PartFeature):
         print("poles u count", bs.NbUKnots)
         print("poles v count", bs.NbVKnots)
 
-        # +#+ todo split knot vectors in single values vector and multiplicity vector
+        # +#+ to-do split knot vectors in single values vector and multiplicity vector
         for i in range(0, len(knot_u)):
             # if knot_u[i+1] > knot_u[i]:
             bs.insertUKnot(knot_u[i], 1, 0.0000001)
@@ -660,7 +660,7 @@ class Nurbs(PartFeature):
                                         ku,
                                         False, True, 3, 3, 1.0*np.ones(nNodes_v*(nNodes_u-1)))
 
-        # irgendwas vertauscht beim torus
+        # something mixed up in the torus
         if obj.model == "NurbsTorus":
 
             coor = [
@@ -776,7 +776,7 @@ class Nurbs(PartFeature):
         # create a pole grid with spines
 
         # --- hack
-        # print ("cancellation Zeile 661"
+        # print ("cancellation line 661"
         # return None
         # ---
 
@@ -830,7 +830,7 @@ class Nurbs(PartFeature):
         try:
             rc = self.bs
         except:
-            sayexc("BSpline nicht mehr vorhanden, muss neu berechnet werden ....")
+            sayexc("BSpline no longer available, must be recalculated ....")
             uc = self.obj2.nNodes_v
             vc = self.obj2.nNodes_u
             self.createSurface(self.obj2, self.obj2.poles)
@@ -1132,7 +1132,7 @@ class Nurbs(PartFeature):
         # App.ActiveDocument.commitTransaction()
 
     def addS(self, vp):
-        ''' harte kante links, weicher uebergang, harte kante rechts '''
+        ''' hard edge on the left, soft transition, hard edge on the right '''
 
         App.ActiveDocument.openTransaction("add vertical S " + str(vp))
 
@@ -1745,7 +1745,7 @@ class Nurbs_NurbsTest:
             App.ActiveDocument = App.getDocument("Unnamed")
             Gui.ActiveDocument = Gui.getDocument("Unnamed")
 
-    #    createnurbs()
+    #    create nurbs()
 
         na = 10
         b = 10

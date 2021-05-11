@@ -313,9 +313,9 @@ def npa2ssa(arr,spreadsheet,c1,r1,color=None):
 def gendata(ss):
     print ("gendata",ss.Label)
 
-    # Form der Nadel als Parameter 
+    # Shape of the needle as a parameter
 
-    # profil blatt
+    # profile sheet
     curve=[[0,0,0],[5,-5,10],[30,-10,-0],[20,-5,-10],[0,10,0],[-20,-5,-0],[-30,-10,0],[-5,-5,0]]
 
     curve=[
@@ -355,7 +355,7 @@ def gendata(ss):
     twister=[[0,0,0],[0,45,0],[0,0,0],[00,0,0],[0,45,0],[0,-45,0],[0,0,0]]
 
 
-    # halbscharfe kante
+    # semi-sharp edge
     bb= [[0,0,0],[0,0,50],[0,0,100],[0,0,200],[0,0,400],[0,0,499],[0,0,500],[0,0,600]]
     twister=[[0,0,0],[0,-25,0],[0,0,0],[00,0,0],[0,-25,0],[0,25,0],[0,25,0],[0,0,0]]
     sc=[[1,0],[1,0],[1,0],[1,0],[1,0],[1.3,0],[1.3,0],[1.,0]]
@@ -444,7 +444,7 @@ class PartFeature:
         obj.Proxy = self
         self.Object=obj
 
-# grundmethoden zum sichern
+# basic methods to secure
 
     def attach(self,vobj):
         self.Object = vobj.Object
@@ -571,7 +571,7 @@ class Needle(PartFeature):
 
 #----------------------------
         #'''
-        # backbone machen
+        # make backbone
         bbc=Part.BSplineCurve()
         bbc.buildFromPoles(bb)
 
@@ -1007,7 +1007,7 @@ class Nurbs_NeedleMain:
         self.testmain()
     def testmain(self):
 
-        # test aus parametern
+        # test from parameters
         import Draft 
         import needle as needle
         #reload( .needle)
@@ -1057,7 +1057,7 @@ class Nurbs_NeedleMain:
 
         if 0:
 
-            # zweiter koerper
+            # second body
 
             b=App.ActiveDocument.addObject("Part::FeaturePython","MyNeedle")
             bn=needle.Needle(b)
@@ -1070,7 +1070,7 @@ class Nurbs_NeedleMain:
             '''
             b.useSpreadsheet=True
 
-            # b.Spreeadsheet= App.ActiveDocument.recompute().addObject('Spreadsheet::Sheet','huhu')
+            # b.Spreadsheet= App.ActiveDocument.recompute().addObject('Spreadsheet::Sheet','huhu')
             bss=b.Spreadsheet
             needle.gendata(bss)
 

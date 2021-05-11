@@ -67,7 +67,7 @@ class Nurbs_DisplayKontsandPolseForCurve:
                 App.ActiveDocument.ActiveObject.ViewObject.PointSize=10
                 App.ActiveDocument.ActiveObject.ViewObject.PointColor=(0.,1.,1.)
                 App.ActiveDocument.ActiveObject.ViewObject.LineColor=(0.,1.,1.)
-    #dont run make a class
+    #don't run make a class
     #ThousandsOfRunWhatShouldIdo()
 
     def GetResources(self):

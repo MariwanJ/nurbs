@@ -120,7 +120,7 @@ def splitEdges(obj=None,show=True):
             g.node[n]['sortedEdges']=arcl2
 
 
-    # Schnittpunkte
+    # Intersections
 
     pts=[]
     xyplane=Part.Plane()
@@ -145,7 +145,7 @@ def splitEdges(obj=None,show=True):
                     try:
                         _ = points[vkey([p[0],p[1],0.0])]
                     except:
-                        # liegt Punkt innen?
+                        # lies point inside?
                         pp=App.Vector(p[0],p[1],0.0)
                         (cmin,cmax)=c1.ParameterRange
                         cp1=c1.Curve.parameter(pp)
@@ -156,7 +156,7 @@ def splitEdges(obj=None,show=True):
                                 pts+=[App.Vector(p[0],p[1])]
                                 cuts[c1i] += [cp1]
                                 cuts2[c2i] += [cp]
-                                print(("schnitt",c1i,c2i,cp1,cp))
+                                print(("cut",c1i,c2i,cp1,cp))
 
     # use the cutpoints to split all edges
     newedges=[]
@@ -178,7 +178,7 @@ def splitEdges(obj=None,show=True):
                 try:
                     csegment(cus[i],cus[i+1])
                 except:
-                    print(("fehler csegment(cus[i],cus[i+1])",i))
+                    print(("error csegment(cus[i],cus[i+1])",i))
                     continue
                 #display the segment
                 if displayEdges:
@@ -380,7 +380,7 @@ Gui.addCommand("Nurbs_CreatePatternV2", Nurbs_CreatePatternV2())
 
 
 
-#erzeugt einzelnes Muster bestehend aus Flächen
+#creates a single pattern consisting of surfaces
 
 class Nurbs_CreateSinglePattern:
     def Activated(self):
@@ -404,7 +404,7 @@ Gui.addCommand("Nurbs_CreateSinglePattern", Nurbs_CreateSinglePattern())
 
 
 def _createArray(show=True,obj=None):
-    ''' array aus edges machen'''
+    ''' make array out of edges'''
 
     edges=[]
 
@@ -515,11 +515,11 @@ def removeEdges():
         App.ActiveDocument.ActiveObject.ViewObject.LineWidth=10
 
 
-## Das Pattern Objekt erzeugt aus den Kanten des **obj** ein
-# Compound mit Kanten, welche in den Parametern eingestellte Symmetrien
-# bilden
+## The pattern object creates a from the edges of the ** obj **
+# Compound with edges, which symmetries set in the parameters
+# form
 #
-# Das Ergebnis ist planar in xy oder auf eine Targetfläche abgebildet
+# The result is mapped planar in xy or on a target surface
 #
 
 class Pattern(FeaturePython):
@@ -629,9 +629,9 @@ class Nurbs_runPatternV3:
 
         createPatternV3(obj)
 
-    ## bildet eine Folge von Punkten **points** auf die Fläche1 des Objektes
+    ## forms a sequence of points ** points ** on the surface1 of the object
     # **target**.
-    # Die Größe wird angepasst und das Muster **repeatX** / **repeatY** mal wiederholt.
+    # The size is adjusted and the pattern ** repeatX ** / ** repeatY ** is repeated times.
 
     def GetResources(self):
         
@@ -723,7 +723,7 @@ def mapcurve(points,border,target,repeatX,repeatY):
 
             pts2d +=[App.Base.Vector2d(u,v) for u,v in zip(uss2,vss2)]
 
-            #geschlossen
+            #closed
             #bs2d.buildFromPolesMultsKnots(pts2d,[1]*(len(pts2d)+1),list(range(len(pts2d)+1)),True,1)
 
             bs2d.buildFromPolesMultsKnots(pts2d,[2]+[1]*(len(pts2d)-2)+[2],list(range(len(pts2d)-0)),False,1)

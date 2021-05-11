@@ -189,14 +189,14 @@ class _Command2():
             return {'Pixmap': self.icon,
                     'MenuText': self.name,
                     'ToolTip': self.tooltip,
-                    'CmdType': "ForEdit"  # bleibt aktiv, wenn sketch editor oder andere tasktab an ist
+                    'CmdType': "ForEdit"  #remains active when the sketch editor or other tasktab is on
                     }
         else:
             return {
                 # 'Pixmap' : self.icon,
                 'MenuText': self.name,
                 'ToolTip': self.name,
-                'CmdType': "ForEdit"  # bleibt aktiv, wenn sketch editor oder andere tasktab an ist
+                'CmdType': "ForEdit"  #remains active when the sketch editor or other tasktab is on
             }
 
     def IsActive(self):
@@ -262,7 +262,7 @@ class _Command():
         return {'Pixmap': self.icon,
                 'MenuText': self.name,
                 'ToolTip': self.name,
-                'CmdType': "ForEdit"  # bleibt aktiv, wenn sketch editor oder andere tasktab an ist
+                'CmdType': "ForEdit"  #remains active when the sketch editor or other tasktab is on
                 }
 
     def IsActive(self):

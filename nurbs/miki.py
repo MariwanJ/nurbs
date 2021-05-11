@@ -192,7 +192,7 @@ def  fh(name="horizontal",title=''):
     layout = QtGui.QHBoxLayout()
     layout.setAlignment(QtCore.Qt.AlignLeft)
     w.setLayout(layout)
-    # Gruppenname setzen:
+    # Set group name:
     #pB= QtGui.QLabel("name")
     #pB.setStyleSheet("QWidget { font: bold 18px;color:red;border-style: outset;border-width: 3px;border-radius: 10px;border-color: blue;}")
     #layout.addWidget(pB)
@@ -204,7 +204,7 @@ def  fh(name="horizontal",title=''):
     return w
 
     
-def  fh2(name="vertik horizontal",title=''):
+def  fh2(name="vertical horizontal",title=''):
     w=QtGui.QWidget()
     #w.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
     
@@ -358,7 +358,7 @@ class Miki():
                 #parent=ln[depth-1]
                 parent=ln[l-1]
                 ln[l]=line
-#                print ["einzug",l,"depth",depth,"parent",parent,ln]
+#                print ["indent",l,"depth",depth,"parent",parent,ln]
 #                print 
                 r=[l,line,parent,res.group(2)]
                 r=[l,line,parent,res.group(2),depth,ln]
@@ -387,7 +387,7 @@ class Miki():
 #                    print app
                     r=[l,line,parent,"att val",res.group(1),eval(res.group(2))]
                     if res.group(1) =='Name':
-#                        print ("setze Namen von parent"
+#                        print ("set name of parent"
 #                        print parent
 #                        print rs[parent]
                         rs[parent].append(res.group(2))
@@ -399,7 +399,7 @@ class Miki():
                     print (app)
                     r=[l,line,parent,"att val",res.group(1),eval(res.group(2))]
                     if res.group(1) =='Name':
-#                        print ("setze Namen von parent"
+#                        print ("set name of parent"
 #                        print parent
 #                        print rs[parent]
                         rs[parent].append(res.group(2))
@@ -515,7 +515,7 @@ class Miki():
                         elif cn=='str':
                             ex="parent."+l[4]+"='"+v+"'"
                         else:
-                            print ("nicht implementierter typ")
+                            print ("not implemented type")
                             ex=''
 #                        print ("!!! *!!** "+ex
                         exec(ex)
@@ -549,7 +549,7 @@ class Miki():
                         elif cn=='str':
                             ex="parent."+l[4]+"='"+v+"'"
                         else:
-                            print ("nicht implementierter typ")
+                            print ("not implemented type")
                             ex=''
 #                        ex="parent."+l[4]+"="+str(v)
 #                        print ("*** "+ex
@@ -570,7 +570,7 @@ class Miki():
                     
                     if cnkk =='builtin_function_or_method':
                             # qt 3...
-#                            print ("mche was"
+#                            print ("do something"
 #                            print v
 #                            print ("parent."+l[4]
                             kk(v)
@@ -584,12 +584,12 @@ class Miki():
                     elif cn=='str':
                         ex="parent."+l[4]+"='"+v+"'"
                     else:
-                        print ("nicht implementierter typ")
+                        print ("not implemented type")
                         ex=''
 #                    print ("//*** "+ex
                     exec(ex)
 #                    print parent
-        print ("Ende build")
+        print ("End build")
 
 
     def showSo(self):
@@ -776,7 +776,7 @@ class MyDockWidget(QtGui.QDockWidget):
         scroll.setWidgetResizable(True)
         self.lilayout.addWidget(scroll)
 
-        # optionaler Top button
+        # optional Top button
         if 0:
             self.pushButton00 = QtGui.QPushButton(QtGui.QIcon('icons:App.svg'),objectname)
             layout.addWidget(self.pushButton00)
@@ -794,7 +794,7 @@ class MyDockWidget(QtGui.QDockWidget):
         self.dwl=dwl
 
 
-        if False: # Top level Icon leiste optional sichtbar machen
+        if False: # Optionally make the top level icon bar visible
             layout.addWidget(dw)
         #self.setTitleBarWidget(dw)
         

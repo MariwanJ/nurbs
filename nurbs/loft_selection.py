@@ -44,7 +44,7 @@ class Nurbs_LoftSelectionEdge:
         self.runOnEdges()
 
     def runOnEdges(self):
-        '''version bei selektierten geschlossenen Kanten'''
+        '''version with selected closed edges'''
         import FreeCADGui as Gui 
         import Part
         wx=Gui.Selection.getSelection()
