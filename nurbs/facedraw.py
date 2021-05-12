@@ -854,7 +854,7 @@ def start(free=False):
     try:
             sel=Gui.Selection.getSelection()
             fob=sel[0]
-            s=Gui.Selection.getSelection()
+            s=Gui.Selection.getSelectionEx()
             print (s,s[0].SubObjects)
 
             if len(s[0].SubObjects)>0:
@@ -877,13 +877,26 @@ def start(free=False):
             fob.ViewObject.Selectable=False
 
             Gui.Selection.clearSelection()
-
-    except:
+    except Exception as err:
         if not free:
             sayexc2("no surface selected","Select first a face you want to draw on it")
             return
         else:
-            print ("run free----------------------")
+            App.Console.PrintError("'Start' Failed. "
+                                   "{err}\n".format(err=str(err)))
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, fname, exc_tb.tb_lineno)
+
+
+
+
+    # except:
+    #     if not free:
+    #         sayexc2("no surface selected","Select first a face you want to draw on it")
+    #         return
+    #     else:
+    #         print ("run free----------------------")
 
     App.eventfilter=ef
 
