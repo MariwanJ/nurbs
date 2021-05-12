@@ -126,7 +126,7 @@ def get_SelectedObjects(info=0, printError=True):
 
 # ------------------------------
 
-
+#TODO : There is not such TestNurbsGui file clean up this code
 # ---------------------------------------------------------------------------
 # define the Commands of the Test Application module
 # ---------------------------------------------------------------------------

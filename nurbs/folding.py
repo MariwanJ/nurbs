@@ -192,8 +192,10 @@ def fold(obj):
 
 
 class Nurbs_FoldingRun:
-    def Activated(Self):
+    
+    def Activated(self):
         self.runMe()
+    
     def runMe(self):
         ss=Gui.Selection.getSelection()
         folder=createFolding(obj=None)

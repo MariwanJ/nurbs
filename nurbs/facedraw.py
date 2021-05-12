@@ -921,24 +921,30 @@ def start(free=False):
 
 def createGrid(name="MyGrid"):
     '''create the 2D or 3D grid for the first face of a selected object'''
+    try:
+        sel=Gui.Selection.getSelection()
+        fob=sel[0]
 
-    sel=Gui.Selection.getSelection()
-    fob=sel[0]
+        b=App.ActiveDocument.addObject("Part::FeaturePython",name)
 
-    b=App.ActiveDocument.addObject("Part::FeaturePython",name)
+        name=b.Name
+        isodraw.Drawgrid(b)
+        b.faceObject=fob
 
-    name=b.Name
-    isodraw.Drawgrid(b)
-    b.faceObject=fob
+        b.ViewObject.Transparency=60
+        App.ActiveDocument.recompute()
 
-    b.ViewObject.Transparency=60
-    App.ActiveDocument.recompute()
-
-    b2=App.ActiveDocument.addObject("Part::FeaturePython",name+"_2_")
-    b2.Label=name+"_3D_"
-    isodraw.Draw3Dgrid(b2)
-    b2.drawgrid=b
-
+        b2=App.ActiveDocument.addObject("Part::FeaturePython",name+"_2_")
+        b2.Label=name+"_3D_"
+        isodraw.Draw3Dgrid(b2)
+        b2.drawgrid=b
+    except Exception as err:
+        App.Console.PrintError("createGrid' Failed. "
+                               "{err}\n".format(err=str(err)))
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
+            
 ## create a map control for the first face of the selected object
 
 def createMap(mode=''):
