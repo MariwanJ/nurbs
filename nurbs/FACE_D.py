@@ -30,9 +30,6 @@ import FreeCAD as App
 import FreeCADGui as Gui
 import NURBSinit
 from PySide import QtGui, QtCore  # https://www.freecadweb.org/wiki/PySide
-import Draft  as _draft
-import Part  as _part
-from pivy import coin
 
 
 def errorDialog(msg):

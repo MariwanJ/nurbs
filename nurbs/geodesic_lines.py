@@ -67,7 +67,7 @@ import pyob
 from  pyob import  FeaturePython,ViewProvider
 #reload (pyob)
 
-
+from PySide.QtCore import QT_TRANSLATE_NOOP
 #-------------------------------
 
 def hideAllProps(obj,pns=None):
@@ -2182,7 +2182,7 @@ class MyViewProviderDraftLabel:
             text = self.text3d
         else:
             text = self.text2d
-        v = Gui.ActiveDocument.ActiveView.getViewer().getSoRenderManager().getViewportRegion()
+        v = Gui.activeView().getViewer().getSoRenderManager().getViewportRegion()
         b = coin.SoGetBoundingBoxAction(v)
         text.getBoundingBox(b)
         return b.getBoundingBox().getSize().getValue()

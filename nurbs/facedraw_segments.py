@@ -109,8 +109,8 @@ class EventFilter(QtCore.QObject):
             return QtGui.QWidget.eventFilter(self, o, e)
 
         if event.type() == QtCore.QEvent.MouseMove:
-            (x, y) = Gui.ActiveDocument.ActiveView.getCursorPos()
-            t = Gui.ActiveDocument.ActiveView.getObjectsInfo((x, y))
+            (x, y) = Gui.activeView().getCursorPos()
+            t = Gui.activeView().getObjectsInfo((x, y))
 
             # ---------------------
 

@@ -648,7 +648,7 @@ class Miki(object):
         return self.widget
 
     def showSo(self):
-        ''' add the item as openinventor objects to Gui.ActiveDocument.ActiveView.getSceneGraph()'''
+        ''' add the item as openinventor objects to Gui.activeView().getSceneGraph()'''
 
         for l in self.lines:
             if l[2] == 0 and l[0] != -1:
@@ -656,7 +656,7 @@ class Miki(object):
                         continue
                     r = l[7]
                     if r.__class__.__name__.startswith('So'):
-                        sg = Gui.ActiveDocument.ActiveView.getSceneGraph()
+                        sg = Gui.activeView().getSceneGraph()
                         sg.addChild(r)
 
     def showSo2(self, docname):
@@ -774,7 +774,7 @@ class Miki(object):
         for r in results:
             print (r)
             if r.__class__.__name__.startswith('So'):
-                sg = Gui.ActiveDocument.ActiveView.getSceneGraph()
+                sg = Gui.activeView().getSceneGraph()
                 sg.addChild(r)
 
         print ("Data ...")

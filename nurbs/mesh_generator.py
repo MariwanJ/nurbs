@@ -215,8 +215,10 @@ def createNurbs(pts,parentName,parent=None,uc=0,vc=0):
 class Nurbs_MeshGenModTest:
     def Activated(self):
         self.modtest()
+        
     def modtest(self):
         '''update the points and the mesh example'''
+        pc=Gui.Selection.getSelection()[0]
         mm=App.ActiveDocument.getObject(pc.Name+'_M')
         pc=App.ActiveDocument.getObject(pc.Name)
         ptsk=mm.Mesh.Topology[0]
@@ -241,8 +243,9 @@ Gui.addCommand("Nurbs_MeshGenModTest", Nurbs_MeshGenModTest())
 
 class Nurbs_MeshGenTest:
     def Activated(self):
-        self.gentest(self)
-    def gentest():
+        self.gentest()
+        
+    def gentest(self):
 
         #create the testdata
         uc=200

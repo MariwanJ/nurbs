@@ -951,7 +951,7 @@ def mkshadow(sgg, lis):
     # or off
     rGrp.SetInt(atr, 0)
 
-    # myCustomNode=Gui.ActiveDocument.ActiveView.getSceneGraph()
+    # myCustomNode=Gui.activeView().getSceneGraph()
 
     sggs = sgg.getChildren()
     cs = [c.copy() for c in sggs]

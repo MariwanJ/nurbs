@@ -602,7 +602,7 @@ class Miki():
 #                    print r
                     if r.__class__.__name__.startswith('So'):
 #                        print r
-                        sg = Gui.ActiveDocument.ActiveView.getSceneGraph()
+                        sg = Gui.activeView().getSceneGraph()
                         sg.addChild(r)
 
 
@@ -701,7 +701,7 @@ class Miki():
         for r in results:
             print (r)
             if r.__class__.__name__.startswith('So'):
-                sg = Gui.ActiveDocument.ActiveView.getSceneGraph()
+                sg = Gui.activeView().getSceneGraph()
                 sg.addChild(r)
 
         print ("Data ...")

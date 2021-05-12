@@ -248,9 +248,9 @@ class gridNode(coin.SoSeparator):
         #          transformation.getTransform(translation, rotation, scalevector, scaleorientation);
         searchaction = coin.SoSearchAction()
         searchaction.setNode(self)
-        searchaction.apply(Gui.ActiveDocument.ActiveView.getSceneGraph())
+        searchaction.apply(Gui.activeView().getSceneGraph())
         path = searchaction.getPath()
-        vpr = Gui.ActiveDocument.ActiveView.getViewer().getViewportRegion()
+        vpr = Gui.activeView().getViewer().getViewportRegion()
         getmatrixaction = coin.SoGetMatrixAction(vpr)
         getmatrixaction.apply(path)
         transformation = getmatrixaction.getMatrix()
@@ -395,8 +395,8 @@ class gridVP:
         self.yz.subDim = 10
         self.yz.maxviz = 0.5
 
-        self.sg = Gui.ActiveDocument.ActiveView.getSceneGraph()
-        self.cam = Gui.ActiveDocument.ActiveView.getCameraNode()
+        self.sg = Gui.activeView().getSceneGraph()
+        self.cam = Gui.activeView().getCameraNode()
 
         self.xy.linkTo(self.cam)
         self.xy.factor = 1.
@@ -417,7 +417,7 @@ class gridVP:
         self.Object = obj.Object
 
 #    def updateCam(self):
-#        self.cam = Gui.ActiveDocument.ActiveView.getCameraNode()
+#        self.cam = Gui.activeView().getCameraNode()
 #        self.xy.linkTo(self.cam)
 #        self.xz.linkTo(self.cam)
 #        self.yz.linkTo(self.cam)
@@ -439,7 +439,7 @@ class gridVP:
         return mode
 
     def updateCam(self):
-        self.cam = Gui.ActiveDocument.ActiveView.getCameraNode()
+        self.cam = Gui.activeView().getCameraNode()
         self.xy.linkTo(self.cam)
         self.xz.linkTo(self.cam)
         self.yz.linkTo(self.cam)

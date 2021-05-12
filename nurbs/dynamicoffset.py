@@ -133,7 +133,6 @@ def myupdate(obj):
         obj.Shape=bc.toShape()
 
 
-from say import *
 import pyob
 
 ## A configurable offset curve

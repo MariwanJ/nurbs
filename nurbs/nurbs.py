@@ -56,7 +56,7 @@ __version__ = '0.3'
 
 if 0:  # change render to show triangulations
 
-    view = Gui.ActiveDocument.ActiveView
+    view = Gui.activeView()
     viewer = view.getViewer()
     render = viewer.getSoRenderManager()
 

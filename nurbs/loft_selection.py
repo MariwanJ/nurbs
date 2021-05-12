@@ -47,7 +47,7 @@ class Nurbs_LoftSelectionEdge:
         '''version with selected closed edges'''
         import FreeCADGui as Gui 
         import Part
-        wx=Gui.Selection.getSelection()
+        wx=Gui.Selection.getSelectionEx()
 
         sls=[]
         for w in wx:

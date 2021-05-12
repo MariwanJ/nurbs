@@ -242,7 +242,7 @@ def run(model='shoeAdam', point_cloud='shoe_last_scanned',showpoints=True,showxy
         trafos.append(trafo)
 
     # create the sketches
-    createsketchspline
+    import createsketchspline
     #reload(.createsketchspline)
 
     scp=App.ActiveDocument.Scanpoints

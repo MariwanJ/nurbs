@@ -1455,9 +1455,9 @@ def SurfaceEditor():
                             workspace.views.lightOn()
                         self.light = not self.light
                     elif cmd=='+':
-                        Gui.ActiveDocument.ActiveView.zoomIn()
+                        Gui.activeView().zoomIn()
                     elif cmd=='-':
-                        Gui.ActiveDocument.ActiveView.zoomOut()
+                        Gui.activeView().zoomOut()
                     elif cmd=='q':
                         self.close()
 
