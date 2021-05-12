@@ -993,6 +993,12 @@ def stop():
 
 class Nurbs_FaceDraw:
     def Activated(self):
+        selection = Gui.Selection.getSelectionEx()
+        if (len(selection) < 1):
+            # An object must be selected
+            errMessage = "Select a face to use Extrude"
+            App.Console.PrintError("Please select a face before you can draw")
+            return
         try:
             '''start the facedraw dialog and eventmanager'''
             try: stop()
