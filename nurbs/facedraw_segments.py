@@ -887,7 +887,7 @@ class Nurbs_CreateGridToFace:
         if (len(sel) < 1):
             # An object must be selected
             errMessage = "Select a face"
-            faced.getInfo(selection).errorDialog(errMessage)
+            faced.getInfo(None).errorDialog(errMessage)
             return
         
         fob = sel[0]
@@ -920,15 +920,15 @@ Gui.addCommand('Nurbs_CreateGridToFace', Nurbs_CreateGridToFace())
 
 
 class Nurbs_CreateMapToFace:
-    def __init__(self):
-        self.mode = ''
-
     def Activated(self):
+        import isodraw 
+        self.mode = ''
         ''' create a map control for the first face of the selected object '''
         # last selection == face
         # other sels: wires to project
         s0 = Gui.Selection.getSelection()
         face = s0[-1]
+        print("Create Map to face Activated")
         moa = isodraw.createMap(self.mode)
         moa.faceObject = face
 

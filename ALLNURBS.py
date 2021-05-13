@@ -234,6 +234,7 @@ class Nurbs_List5Group:
         return (
                 "Nurbs_CreateMapToFace",
                 "Nurbs_CreateGridToFace",
+                "Nurbs_createIsodrawFace",
                 "Nurbs_EventFilter",
                 "Nurbs_DrawIsoFace",
                 "Nurbs_FaceDraw",

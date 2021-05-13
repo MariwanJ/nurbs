@@ -594,39 +594,24 @@ class Map(PartFeature):
         print("getmap done")
 
 
-class createMap:
-    def __init__(self,mode=''):
-        self.mode=mode
-         
-    def Activated(self):
-        '''create a Map object'''
-        b = App.ActiveDocument.addObject("Part::FeaturePython", "MAP")
-        Map(b, mode=mode)
+def createMap(mode=''):
+    '''create a Map object'''
+    b = App.ActiveDocument.addObject("Part::FeaturePython", "MAP")
+    Map(b, mode)
 
-        # hack
-        b.display2d = False
-        b.displayCircles = True
-        b.uMin = 0
+    # hack
+    b.display2d = False
+    b.displayCircles = True
+    b.uMin = 0
+    b.vMin = 0
+
+    if 0:
+        b.modeCurvature = "Gauss"
+        b.uMin = 20
         b.vMin = 0
-
-        if 0:
-            b.modeCurvature = "Gauss"
-            b.uMin = 20
-            b.vMin = 0
-            b.uMax = 50
-            b.vMax = 101
-        return b
-
-    def GetResources(self):
-        return {
-            'Pixmap': NURBSinit.ICONS_PATH + 'drawing.svg',
-            'MenuText': 'testD',
-            'ToolTip':  'testD'
-        }
-
-Gui.addCommand('createMap', createMap())
-createMap.__doc__ = """createMap: To be added later     """
-
+        b.uMax = 50
+        b.vMax = 101
+    return b
 
 class createGrid:
     def __init__(self, mapobj,upmode=False):

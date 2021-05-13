@@ -47,7 +47,7 @@ import os, sys
 import NURBSinit
 import sys,time
 import random
-
+import Part
 
 
 import isodraw
@@ -90,97 +90,107 @@ class EventFilter(QtCore.QObject):
         self.pts=[]
         self.ptsm=[]
         self.mode='n'
-
+        self.x=0
+        self.y=0
+        self.z=0
+        
     def eventFilter(self, o, e):
         ''' the eventfilter for the facedraw server'''
 
-        z=str(e.type())
-
+        zz=str(e.type())
+        tt=None
+        t=None
         event=e
 
         if event.type() == QtCore.QEvent.ContextMenu : 
             return True
 
         # not used events
-        if z == 'PySide.QtCore.QEvent.Type.ChildAdded' or \
-                z == 'PySide.QtCore.QEvent.Type.ChildRemoved'or \
-                z == 'PySide.QtCore.QEvent.Type.User'  or \
-                z == 'PySide.QtCore.QEvent.Type.Paint' or \
-                z == 'PySide.QtCore.QEvent.Type.LayoutRequest' or\
-                z == 'PySide.QtCore.QEvent.Type.UpdateRequest'  : 
+        if zz == 'PySide.QtCore.QEvent.Type.ChildAdded' or \
+               zz == 'PySide.QtCore.QEvent.Type.ChildRemoved'or \
+                zz == 'PySide.QtCore.QEvent.Type.User'  or \
+                zz == 'PySide.QtCore.QEvent.Type.Paint' or \
+                zz == 'PySide.QtCore.QEvent.Type.LayoutRequest' or\
+                zz == 'PySide.QtCore.QEvent.Type.UpdateRequest'  : 
             return QtGui.QWidget.eventFilter(self, o, e)
 
         if event.type() == QtCore.QEvent.MouseButtonRelease:
             self.pts += [None]
 
         if event.type() == QtCore.QEvent.MouseMove:
-                (x,y)=Gui.activeView().getCursorPos()
-                t=Gui.activeView().getObjectsInfo((x,y))
-                
-                #---------------------
-
-                cursor=QtGui.QCursor()
-                p = cursor.pos()
-
-#                if p.x()<100 or p.y()<100: 
-#                    print ("jump cursor facedraw 92")
-#                    cursor.setPos(p.x()+100, p.y()+100)
-                #-----------------------------------
-
-                if t!=None: # if objects are under the mouse
-                    for tt in t:
-                        if not  hasattr(self,'objname'):
-#                            print ("*",tt
-                            self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
-                            break
-
-                        if tt['Object']==self.objname and tt['Component']==self.subelement:
-                            self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
-                            break
-
-                    if not  hasattr(self,'objname') and event.buttons()==QtCore.Qt.LeftButton:
+            (self.x,self.y)=Gui.activeView().getCursorPos()
+            print(self.x)
+            print(self.y)
+            tactive=Gui.activeView()
+            print(tactive)
+            t=tactive.getObjectsInfo(self.x,self.y)
+            print ("*",t)
+            print("-......")
+            #---------------------
+            #cursor=QtGui.QCursor()
+            #p = cursor.pos()
+            #   if p.x()<100 or p.y()<100: 
+            #       print ("jump cursor facedraw 92")
+            #       cursor.setPos(p.x()+100, p.y()+100)
+            #-----------------------------------
+            if t!=None: # if objects are under the mouse
+                for tt in t:
+                    if not  hasattr(self,'objname'):
+                    #        print ("*",tt)
+                        self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
+                        break
+                    if tt['Object']==self.objname and tt['Component']==self.subelement:
+                        self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
+                        break
+                print ("*",tt)
+                print(".....")
+                print (self.x)
+                print(self.y)
+                print(self.z)
+                if not  hasattr(self,'objname') and event.buttons()==QtCore.Qt.LeftButton:
+                    vf=App.Vector(self.x,self.y,self.z)
+                    self.pts += [vf]
+                    if self.colorA not in self.colors:
+                        #self.colors += [self.colorA]   THIS IS WRONG!
+                        myColors=[]
+                        myColors=[*self.colors]
+                        myColors.append(self.colorA)
+                        print(myColors)
+                    drawColorpath(self.pts,myColors,self.colorA,self.drawname)
+                else:
+                    if event.buttons()==QtCore.Qt.LeftButton:
+                        #print ("LEFT BUTTON drawing"
                         vf=App.Vector(self.x,self.y,self.z)
+                        bs=self.subobj.Surface
+                        (u,v)=bs.parameter(vf)
+                        #print (u,v)
+                        lu=0.5
+                        lv=0.5
+                        ba=bs.vIso(u)
+                        ky=ba.length(v,lv)
+                        if v<0.5: ky =-ky
+                        bbc=bs.vIso(v)
+                        kx=bbc.length(lu,u)
+                        if u<0.5: kx =-kx
+                        mf=App.Vector(self.x,self.y,0)
+                        mf=App.Vector(-1*ky,-1*kx,0)
                         self.pts += [vf]
-                        if self.colorA not in self.colors:
-                            self.colors += [self.colorA]
-                        drawColorpath(self.pts,self.colors,self.colorA,self.drawname)
+                        self.ptsm += [mf]
+                        #self.colors += [self.colorA] THIS IS WRONG
+                        myColors=[]
+                        myColors=[*self.colors]
+                        myColors.append(self.colorA)
+                        drawColorpath(self.pts,myColors,self.colorA)
+                        self.wire.ViewObject.Visibility=False
+                        print("--------------------")
+                        print(self.pts)
+                        print("--------------------")
+                        if len(self.pts)>1:
+                            self.wire.Shape=Part.makePolygon(self.pts)
+                            self.wirem.Shape=Part.makePolygon(self.ptsm)
+                        return True
 
-                    else:
-                        if event.buttons()==QtCore.Qt.LeftButton:
-                            #print ("LEFT BUTTON drawing"
-                            vf=App.Vector(self.x,self.y,self.z)
-                            bs=self.subobj.Surface
-
-                            (u,v)=bs.parameter(vf)
-                            #print (u,v)
-                            lu=0.5
-                            lv=0.5
-
-                            ba=bs.vIso(u)
-                            ky=ba.length(v,lv)
-                            if v<0.5: ky =-ky
-
-                            bbc=bs.vIso(v)
-                            kx=bbc.length(lu,u)
-                            if u<0.5: kx =-kx
-
-                            mf=App.Vector(self.x,self.y,0)
-                            mf=App.Vector(-1*ky,-1*kx,0)
-
-                            self.pts += [vf]
-                            self.ptsm += [mf]
-
-                            self.colors += [self.colorA]
-                            drawColorpath(self.pts,self.colors,self.colorA)
-                            self.wire.ViewObject.Visibility=False
-
-                            if len(self.pts)>1:
-                                self.wire.Shape=Part.makePolygon(self.pts)
-                                self.wirem.Shape=Part.makePolygon(self.ptsm)
-
-                            return True
-
-        if z == 'PySide.QtCore.QEvent.Type.KeyPress':
+        if zz == 'PySide.QtCore.QEvent.Type.KeyPress':
             # http://doc.qt.io/qt-4.8/qkeyevent.html
 
             # ignore editors
@@ -213,7 +223,7 @@ class EventFilter(QtCore.QObject):
                         say("------------F3-----------------")
                         stop()
 
-#+hack
+                    #+hack
                     elif e.key() ==  QtCore.Qt.Key_F6:
                         say("--------apply and new-----7----------")
                         self.pts += [None]
@@ -231,14 +241,12 @@ class EventFilter(QtCore.QObject):
                         print (self.colorA)
                         drawColorpath(self.pts,self.colors,self.colorA,self.drawname)
 
-#-hack
+                    #-hack
 
-
-
-# some key bindings not used at the moment
-#                    elif  e.key()== QtCore.Qt.Key_Return:
-#                        say("------------Enter-----------------")
-#                        self.update()
+                    # some key bindings not used at the moment
+                    #elif  e.key()== QtCore.Qt.Key_Return:
+                    #    say("------------Enter-----------------")
+                    #    self.update()
                     elif e.key() == QtCore.Qt.Key_Right :
                         if self.dialog.dial.value()==self.dialog.dial.maximum(): val=0
                         else: val=self.dialog.dial.value()+1
@@ -269,12 +277,16 @@ class EventFilter(QtCore.QObject):
                     if e.key()== QtCore.Qt.Key_Enter or e.key()== QtCore.Qt.Key_Return:
                         # enter creates a new point ...
                         vf=App.Vector(self.x,self.y,self.z)
-                        self.colors += [self.colorA]
+                        #self.colors += [self.colorA]  THIS IS WRONG!
+                        myColors=[]
+                        myColors=[*self.colors]
+                        myColors.append(self.colorA)
+                        
                         self.pts += [vf]
 
                         if len(self.pts)>1:
                             self.wire.Shape=Part.makePolygon(self.pts)
-                            drawColorpath(self.pts,self.colors,self.colorA)
+                            drawColorpath(self.pts,myColors,self.colorA)
 
                     else: # letter key pressed
                         
@@ -323,44 +335,39 @@ class EventFilter(QtCore.QObject):
                             Gui.activeDocument().ActiveView.fitAll()
                             return True
 
-
                         if r in ['a','b','c']:
-
-                                print ("KEY pressed ----------------------",r)
-
-
+                            print ("KEY pressed ----------------------",r)
 
                 except:
                     sayexc()
 
-
         # end of a single key pressed
-        if z == 'PySide.QtCore.QEvent.Type.KeyRelease':
+        if self.z == 'PySide.QtCore.QEvent.Type.KeyRelease':
             self.lasttime=time.time()
             self.keyPressed2=False
 
         # enter and leave a widget - editor widgets
-        if z == 'PySide.QtCore.QEvent.Type.Enter' or z == 'PySide.QtCore.QEvent.Type.Leave':
+        if self.z == 'PySide.QtCore.QEvent.Type.Enter' or self.z == 'PySide.QtCore.QEvent.Type.Leave':
             pass
 
         # deactivate keys in editors context
-        if z == 'PySide.QtCore.QEvent.Type.Enter' and \
+        if self.z == 'PySide.QtCore.QEvent.Type.Enter' and \
             (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
             self.editmode=True
-        elif z == 'PySide.QtCore.QEvent.Type.Leave' and \
+        elif self.z == 'PySide.QtCore.QEvent.Type.Leave' and \
             (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
             self.editmode=False
 
         # mouse movement only leaves and enters
-        if z == 'PySide.QtCore.QEvent.Type.HoverMove' :
+        if self.z == 'PySide.QtCore.QEvent.Type.HoverMove' :
             pass
 
         return QtGui.QWidget.eventFilter(self, o, e)
 
 ##\endcond
 
-## draw a curve on a face and create the two sub-faces defined by the curve
 
+## draw a curve on a face and create the two sub-faces defined by the curve
 def drawcurve(wire,face,facepos=App.Vector()):
     '''draw a curve on a face and create the two subfaces defined by the curve'''
 
