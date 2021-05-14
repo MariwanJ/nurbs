@@ -2379,6 +2379,5 @@ class Nurbs_IsoDrawtestE():
             'ToolTip':  'Nurbs_IsoDrawtestE'
         }
 
-
 Gui.addCommand('Nurbs_IsoDrawtestE', Nurbs_IsoDrawtestE())
 Nurbs_IsoDrawtestE.__doc__ = """Nurbs_IsoDrawtestE: Tobe added later     """

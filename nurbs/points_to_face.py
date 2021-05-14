@@ -1751,7 +1751,7 @@ def splitShapePlane(shape,center,normal,tol=0.01):
 
     return (syes,sno)
 
-print ("HUHU")
+
 
 def borderPlane(shape,center,normal,tol=0.01):
 

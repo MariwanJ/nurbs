@@ -73,8 +73,7 @@ class EventFilter(QtCore.QObject):
 
 ##\cond
 
-    def __init__(self):
-        QtCore.QObject.__init__(self)
+    def __init__(self,object):
         self.mouseWheel=0
         self.enterleave=False
         self.enterleave=True
@@ -90,42 +89,40 @@ class EventFilter(QtCore.QObject):
         self.pts=[]
         self.ptsm=[]
         self.mode='n'
-        self.x=0
+        self.x =0
         self.y=0
         self.z=0
+        super(self).__init__(object)
         
     def eventFilter(self, o, e):
         ''' the eventfilter for the facedraw server'''
+        try:
+            zz=str(e.type())
+            event=e
+            t=None
+            if event.type() == QtCore.QEvent.ContextMenu : 
+                return True
 
-        zz=str(e.type())
-        tt=None
-        t=None
-        event=e
-
-        if event.type() == QtCore.QEvent.ContextMenu : 
-            return True
-
-        # not used events
-        if zz == 'PySide.QtCore.QEvent.Type.ChildAdded' or \
-               zz == 'PySide.QtCore.QEvent.Type.ChildRemoved'or \
+            # not used events
+            if zz == 'PySide.QtCore.QEvent.Type.ChildAdded' or \
+                zz == 'PySide.QtCore.QEvent.Type.ChildRemoved'or \
                 zz == 'PySide.QtCore.QEvent.Type.User'  or \
                 zz == 'PySide.QtCore.QEvent.Type.Paint' or \
                 zz == 'PySide.QtCore.QEvent.Type.LayoutRequest' or\
                 zz == 'PySide.QtCore.QEvent.Type.UpdateRequest'  : 
-            return QtGui.QWidget.eventFilter(self, o, e)
+                return QtGui.QWidget.eventFilter(self, o, e)
 
-        if event.type() == QtCore.QEvent.MouseButtonRelease:
-            self.pts += [None]
+            if event.type() == QtCore.QEvent.MouseButtonRelease:
+                self.pts += [None]
 
-        if event.type() == QtCore.QEvent.MouseMove:
-            (self.x,self.y)=Gui.activeView().getCursorPos()
-            print(self.x)
-            print(self.y)
-            tactive=Gui.activeView()
-            print(tactive)
-            t=tactive.getObjectsInfo(self.x,self.y)
-            print ("*",t)
-            print("-......")
+            if event.type() == QtCore.QEvent.MouseMove:
+                #(self.x,self.y)=Gui.ActiveDocument.ActiveView.getCursorPos()
+                #tactive=Gui.ActiveDocument.ActiveView
+                #print(tactive)
+                #t=tactive.getObjectsInfo(self.x,self.y)
+                #print(t)
+                t=Gui.ActiveDocument.ActiveView.getObjectsInfo(Gui.ActiveDocument.ActiveView.getCursorPos())
+                print(t)
             #---------------------
             #cursor=QtGui.QCursor()
             #p = cursor.pos()
@@ -140,9 +137,10 @@ class EventFilter(QtCore.QObject):
                         self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
                         break
                     if tt['Object']==self.objname and tt['Component']==self.subelement:
+                        print ("*",tt)
                         self.x,self.y,self.z=tt['x'],tt['y'],tt['z']
                         break
-                print ("*",tt)
+                    
                 print(".....")
                 print (self.x)
                 print(self.y)
@@ -190,179 +188,186 @@ class EventFilter(QtCore.QObject):
                             self.wirem.Shape=Part.makePolygon(self.ptsm)
                         return True
 
-        if zz == 'PySide.QtCore.QEvent.Type.KeyPress':
-            # http://doc.qt.io/qt-4.8/qkeyevent.html
+            if zz == 'PySide.QtCore.QEvent.Type.KeyPress':
+                # http://doc.qt.io/qt-4.8/qkeyevent.html
 
-            # ignore editors
-            try:
-                if self.editmode:
-                    return QtGui.QWidget.eventFilter(self, o, e)
-            except: pass
-
-            # only first time key pressed
-            if not self.keyPressed2:
-                self.keyPressed2=True
-                time2=time.time()
-                ee=e.text()
-
-                if time2-self.lasttime<0.01 and len(ee)>0 and ee[0]==self.lastkey:
-                    self.lasttime=time2
-                    return False
-
+                # ignore editors
                 try:
-                    # only two function keys implemented, no modifiers
-                    if e.key()== QtCore.Qt.Key_F2:
-                        say("------------F2-- show mode and moddata---------------")
+                    if self.editmode:
+                        return QtGui.QWidget.eventFilter(self, o, e)
+                except: pass
+
+                # only first time key pressed
+                if not self.keyPressed2:
+                    self.keyPressed2=True
+                    time2=time.time()
+                    ee=e.text()
+
+                    if time2-self.lasttime<0.01 and len(ee)>0 and ee[0]==self.lastkey:
+                        self.lasttime=time2
                         return False
 
-                    elif e.key()== QtCore.Qt.Key_Escape:
-                        say("------------Escape = Stop-----------------")
-                        stop()
+                    try:
+                        # only two function keys implemented, no modifiers
+                        if e.key()== QtCore.Qt.Key_F2:
+                            say("------------F2-- show mode and moddata---------------")
+                            return False
 
-                    elif e.key()== QtCore.Qt.Key_F3 :
-                        say("------------F3-----------------")
-                        stop()
+                        elif e.key()== QtCore.Qt.Key_Escape:
+                            say("------------Escape = Stop-----------------")
+                            stop()
 
-                    #+hack
-                    elif e.key() ==  QtCore.Qt.Key_F6:
-                        say("--------apply and new-----7----------")
-                        self.pts += [None]
+                        elif e.key()== QtCore.Qt.Key_F3 :
+                            say("------------F3-----------------")
+                            stop()
+
+                        #+hack
+                        elif e.key() ==  QtCore.Qt.Key_F6:
+                            say("--------apply and new-----7----------")
+                            self.pts += [None]
 
 
 
-                    elif e.key() ==  QtCore.Qt.Key_F7:
-                        say("--------apply and new-----7----------")
-                        self.dialog.applyandnew()
+                        elif e.key() ==  QtCore.Qt.Key_F7:
+                            say("--------apply and new-----7----------")
+                            self.dialog.applyandnew()
 
-                    elif e.key() ==  QtCore.Qt.Key_F8:
-                        say("-------------8----------")
-                        print (self.colorA)
-                        self.colorA =(self.colorA+1)%7
-                        print (self.colorA)
-                        drawColorpath(self.pts,self.colors,self.colorA,self.drawname)
+                        elif e.key() ==  QtCore.Qt.Key_F8:
+                            say("-------------8----------")
+                            print (self.colorA)
+                            self.colorA =(self.colorA+1)%7
+                            print (self.colorA)
+                            drawColorpath(self.pts,self.colors,self.colorA,self.drawname)
 
-                    #-hack
+                        #-hack
 
-                    # some key bindings not used at the moment
-                    #elif  e.key()== QtCore.Qt.Key_Return:
-                    #    say("------------Enter-----------------")
-                    #    self.update()
-                    elif e.key() == QtCore.Qt.Key_Right :
-                        if self.dialog.dial.value()==self.dialog.dial.maximum(): val=0
-                        else: val=self.dialog.dial.value()+1
-                        self.dialog.dial.setValue(val)
-                        return True
-                    elif e.key() == QtCore.Qt.Key_Left :
-                        if self.dialog.dial.value()== 0: val=self.dialog.dial.maximum()
-                        else: val=self.dialog.dial.value()-1
-                        self.dialog.dial.setValue(val)
-                        return True
-                    elif e.key() == QtCore.Qt.Key_Up :
-                        self.mouseWheel += App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MoveCursorStep",10)
-                        self.dialog.ef_action("up",self,self.mouseWheel) 
-                        return True
-                    elif e.key() == QtCore.Qt.Key_Down :
-                        self.mouseWheel -= App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MoveCursorStep",10) 
-                        self.dialog.ef_action("down",self,self.mouseWheel)
-                        return True
-                    elif e.key() == QtCore.Qt.Key_PageUp :
-                        self.mouseWheel += App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MovePageStep",50)
-                        self.dialog.ef_action("up!",self,self.mouseWheel)
-                        return True
-                    elif e.key() == QtCore.Qt.Key_PageDown :
-                        self.mouseWheel -= App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MovePageStep",50)
-                        self.dialog.ef_action("down!",self,self.mouseWheel)
-                        return True
-
-                    if e.key()== QtCore.Qt.Key_Enter or e.key()== QtCore.Qt.Key_Return:
-                        # enter creates a new point ...
-                        vf=App.Vector(self.x,self.y,self.z)
-                        #self.colors += [self.colorA]  THIS IS WRONG!
-                        myColors=[]
-                        myColors=[*self.colors]
-                        myColors.append(self.colorA)
-                        
-                        self.pts += [vf]
-
-                        if len(self.pts)>1:
-                            self.wire.Shape=Part.makePolygon(self.pts)
-                            drawColorpath(self.pts,myColors,self.colorA)
-
-                    else: # letter key pressed
-                        
-                        ee=e.text()
-                        if len(ee)>0: r=ee[0]
-                        else: r="key:"+ str(e.key())
-
-                        self.lastkey=e.text()
-
-                        #color select for drawing
-                        print ("SET Color--------------",r)
-                        if 0:
-                            if r=='h':
-                                self.colorA=0
-                                return True
-                            if r=='y':
-                                self.colorA=1
-                                return True
-                            if r=='n':
-                                self.colorA=2
-                                return True
-                            if r=='g':
-                                self.colorA=3
-                                return True
-                            if r=='j':
-                                self.colorA=4
-                                return True
-                            if r=='z':
-                                self.colorA=6
-                                return True
-                            if r=='x':
-                                self.colorA=5
-                                return True
-                            if r=='#':
-                                self.colorA=7
-                                return True
-
-                        # zooming +-*
-                        if r=='+':
-                            Gui.activeDocument().ActiveView.zoomIn()
+                        # some key bindings not used at the moment
+                        #elif  e.key()== QtCore.Qt.Key_Return:
+                        #    say("------------Enter-----------------")
+                        #    self.update()
+                        elif e.key() == QtCore.Qt.Key_Right :
+                            if self.dialog.dial.value()==self.dialog.dial.maximum(): val=0
+                            else: val=self.dialog.dial.value()+1
+                            self.dialog.dial.setValue(val)
                             return True
-                        if r=='-':
-                            Gui.activeDocument().ActiveView.zoomOut()
+                        elif e.key() == QtCore.Qt.Key_Left :
+                            if self.dialog.dial.value()== 0: val=self.dialog.dial.maximum()
+                            else: val=self.dialog.dial.value()-1
+                            self.dialog.dial.setValue(val)
                             return True
-                        if r=='*':
-                            Gui.activeDocument().ActiveView.fitAll()
+                        elif e.key() == QtCore.Qt.Key_Up :
+                            self.mouseWheel += App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MoveCursorStep",10)
+                            self.dialog.ef_action("up",self,self.mouseWheel) 
+                            return True
+                        elif e.key() == QtCore.Qt.Key_Down :
+                            self.mouseWheel -= App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MoveCursorStep",10) 
+                            self.dialog.ef_action("down",self,self.mouseWheel)
+                            return True
+                        elif e.key() == QtCore.Qt.Key_PageUp :
+                            self.mouseWheel += App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MovePageStep",50)
+                            self.dialog.ef_action("up!",self,self.mouseWheel)
+                            return True
+                        elif e.key() == QtCore.Qt.Key_PageDown :
+                            self.mouseWheel -= App.ParamGet('User parameter:Plugins/nurbs').GetFloat("MovePageStep",50)
+                            self.dialog.ef_action("down!",self,self.mouseWheel)
                             return True
 
-                        if r in ['a','b','c']:
-                            print ("KEY pressed ----------------------",r)
+                        if e.key()== QtCore.Qt.Key_Enter or e.key()== QtCore.Qt.Key_Return:
+                            # enter creates a new point ...
+                            vf=App.Vector(self.x,self.y,self.z)
+                            #self.colors += [self.colorA]  THIS IS WRONG!
+                            myColors=[]
+                            myColors=[*self.colors]
+                            myColors.append(self.colorA)
 
-                except:
-                    sayexc()
+                            self.pts += [vf]
 
-        # end of a single key pressed
-        if self.z == 'PySide.QtCore.QEvent.Type.KeyRelease':
-            self.lasttime=time.time()
-            self.keyPressed2=False
+                            if len(self.pts)>1:
+                                self.wire.Shape=Part.makePolygon(self.pts)
+                                drawColorpath(self.pts,myColors,self.colorA)
 
-        # enter and leave a widget - editor widgets
-        if self.z == 'PySide.QtCore.QEvent.Type.Enter' or self.z == 'PySide.QtCore.QEvent.Type.Leave':
-            pass
+                        else: # letter key pressed
 
-        # deactivate keys in editors context
-        if self.z == 'PySide.QtCore.QEvent.Type.Enter' and \
-            (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
-            self.editmode=True
-        elif self.z == 'PySide.QtCore.QEvent.Type.Leave' and \
-            (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
-            self.editmode=False
+                            ee=e.text()
+                            if len(ee)>0: r=ee[0]
+                            else: r="key:"+ str(e.key())
 
-        # mouse movement only leaves and enters
-        if self.z == 'PySide.QtCore.QEvent.Type.HoverMove' :
-            pass
+                            self.lastkey=e.text()
 
-        return QtGui.QWidget.eventFilter(self, o, e)
+                            #color select for drawing
+                            print ("SET Color--------------",r)
+                            if 0:
+                                if r=='h':
+                                    self.colorA=0
+                                    return True
+                                if r=='y':
+                                    self.colorA=1
+                                    return True
+                                if r=='n':
+                                    self.colorA=2
+                                    return True
+                                if r=='g':
+                                    self.colorA=3
+                                    return True
+                                if r=='j':
+                                    self.colorA=4
+                                    return True
+                                if r=='z':
+                                    self.colorA=6
+                                    return True
+                                if r=='x':
+                                    self.colorA=5
+                                    return True
+                                if r=='#':
+                                    self.colorA=7
+                                    return True
+
+                            # zooming +-*
+                            if r=='+':
+                                Gui.activeDocument().ActiveView.zoomIn()
+                                return True
+                            if r=='-':
+                                Gui.activeDocument().ActiveView.zoomOut()
+                                return True
+                            if r=='*':
+                                Gui.activeDocument().ActiveView.fitAll()
+                                return True
+
+                            if r in ['a','b','c']:
+                                print ("KEY pressed ----------------------",r)
+
+                    except:
+                        sayexc()
+
+            # end of a single key pressed
+            if zz == 'PySide.QtCore.QEvent.Type.KeyRelease':
+                self.lasttime=time.time()
+                self.keyPressed2=False
+
+            # enter and leave a widget - editor widgets
+            if zz == 'PySide.QtCore.QEvent.Type.Enter' or zz == 'PySide.QtCore.QEvent.Type.Leave':
+                pass
+
+            # deactivate keys in editors context
+            if zz == 'PySide.QtCore.QEvent.Type.Enter' and \
+                (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
+                self.editmode=True
+            elif zz == 'PySide.QtCore.QEvent.Type.Leave' and \
+                (o.__class__ == QtGui.QPlainTextEdit or o.__class__ == QtGui.QTextEdit):
+                self.editmode=False
+
+            # mouse movement only leaves and enters
+            if zz == 'PySide.QtCore.QEvent.Type.HoverMove' :
+                pass
+
+            return QtGui.QWidget.eventFilter(self, o, e)
+        
+        except Exception as err:
+            App.Console.PrintError("'start' Failed. "
+                                       "{err}\n".format(err=str(err)))
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, fname, exc_tb.tb_lineno)
 
 ##\endcond
 
@@ -849,15 +854,14 @@ def start(free=False):
     '''create and initialize the event filter'''
 
     free=True # hack
-    
-    ef=EventFilter()
+    ef=EventFilter(None)
     ef.mouseWheel=0
     ef.colorpathcount=0
     ef.colorA=2
     print ("start--")
     iv=App.ActiveDocument.addObject("App::InventorObject","draw_"+str(ef.colorpathcount)+"_")
     ef.drawname=iv.Name
-
+    
     try:
             sel=Gui.Selection.getSelection()
             fob=sel[0]
@@ -907,7 +911,7 @@ def start(free=False):
 
     App.eventfilter=ef
 
-    mw=QtGui.qApp
+    mw=QtGui.QApplication
     mw.installEventFilter(ef)
     ef.keyPressed2=False
 

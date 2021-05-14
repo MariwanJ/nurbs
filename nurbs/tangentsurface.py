@@ -908,7 +908,6 @@ def machFlaeche(psta, ku=None, closed=False, bs=None, swap=False):
     return bs2
 
 
-print("temp module")
 
 def createShapeV2(obj):
     if not obj.swap:

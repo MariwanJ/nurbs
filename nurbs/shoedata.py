@@ -29,9 +29,6 @@ from __future__ import unicode_literals
 # version 0.92
 # (c) microelly
 #
-
-print ("shoedata version 0.92")
-
 ## shoeAdam ist das erste Schuh-Modell
 #
 # es benutzt eine Erweiterung der Methoden der Needle-Klasse
