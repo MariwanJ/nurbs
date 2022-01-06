@@ -1101,7 +1101,7 @@ class CreateBering:
         if (len(sel) < 1):
             # An object must be selected
             errMessage = "Select a face from an objects to use Extract"
-            faced.getInfo(s).errorDialog(errMessage)
+            faced.errorDialog(errMessage)
             return
 
             rc=[]
@@ -1275,7 +1275,7 @@ class Nurbs_FixCorner:
         if len(sel)!=3:
             # 3 edges must be selected
             errMessage = "Select 3 edges to use the tool"
-            faced.getInfo(sel).errorDialog(errMessage)
+            faced.errorDialog(errMessage)
             return
         (a,b,c)=Gui.Selection.getSelection()
         self._fixCorner(a,b,c)

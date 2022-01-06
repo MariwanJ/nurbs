@@ -48,6 +48,8 @@ import time
 import NURBSinit
 try:
     import networkx as nx
+    g=nx.Graph()
+
 except ImportError:
     print("Please install the required library networkx")
     
@@ -58,9 +60,8 @@ except ImportError:
     
 
 # module variables
-g=nx.Graph()
-points={}
 
+points={}
 
 def ptokey(v):
     ''' simplify vectors'''

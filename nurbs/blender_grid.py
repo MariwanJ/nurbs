@@ -214,7 +214,7 @@ class gridNode(coin.SoSeparator):
 
     def linkTo(self, cam):
         self.vec.matrix.connectFrom(cam.orientation)
-        self.scaleEngine.a.connectFrom(cam.height)
+        #self.scaleEngine.a.connectFrom(cam.height)
 
     def updateTransformedNormal(self):
         #          // First get hold of an SoPath through the scenegraph down to the
@@ -297,7 +297,7 @@ class gridNode(coin.SoSeparator):
 
         a = []
         l = len(pts)-4
-        for i in range(l/2):
+        for i in range(int(l/2)):
             a.append(2*i + 4)
             a.append(2*i + 5)
             a.append(-1)
@@ -310,7 +310,7 @@ class gridNode(coin.SoSeparator):
 
         a2 = []
         l = len(pts2)
-        for i in range(l/2):
+        for i in range(int(l/2)):
             a2.append(2*i)
             a2.append(2*i + 1)
             a2.append(-1)
@@ -342,7 +342,13 @@ class gridObject:
 
 class gridVP:
     '''View Provider for the Grid'''
-
+    trans =None
+    xy =None
+    xz =None
+    yz =None
+    sg  =None
+    cam =None
+    grid =None
     def __init__(self, obj):
         obj.addProperty("App::PropertyDistance",  "Total",
                         "Size",   "Size of a grid quadrant").Total = '100mm'
@@ -364,6 +370,8 @@ class gridVP:
                         "Color",  "Grid Color").GridColor = (0.5, 0.5, 0.5)
         obj.Proxy = self
 
+
+        
     def attach(self, obj):
 
         self.trans = coin.SoTransform()
@@ -439,11 +447,14 @@ class gridVP:
         return mode
 
     def updateCam(self):
-        self.cam = Gui.activeView().getCameraNode()
-        self.xy.linkTo(self.cam)
-        self.xz.linkTo(self.cam)
-        self.yz.linkTo(self.cam)
-
+        try:
+            self.cam = Gui.activeView().getCameraNode()
+            self.xy.linkTo(self.cam)
+            self.xz.linkTo(self.cam)
+            self.yz.linkTo(self.cam)
+        except Exception as err:
+            pass
+            
     def onChanged(self, vp, prop):
         self.updateCam()
         if prop == 'Total':

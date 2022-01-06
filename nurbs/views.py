@@ -905,7 +905,7 @@ class Nurbs_CreateH2():
         if (len(s) <3):
             # An object must be sele()
             errMessage = "Select 3 objects to use Extrude Face"
-            faced.getInfo(s).errorDialog(errMessage)
+            faced.errorDialog(errMessage)
             return
         obja = Gui.Selection.getSelection()[0]
         objb = Gui.Selection.getSelection()[1]

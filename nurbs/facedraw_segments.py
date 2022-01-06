@@ -809,7 +809,7 @@ class Nurbs_EventFilter:
             if (len(sel) < 1):
                 # An object must be selected
                 errMessage = "Select a face"
-                faced.getInfo(sel).errorDialog(errMessage)
+                faced.errorDialog(errMessage)
                 return
 
             fob = sel[0]
@@ -887,7 +887,7 @@ class Nurbs_CreateGridToFace:
         if (len(sel) < 1):
             # An object must be selected
             errMessage = "Select a face"
-            faced.getInfo(None).errorDialog(errMessage)
+            faced.errorDialog(errMessage)
             return
         
         fob = sel[0]
