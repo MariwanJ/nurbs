@@ -340,7 +340,7 @@ Gui.addCommand("Nurbs_MoinitorForce", Nurbs_MoinitorForce())
 class Nurbs_MonitorMain:
     def Activated(self):
         self.main_me()
-    def main_me():
+    def main_me(self):
         import Draft
         
         points = [
